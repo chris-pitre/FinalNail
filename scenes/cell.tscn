@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjgwygl1psnne"]
+
+[ext_resource type="Script" path="res://scenes/cell.gd" id="1_whknc"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_supd2"]
+size = Vector2(2, 2)
+
+[node name="Cell" type="Area3D"]
+script = ExtResource("1_whknc")
+
+[node name="BottomFace" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 0, 0)
+mesh = SubResource("QuadMesh_supd2")
+
+[node name="NorthFace" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
+mesh = SubResource("QuadMesh_supd2")
+
+[node name="EastFace" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1, 1, 0)
+mesh = SubResource("QuadMesh_supd2")
+
+[node name="WestFace" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1, 1, 0)
+mesh = SubResource("QuadMesh_supd2")
+
+[node name="SouthFace" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, 1)
+mesh = SubResource("QuadMesh_supd2")
+
+[node name="TopFace" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2, 0)
+mesh = SubResource("QuadMesh_supd2")
