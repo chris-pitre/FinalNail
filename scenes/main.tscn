@@ -1,7 +1,8 @@
-[gd_scene load_steps=24 format=3 uid="uid://c62k2e27wds1u"]
+[gd_scene load_steps=26 format=3 uid="uid://c62k2e27wds1u"]
 
 [ext_resource type="PackedScene" uid="uid://b1pu7ddiid0ow" path="res://scenes/world/world.tscn" id="1_yich0"]
 [ext_resource type="Texture2D" uid="uid://bk483y6tvh6nq" path="res://assets/icons/cogbutton.png" id="2_bib5k"]
+[ext_resource type="Script" path="res://scenes/ui/ui.gd" id="2_fora6"]
 [ext_resource type="Theme" uid="uid://doj3k314rmhhy" path="res://src/theme.tres" id="2_m8jm6"]
 [ext_resource type="Texture2D" uid="uid://bmt885g0bl15h" path="res://assets/icons/bagbutton.png" id="3_mde73"]
 [ext_resource type="PackedScene" uid="uid://dh1mo8mixskss" path="res://scenes/ui/minimap.tscn" id="4_0da32"]
@@ -10,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bhsueomjnheek" path="res://assets/textures/woodframesmall.png" id="6_8a06b"]
 [ext_resource type="Shader" path="res://src/shaders/vignette.gdshader" id="7_slnml"]
 [ext_resource type="Texture2D" uid="uid://cbgy2acshjh72" path="res://assets/textures/woodframe.png" id="8_1pkee"]
+[ext_resource type="PackedScene" uid="uid://bffshd3t3axkl" path="res://scenes/ui/cursor.tscn" id="11_uqah4"]
 
 [sub_resource type="Gradient" id="Gradient_b2j0i"]
 colors = PackedColorArray(0.0576377, 2.83971e-06, 0.317881, 1, 0.198681, 0.00388911, 0.229368, 1)
@@ -76,6 +78,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 theme = ExtResource("2_m8jm6")
+script = ExtResource("2_fora6")
 
 [node name="Background" type="TextureRect" parent="UI"]
 layout_mode = 1
@@ -151,13 +154,13 @@ visible = false
 layout_mode = 2
 texture = SubResource("GradientTexture2D_o5hyk")
 
-[node name="TextureRect" type="TextureRect" parent="UI/OuterMargin/HBoxContainer/ViewVBox/Viewport/BorderExpand"]
+[node name="DialogueGradient" type="TextureRect" parent="UI/OuterMargin/HBoxContainer/ViewVBox/Viewport/BorderExpand"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_vertical = 8
 texture = SubResource("GradientTexture2D_5j5sa")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/OuterMargin/HBoxContainer/ViewVBox/Viewport/BorderExpand/TextureRect"]
+[node name="DialogueLabel" type="RichTextLabel" parent="UI/OuterMargin/HBoxContainer/ViewVBox/Viewport/BorderExpand/DialogueGradient"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 1
 anchors_preset = 7
@@ -245,26 +248,87 @@ patch_margin_bottom = 64
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
-[node name="StatsContainer" type="PanelContainer" parent="UI/OuterMargin/HBoxContainer/InfoVBox"]
+[node name="StatsVBox" type="VBoxContainer" parent="UI/OuterMargin/HBoxContainer/InfoVBox"]
 layout_mode = 2
 
-[node name="StatNames" type="Label" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsContainer"]
+[node name="StatContainer" type="PanelContainer" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsVBox"]
+layout_mode = 2
+
+[node name="StatName" type="Label" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsVBox/StatContainer" groups=["tooltip"]]
 layout_mode = 2
 size_flags_horizontal = 0
-text = "Composition
-Favor
-Miasma
-Piety
-Premonition"
+text = "Composition"
+metadata/tooltip = "The balance of your soul; affects health"
 
-[node name="StatValues" type="Label" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsContainer"]
+[node name="StatValue" type="Label" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsVBox/StatContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
-text = "13
-14
-15
-0
-43573
+text = "13"
+horizontal_alignment = 2
+
+[node name="StatContainer2" type="PanelContainer" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsVBox"]
+layout_mode = 2
+
+[node name="StatName" type="Label" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsVBox/StatContainer2" groups=["tooltip"]]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Spirit
+"
+metadata/tooltip = "The strength of your soul; affects mana"
+
+[node name="StatValue" type="Label" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsVBox/StatContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "14
+"
+horizontal_alignment = 2
+
+[node name="StatContainer3" type="PanelContainer" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsVBox"]
+layout_mode = 2
+
+[node name="StatName" type="Label" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsVBox/StatContainer3" groups=["tooltip"]]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Corpus
+"
+metadata/tooltip = "The integrity of your physical manifestation; affects damage"
+
+[node name="StatValue" type="Label" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsVBox/StatContainer3"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "15"
+horizontal_alignment = 2
+
+[node name="StatContainer4" type="PanelContainer" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsVBox"]
+layout_mode = 2
+
+[node name="StatName" type="Label" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsVBox/StatContainer4" groups=["tooltip"]]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Premonition"
+metadata/tooltip = "Your reservoir of thought; affects XP gain and"
+
+[node name="StatValue" type="Label" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsVBox/StatContainer4"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "0
+"
+horizontal_alignment = 2
+
+[node name="StatContainer5" type="PanelContainer" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsVBox"]
+layout_mode = 2
+
+[node name="StatName" type="Label" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsVBox/StatContainer5" groups=["tooltip"]]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Piety
+"
+metadata/tooltip = "Your favor with your divine warden; affects decree powers"
+
+[node name="StatValue" type="Label" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsVBox/StatContainer5"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "43573
 "
 horizontal_alignment = 2
 
@@ -308,4 +372,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="Cursor" parent="UI" instance=ExtResource("11_uqah4")]
