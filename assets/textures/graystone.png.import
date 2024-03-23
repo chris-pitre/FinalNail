@@ -2,27 +2,46 @@
 
 importer="texture"
 type="CompressedTexture2D"
+<<<<<<< HEAD
 uid="uid://t21j8c3i3rix"
 path.s3tc="res://.godot/imported/graystone.png-8faa33a075cbce77dde7645b1e7498ad.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+=======
+uid="uid://cikk4em8ye3er"
+path="res://.godot/imported/graystone.png-8faa33a075cbce77dde7645b1e7498ad.ctex"
+metadata={
+"vram_texture": false
+>>>>>>> c8496840001f22764ad94c7dfd5e7334c24a80ec
 }
 
 [deps]
 
 source_file="res://assets/textures/graystone.png"
+<<<<<<< HEAD
 dest_files=["res://.godot/imported/graystone.png-8faa33a075cbce77dde7645b1e7498ad.s3tc.ctex"]
 
 [params]
 
 compress/mode=2
+=======
+dest_files=["res://.godot/imported/graystone.png-8faa33a075cbce77dde7645b1e7498ad.ctex"]
+
+[params]
+
+compress/mode=0
+>>>>>>> c8496840001f22764ad94c7dfd5e7334c24a80ec
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
+<<<<<<< HEAD
 mipmaps/generate=true
+=======
+mipmaps/generate=false
+>>>>>>> c8496840001f22764ad94c7dfd5e7334c24a80ec
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -32,4 +51,8 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
+<<<<<<< HEAD
 detect_3d/compress_to=0
+=======
+detect_3d/compress_to=1
+>>>>>>> c8496840001f22764ad94c7dfd5e7334c24a80ec
