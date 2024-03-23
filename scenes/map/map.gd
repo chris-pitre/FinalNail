@@ -12,6 +12,7 @@ func _ready():
 	var map_instance = map_scene.instantiate()
 	add_child(map_instance)
 	map = map_instance
+	map_instance.hide()
 	generate_level()
 
 func generate_level():

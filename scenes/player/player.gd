@@ -13,9 +13,6 @@ var moving: bool = false
 
 @onready var move_raycast: RayCast3D = $MoveRaycast
 
-func _process(delta):
-	print(move_raycast.is_colliding())
-
 func _input(event):
 	if event.is_pressed() and not moving:
 		if event.is_action("move_forward"):
