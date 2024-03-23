@@ -9,7 +9,7 @@ extends Node3D
 @onready var south := $SouthFace
 
 func set_faces(cell_list: Array[Vector2i], tile_open: bool) -> void:
-	var grid_pos = Vector2i(global_position.x / 2, global_position.z / 2)
+	var grid_pos = Vector2i(round(global_position.x) / 2, round(global_position.z) / 2)
 	if cell_list.has(grid_pos + Vector2i.RIGHT):
 		east.hide()
 	if cell_list.has(grid_pos + Vector2i.LEFT):
