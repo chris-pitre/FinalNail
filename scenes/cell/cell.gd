@@ -8,8 +8,17 @@ extends Node3D
 @onready var north := $NorthFace
 @onready var south := $SouthFace
 
-func set_faces(cell_list: Array[Vector2i], tile_open: bool) -> void:
+
+func set_faces(cell_list: Array[Vector2i], tile_open: bool, cell_theme: CellTheme) -> void:
+	bottom.material_override = cell_theme.floor
+	east.material_override = cell_theme.wall
+	west.material_override = cell_theme.wall
+	north.material_override = cell_theme.wall
+	south.material_override = cell_theme.wall
+	top.material_override = cell_theme.ceiling
+	
 	var grid_pos = Vector2i(round(global_position.x) / 2, round(global_position.z) / 2)
+	
 	if cell_list.has(grid_pos + Vector2i.RIGHT):
 		east.hide()
 	if cell_list.has(grid_pos + Vector2i.LEFT):
@@ -20,3 +29,8 @@ func set_faces(cell_list: Array[Vector2i], tile_open: bool) -> void:
 		north.hide()
 	if tile_open:
 		top.hide()
+	
+	
+	
+	
+	

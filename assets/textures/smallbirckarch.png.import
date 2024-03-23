@@ -2,27 +2,26 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cp48x3w6ps8pc"
-path.s3tc="res://.godot/imported/birck.png-92bc487710efaa7b920869e16017a052.s3tc.ctex"
+uid="uid://c8wssxaaa2kuo"
+path="res://.godot/imported/smallbirckarch.png-502912471025a7bcb6438c0183783703.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/birck.png"
-dest_files=["res://.godot/imported/birck.png-92bc487710efaa7b920869e16017a052.s3tc.ctex"]
+source_file="res://assets/textures/smallbirckarch.png"
+dest_files=["res://.godot/imported/smallbirckarch.png-502912471025a7bcb6438c0183783703.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -32,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1
