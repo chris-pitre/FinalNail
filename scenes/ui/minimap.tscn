@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://dh1mo8mixskss"]
+
+[ext_resource type="TileSet" uid="uid://qd2lm2embmp1" path="res://src/tilesets/tileset.tres" id="1_pyo8c"]
+[ext_resource type="Script" path="res://scenes/ui/minimap.gd" id="2_uc1v2"]
+
+[sub_resource type="Gradient" id="Gradient_328om"]
+colors = PackedColorArray(0, 0, 0, 1, 1, 0, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fiqea"]
+gradient = SubResource("Gradient_328om")
+width = 8
+height = 8
+fill_from = Vector2(1, 0)
+fill_to = Vector2(1, 1)
+
+[node name="Minimap" type="TileMap"]
+tile_set = ExtResource("1_pyo8c")
+format = 2
+script = ExtResource("2_uc1v2")
+
+[node name="MinimapCamera" type="Camera2D" parent="."]
+
+[node name="PlayerMarker" type="Sprite2D" parent="MinimapCamera"]
+texture = SubResource("GradientTexture2D_fiqea")
