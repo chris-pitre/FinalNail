@@ -6,8 +6,8 @@ extends TileMap
 @onready var new_pos: Vector2 = cam.position
 
 func _ready():
-	Global.player_pos_updated.connect(_player_moved)
-	Global.player_dir_updated.connect(_player_rotated)
+	SignalBus.player_pos_updated.connect(_player_moved)
+	SignalBus.player_dir_updated.connect(_player_rotated)
 	_player_moved(0, 0)
 	
 func _player_moved(x, y):
