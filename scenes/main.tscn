@@ -306,7 +306,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Premonition"
-metadata/tooltip = "Your reservoir of thought; affects XP gain and"
+metadata/tooltip = "Your sense of dangert; affects XP gain"
 
 [node name="StatValue" type="Label" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsVBox/StatContainer4"]
 layout_mode = 2
