@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c62k2e27wds1u"]
+[gd_scene load_steps=24 format=3 uid="uid://c62k2e27wds1u"]
 
 [ext_resource type="PackedScene" uid="uid://b1pu7ddiid0ow" path="res://scenes/world/world.tscn" id="1_yich0"]
 [ext_resource type="Texture2D" uid="uid://bk483y6tvh6nq" path="res://assets/icons/cogbutton.png" id="2_bib5k"]
@@ -25,6 +25,13 @@ colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_o5hyk"]
 gradient = SubResource("Gradient_5dhlo")
+
+[sub_resource type="Gradient" id="Gradient_uveib"]
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5j5sa"]
+gradient = SubResource("Gradient_uveib")
+fill_to = Vector2(0, 1)
 
 [sub_resource type="Gradient" id="Gradient_jxb52"]
 colors = PackedColorArray(0.352941, 0, 0, 1, 0.196078, 0.196078, 0.478431, 1)
@@ -122,10 +129,10 @@ layout_mode = 2
 
 [node name="BorderExpand" type="MarginContainer" parent="UI/OuterMargin/HBoxContainer/ViewVBox/Viewport"]
 layout_mode = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 4
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="UI/OuterMargin/HBoxContainer/ViewVBox/Viewport/BorderExpand"]
 layout_mode = 2
@@ -134,7 +141,7 @@ size_flags_vertical = 4
 
 [node name="SubViewport" type="SubViewport" parent="UI/OuterMargin/HBoxContainer/ViewVBox/Viewport/BorderExpand/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(800, 600)
+size = Vector2i(800, 550)
 render_target_update_mode = 4
 
 [node name="World" parent="UI/OuterMargin/HBoxContainer/ViewVBox/Viewport/BorderExpand/SubViewportContainer/SubViewport" instance=ExtResource("1_yich0")]
@@ -143,6 +150,29 @@ render_target_update_mode = 4
 visible = false
 layout_mode = 2
 texture = SubResource("GradientTexture2D_o5hyk")
+
+[node name="TextureRect" type="TextureRect" parent="UI/OuterMargin/HBoxContainer/ViewVBox/Viewport/BorderExpand"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_vertical = 8
+texture = SubResource("GradientTexture2D_5j5sa")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/OuterMargin/HBoxContainer/ViewVBox/Viewport/BorderExpand/TextureRect"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -400.0
+offset_top = -40.0
+offset_right = 400.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+bbcode_enabled = true
+text = "[center]water ice salt ay water ice salt ay[/center]"
 
 [node name="WoodBorder" type="NinePatchRect" parent="UI/OuterMargin/HBoxContainer/ViewVBox/Viewport"]
 layout_mode = 2
