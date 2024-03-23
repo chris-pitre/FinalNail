@@ -1,0 +1,14 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://qd2lm2embmp1"]
+
+[ext_resource type="Texture2D" uid="uid://c3fxwwv33lqw8" path="res://assets/tilemap/path.png" id="1_n4wby"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0jmhe"]
+texture = ExtResource("1_n4wby")
+0:0/0 = 0
+1:0/0 = 0
+1:0/0/custom_data_0 = true
+
+[resource]
+custom_data_layer_0/name = "OpenAir"
+custom_data_layer_0/type = 1
+sources/0 = SubResource("TileSetAtlasSource_0jmhe")
