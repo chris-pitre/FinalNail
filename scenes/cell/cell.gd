@@ -1,6 +1,7 @@
 class_name Cell
 extends Node3D
 
+#faces
 @onready var top := $TopFace
 @onready var bottom := $BottomFace
 @onready var east := $EastFace
@@ -8,8 +9,14 @@ extends Node3D
 @onready var north := $NorthFace
 @onready var south := $SouthFace
 
+#corners
+@onready var pillars := $Pillars
+@onready var se_pillar := $Pillars/SouthEastPillar
+@onready var sw_pillar := $Pillars/SouthWestPillar
+@onready var nw_pillar := $Pillars/NorthWestPillar
+@onready var ne_pillar := $Pillars/NorthEastPillar
 
-func set_faces(cell_list: Array[Vector2i], tile_open: bool, cell_theme: CellTheme) -> void:
+func set_faces(cell_list: Array[Vector2i], tile_open: bool, corners: Dictionary, cell_theme: CellTheme) -> void:
 	bottom.material_override = cell_theme.floor_tex
 	east.material_override = cell_theme.wall
 	west.material_override = cell_theme.wall
@@ -30,6 +37,16 @@ func set_faces(cell_list: Array[Vector2i], tile_open: bool, cell_theme: CellThem
 	if tile_open:
 		top.hide()
 	
+	if cell_theme.pillars:
+		pillars.visible = true
+		if corners["SE"]:
+			se_pillar.visible = true
+		if corners["SW"]:
+			sw_pillar.visible = true
+		if corners["NW"]:
+			nw_pillar.visible = true
+		if corners["NE"]:
+			ne_pillar.visible = true
 	
 	
 	

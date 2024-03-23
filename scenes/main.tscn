@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bmt885g0bl15h" path="res://assets/icons/bagbutton.png" id="3_mde73"]
 [ext_resource type="PackedScene" uid="uid://dh1mo8mixskss" path="res://scenes/ui/minimap.tscn" id="4_0da32"]
 [ext_resource type="Texture2D" uid="uid://b2k3p5p6y3xfo" path="res://assets/icons/scrollbutton.png" id="4_j0gde"]
-[ext_resource type="Texture2D" uid="uid://bfyk7otkr0iyf" path="res://assets/portraits/bellmet1.png" id="5_g3fs2"]
+[ext_resource type="Texture2D" uid="uid://c4qojo5ch3eq3" path="res://assets/portraits/bellmet1.png" id="5_g3fs2"]
 [ext_resource type="Texture2D" uid="uid://bhsueomjnheek" path="res://assets/textures/woodframesmall.png" id="6_8a06b"]
 [ext_resource type="Shader" path="res://src/shaders/vignette.gdshader" id="7_slnml"]
 [ext_resource type="Texture2D" uid="uid://cbgy2acshjh72" path="res://assets/textures/woodframe.png" id="8_1pkee"]

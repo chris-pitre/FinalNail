@@ -1,16 +1,19 @@
-[gd_scene load_steps=9 format=3 uid="uid://b1pu7ddiid0ow"]
+[gd_scene load_steps=10 format=3 uid="uid://b1pu7ddiid0ow"]
 
 [ext_resource type="PackedScene" uid="uid://cf0ng65ho3ys0" path="res://scenes/map/map.tscn" id="1_hdrip"]
 [ext_resource type="PackedScene" uid="uid://db0sndhg6hj30" path="res://scenes/tilemaps/test_level.tscn" id="2_c2dl5"]
 [ext_resource type="Material" uid="uid://cwmifmfw4402q" path="res://assets/materials/birck.tres" id="3_7ewkn"]
+[ext_resource type="Material" uid="uid://kis31lqcl3w0" path="res://assets/materials/gray.tres" id="4_q5fuc"]
 [ext_resource type="Script" path="res://src/cell_theme.gd" id="4_roce2"]
 [ext_resource type="Material" uid="uid://df30sdy12o43m" path="res://assets/materials/smallbirck.tres" id="5_wrpaq"]
 [ext_resource type="PackedScene" uid="uid://bud544xv1crtu" path="res://scenes/player/player.tscn" id="6_kvtnq"]
 
 [sub_resource type="Resource" id="Resource_rlf4f"]
 script = ExtResource("4_roce2")
+floor_tex = ExtResource("4_q5fuc")
 wall = ExtResource("5_wrpaq")
 ceiling = ExtResource("3_7ewkn")
+pillars = true
 
 [sub_resource type="Environment" id="Environment_yf5dv"]
 ssao_enabled = true

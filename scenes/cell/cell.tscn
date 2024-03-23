@@ -31,6 +31,7 @@ size = Vector3(2, 2, 0)
 [sub_resource type="BoxShape3D" id="BoxShape3D_0xxdt"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_abicl"]
+material = ExtResource("3_n0awh")
 size = Vector3(0.5, 2, 0.5)
 
 [node name="Cell" type="Node3D"]
@@ -72,23 +73,28 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_0xxdt")
 
 [node name="Pillars" type="Node3D" parent="."]
+visible = false
 
-[node name="Pillar1" type="MeshInstance3D" parent="Pillars"]
+[node name="SouthEastPillar" type="MeshInstance3D" parent="Pillars"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1)
+visible = false
 mesh = SubResource("BoxMesh_abicl")
 skeleton = NodePath("../..")
 
-[node name="Pillar2" type="MeshInstance3D" parent="Pillars"]
+[node name="SouthWestPillar" type="MeshInstance3D" parent="Pillars"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 1)
+visible = false
 mesh = SubResource("BoxMesh_abicl")
 skeleton = NodePath("../..")
 
-[node name="Pillar3" type="MeshInstance3D" parent="Pillars"]
+[node name="NorthWestPillar" type="MeshInstance3D" parent="Pillars"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, -1)
+visible = false
 mesh = SubResource("BoxMesh_abicl")
 skeleton = NodePath("../..")
 
-[node name="Pillar4" type="MeshInstance3D" parent="Pillars"]
+[node name="NorthEastPillar" type="MeshInstance3D" parent="Pillars"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -1)
+visible = false
 mesh = SubResource("BoxMesh_abicl")
 skeleton = NodePath("../..")
