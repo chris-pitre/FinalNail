@@ -100,7 +100,7 @@ theme_override_constants/margin_bottom = 32
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/OuterMargin"]
 layout_mode = 2
-theme_override_constants/separation = 24
+theme_override_constants/separation = 16
 alignment = 1
 
 [node name="ButtonsVBox" type="VBoxContainer" parent="UI/OuterMargin/HBoxContainer"]
