@@ -7,12 +7,12 @@
 [node name="Player" type="Node3D"]
 script = ExtResource("1_dj456")
 
+[node name="Camera3D" type="Camera3D" parent="."]
+fov = 120.0
+
 [node name="MoveRaycast" type="RayCast3D" parent="."]
 target_position = Vector3(0, 0, -2)
 collide_with_areas = true
-
-[node name="Camera3D" type="Camera3D" parent="."]
-fov = 120.0
 
 [node name="Hitbox" type="Area3D" parent="."]
 

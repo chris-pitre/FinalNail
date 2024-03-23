@@ -8,7 +8,6 @@ enum DIRECTION {
 	LEFT,
 }
 
-var facing: DIRECTION = DIRECTION.FORWARD
 var moving: bool = false
 
 @onready var move_raycast: RayCast3D = $MoveRaycast
@@ -50,6 +49,8 @@ func do_rotate(is_right: bool):
 	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 	
 	await tween.tween_property(self, "rotation", rotation - Vector3(0, dir * (PI / 2), 0), 0.15).finished
+	Global.player_dir_updated.emit(is_right)
+	
 	moving = false
   
 
@@ -66,6 +67,9 @@ func slide(dir: Vector3, success: bool):
 	if not success:
 		tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 		await tween.tween_property(self, "global_position", global_position - dir, 0.15).finished
+		
+	global_position = Vector3(round(global_position.x), round(global_position.y), round(global_position.z))
+	Global.player_pos_updated.emit(global_position.x / 2, global_position.z / 2)
 	
 	moving = false
 		

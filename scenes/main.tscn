@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://c62k2e27wds1u"]
+[gd_scene load_steps=6 format=3 uid="uid://c62k2e27wds1u"]
 
 [ext_resource type="PackedScene" uid="uid://cf0ng65ho3ys0" path="res://scenes/map/map.tscn" id="1_axybf"]
 [ext_resource type="PackedScene" uid="uid://bud544xv1crtu" path="res://scenes/player/player.tscn" id="2_b7mpo"]
 [ext_resource type="PackedScene" uid="uid://db0sndhg6hj30" path="res://scenes/tilemaps/test_level.tscn" id="2_yi783"]
+[ext_resource type="PackedScene" uid="uid://dh1mo8mixskss" path="res://scenes/ui/minimap.tscn" id="4_0da32"]
 
 [sub_resource type="Environment" id="Environment_yf5dv"]
 fog_enabled = true
@@ -10,20 +11,101 @@ fog_light_color = Color(0.101961, 0.117647, 0.137255, 1)
 
 [node name="Main" type="Node"]
 
-[node name="World" type="Node3D" parent="."]
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Map" parent="World" instance=ExtResource("1_axybf")]
+[node name="ColorRect" type="ColorRect" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.141176, 0.0745098, 0.0156863, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="UI/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "~FINAL NAIL~"
+vertical_alignment = 1
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="UI/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="SubViewport" type="SubViewport" parent="UI/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(800, 600)
+render_target_update_mode = 4
+
+[node name="World" type="Node3D" parent="UI/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/SubViewportContainer/SubViewport"]
+
+[node name="Map" parent="UI/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/SubViewportContainer/SubViewport/World" instance=ExtResource("1_axybf")]
 map_scene = ExtResource("2_yi783")
 
-[node name="Player" parent="World" instance=ExtResource("2_b7mpo")]
+[node name="Player" parent="UI/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/SubViewportContainer/SubViewport/World" instance=ExtResource("2_b7mpo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="UI/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/SubViewportContainer/SubViewport/World"]
 environment = SubResource("Environment_yf5dv")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="UI/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/SubViewportContainer/SubViewport/World"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 light_energy = 0.03
 light_indirect_energy = 0.0
 shadow_enabled = true
 shadow_normal_bias = 0.1
+
+[node name="ProgressBar" type="ProgressBar" parent="UI/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="UI/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="UI/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="UI/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(300, 300)
+render_target_update_mode = 4
+
+[node name="Minimap" parent="UI/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2/SubViewportContainer/SubViewport" instance=ExtResource("4_0da32")]
+
+[node name="Button" type="Button" parent="UI/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Stats"
+
+[node name="Label" type="Label" parent="UI/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "asdfasdfasdfasdf"
