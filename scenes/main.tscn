@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c62k2e27wds1u"]
+[gd_scene load_steps=19 format=3 uid="uid://c62k2e27wds1u"]
 
 [ext_resource type="PackedScene" uid="uid://cf0ng65ho3ys0" path="res://scenes/map/map.tscn" id="1_axybf"]
 [ext_resource type="Texture2D" uid="uid://cmhjjxo2knjvd" path="res://assets/textures/birck2.png" id="1_vpgov"]
@@ -6,12 +6,22 @@
 [ext_resource type="PackedScene" uid="uid://db0sndhg6hj30" path="res://scenes/tilemaps/test_level.tscn" id="2_yi783"]
 [ext_resource type="PackedScene" uid="uid://dh1mo8mixskss" path="res://scenes/ui/minimap.tscn" id="4_0da32"]
 [ext_resource type="Texture2D" uid="uid://c4qojo5ch3eq3" path="res://assets/portraits/bellmet1.png" id="5_g3fs2"]
+[ext_resource type="Material" uid="uid://cwmifmfw4402q" path="res://assets/materials/birck.tres" id="5_ohmaj"]
+[ext_resource type="Material" uid="uid://kis31lqcl3w0" path="res://assets/materials/gray.tres" id="6_riedn"]
 [ext_resource type="Shader" path="res://src/shaders/vignette.gdshader" id="7_slnml"]
+[ext_resource type="Script" path="res://src/cell_theme.gd" id="9_s51e0"]
+[ext_resource type="Material" uid="uid://df30sdy12o43m" path="res://assets/materials/smallbirck.tres" id="10_gophp"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1tvqs"]
 
 [sub_resource type="Theme" id="Theme_3pld2"]
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_1tvqs")
+
+[sub_resource type="Resource" id="Resource_rlf4f"]
+script = ExtResource("9_s51e0")
+floor = ExtResource("6_riedn")
+wall = ExtResource("10_gophp")
+ceiling = ExtResource("5_ohmaj")
 
 [sub_resource type="Environment" id="Environment_yf5dv"]
 fog_enabled = true
@@ -106,6 +116,7 @@ render_target_update_mode = 4
 
 [node name="Map" parent="UI/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/SubViewportContainer/SubViewport/World" instance=ExtResource("1_axybf")]
 map_scene = ExtResource("2_yi783")
+cell_theme = SubResource("Resource_rlf4f")
 
 [node name="Player" parent="UI/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/SubViewportContainer/SubViewport/World" instance=ExtResource("2_b7mpo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
