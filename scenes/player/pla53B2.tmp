@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bud544xv1crtu"]
+
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_dj456"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yjxp8"]
+
+[node name="Player" type="Node3D"]
+script = ExtResource("1_dj456")
+
+[node name="MoveRaycast" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -2)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="Hitbox" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+shape = SubResource("BoxShape3D_yjxp8")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+omni_range = 3.0

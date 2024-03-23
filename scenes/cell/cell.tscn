@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://cjgwygl1psnne"]
+[gd_scene load_steps=4 format=3 uid="uid://cjgwygl1psnne"]
 
-[ext_resource type="Script" path="res://scenes/cell.gd" id="1_whknc"]
+[ext_resource type="Script" path="res://scenes/cell/cell.gd" id="1_whknc"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_supd2"]
 size = Vector2(2, 2)
 
-[node name="Cell" type="Area3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_0xxdt"]
+
+[node name="Cell" type="Node3D"]
 script = ExtResource("1_whknc")
 
 [node name="BottomFace" type="MeshInstance3D" parent="."]
@@ -31,3 +33,9 @@ mesh = SubResource("QuadMesh_supd2")
 [node name="TopFace" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2, 0)
 mesh = SubResource("QuadMesh_supd2")
+
+[node name="Collision" type="Area3D" parent="."]
+
+[node name="CellCollision" type="CollisionShape3D" parent="Collision"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_0xxdt")
