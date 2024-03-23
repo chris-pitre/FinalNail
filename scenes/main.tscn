@@ -1,15 +1,15 @@
-[gd_scene load_steps=18 format=3 uid="uid://c62k2e27wds1u"]
+[gd_scene load_steps=22 format=3 uid="uid://c62k2e27wds1u"]
 
-[ext_resource type="PackedScene" uid="uid://cf0ng65ho3ys0" path="res://scenes/map/map.tscn" id="1_axybf"]
-[ext_resource type="PackedScene" uid="uid://bud544xv1crtu" path="res://scenes/player/player.tscn" id="2_b7mpo"]
-[ext_resource type="PackedScene" uid="uid://db0sndhg6hj30" path="res://scenes/tilemaps/test_level.tscn" id="2_yi783"]
+[ext_resource type="PackedScene" uid="uid://b1pu7ddiid0ow" path="res://scenes/world/world.tscn" id="1_yich0"]
+[ext_resource type="Texture2D" uid="uid://bk483y6tvh6nq" path="res://assets/icons/cogbutton.png" id="2_bib5k"]
+[ext_resource type="Theme" uid="uid://doj3k314rmhhy" path="res://src/theme.tres" id="2_m8jm6"]
+[ext_resource type="Texture2D" uid="uid://bmt885g0bl15h" path="res://assets/icons/bagbutton.png" id="3_mde73"]
 [ext_resource type="PackedScene" uid="uid://dh1mo8mixskss" path="res://scenes/ui/minimap.tscn" id="4_0da32"]
-[ext_resource type="Texture2D" uid="uid://c4qojo5ch3eq3" path="res://assets/portraits/bellmet1.png" id="5_g3fs2"]
-[ext_resource type="Material" uid="uid://cwmifmfw4402q" path="res://assets/materials/birck.tres" id="5_ohmaj"]
+[ext_resource type="Texture2D" uid="uid://b2k3p5p6y3xfo" path="res://assets/icons/scrollbutton.png" id="4_j0gde"]
+[ext_resource type="Texture2D" uid="uid://bfyk7otkr0iyf" path="res://assets/portraits/bellmet1.png" id="5_g3fs2"]
+[ext_resource type="Texture2D" uid="uid://bhsueomjnheek" path="res://assets/textures/woodframesmall.png" id="6_8a06b"]
 [ext_resource type="Shader" path="res://src/shaders/vignette.gdshader" id="7_slnml"]
 [ext_resource type="Texture2D" uid="uid://cbgy2acshjh72" path="res://assets/textures/woodframe.png" id="8_1pkee"]
-[ext_resource type="Script" path="res://src/cell_theme.gd" id="9_s51e0"]
-[ext_resource type="Material" uid="uid://df30sdy12o43m" path="res://assets/materials/smallbirck.tres" id="10_gophp"]
 
 [sub_resource type="Gradient" id="Gradient_b2j0i"]
 colors = PackedColorArray(0.0576377, 2.83971e-06, 0.317881, 1, 0.198681, 0.00388911, 0.229368, 1)
@@ -20,14 +20,27 @@ fill = 1
 fill_from = Vector2(1, 1)
 fill_to = Vector2(0.478632, 0.482906)
 
-[sub_resource type="Resource" id="Resource_rlf4f"]
-script = ExtResource("9_s51e0")
-wall = ExtResource("10_gophp")
-ceiling = ExtResource("5_ohmaj")
+[sub_resource type="Gradient" id="Gradient_5dhlo"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
 
-[sub_resource type="Environment" id="Environment_yf5dv"]
-fog_enabled = true
-fog_light_color = Color(0.101961, 0.117647, 0.137255, 1)
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_o5hyk"]
+gradient = SubResource("Gradient_5dhlo")
+
+[sub_resource type="Gradient" id="Gradient_jxb52"]
+colors = PackedColorArray(0.352941, 0, 0, 1, 0.196078, 0.196078, 0.478431, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6mi4h"]
+gradient = SubResource("Gradient_jxb52")
+width = 800
+height = 32
+
+[sub_resource type="Gradient" id="Gradient_n5qvh"]
+colors = PackedColorArray(0.67451, 0, 0, 1, 1, 0, 0.756863, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3l30f"]
+gradient = SubResource("Gradient_n5qvh")
+width = 800
+height = 32
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_34rqv"]
 
@@ -37,8 +50,8 @@ noise = SubResource("FastNoiseLite_34rqv")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3l43o"]
 shader = ExtResource("7_slnml")
-shader_parameter/intensity = 0.4
-shader_parameter/alpha = 0.5
+shader_parameter/intensity = 0.6
+shader_parameter/alpha = 0.1
 shader_parameter/vig_color = Color(0, 0, 0, 1)
 shader_parameter/speed = 0.02
 shader_parameter/amplitude = 0.2
@@ -55,6 +68,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
+theme = ExtResource("2_m8jm6")
 
 [node name="Background" type="TextureRect" parent="UI"]
 layout_mode = 1
@@ -65,83 +79,72 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_e63py")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+[node name="OuterMargin" type="MarginContainer" parent="UI"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -537.5
-offset_top = -289.5
-offset_right = 537.5
-offset_bottom = 289.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 0
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/OuterMargin"]
+layout_mode = 2
+theme_override_constants/separation = 24
 alignment = 1
 
-[node name="Label" type="Label" parent="UI/VBoxContainer"]
+[node name="ButtonsVBox" type="VBoxContainer" parent="UI/OuterMargin/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="OptionsButton" type="TextureButton" parent="UI/OuterMargin/HBoxContainer/ButtonsVBox"]
+layout_mode = 2
+texture_normal = ExtResource("2_bib5k")
+
+[node name="InventoryButton" type="TextureButton" parent="UI/OuterMargin/HBoxContainer/ButtonsVBox"]
+layout_mode = 2
+texture_normal = ExtResource("3_mde73")
+
+[node name="NotesButton" type="TextureButton" parent="UI/OuterMargin/HBoxContainer/ButtonsVBox"]
+layout_mode = 2
+texture_normal = ExtResource("4_j0gde")
+
+[node name="ViewVBox" type="VBoxContainer" parent="UI/OuterMargin/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 6
-theme_override_font_sizes/font_size = 20
-text = "~FINAL NAIL~"
-vertical_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-theme_override_constants/separation = 50
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/VBoxContainer/HBoxContainer"]
+[node name="Viewport" type="PanelContainer" parent="UI/OuterMargin/HBoxContainer/ViewVBox"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
 
-[node name="PanelContainer" type="PanelContainer" parent="UI/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="BorderExpand" type="MarginContainer" parent="UI/OuterMargin/HBoxContainer/ViewVBox/Viewport"]
 layout_mode = 2
-size_flags_horizontal = 4
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="UI/OuterMargin/HBoxContainer/ViewVBox/Viewport/BorderExpand"]
+layout_mode = 2
+size_flags_horizontal = 0
 size_flags_vertical = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="UI/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="SubViewport" type="SubViewport" parent="UI/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="UI/OuterMargin/HBoxContainer/ViewVBox/Viewport/BorderExpand/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(640, 480)
+size = Vector2i(800, 600)
 render_target_update_mode = 4
 
-[node name="World" type="Node3D" parent="UI/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/SubViewportContainer/SubViewport"]
+[node name="World" parent="UI/OuterMargin/HBoxContainer/ViewVBox/Viewport/BorderExpand/SubViewportContainer/SubViewport" instance=ExtResource("1_yich0")]
 
-[node name="Map" parent="UI/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/SubViewportContainer/SubViewport/World" instance=ExtResource("1_axybf")]
-map_scene = ExtResource("2_yi783")
-cell_theme = SubResource("Resource_rlf4f")
+[node name="ViewportCover" type="TextureRect" parent="UI/OuterMargin/HBoxContainer/ViewVBox/Viewport/BorderExpand" groups=["gui_cover"]]
+visible = false
+layout_mode = 2
+texture = SubResource("GradientTexture2D_o5hyk")
 
-[node name="Player" parent="UI/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/SubViewportContainer/SubViewport/World" instance=ExtResource("2_b7mpo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="UI/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/SubViewportContainer/SubViewport/World"]
-environment = SubResource("Environment_yf5dv")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="UI/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer/MarginContainer/SubViewportContainer/SubViewport/World"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
-light_energy = 0.03
-light_indirect_energy = 0.0
-shadow_enabled = true
-shadow_normal_bias = 0.1
-
-[node name="NinePatchRect" type="NinePatchRect" parent="UI/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer"]
+[node name="WoodBorder" type="NinePatchRect" parent="UI/OuterMargin/HBoxContainer/ViewVBox/Viewport"]
 layout_mode = 2
 texture = ExtResource("8_1pkee")
 patch_margin_left = 64
@@ -151,93 +154,119 @@ patch_margin_bottom = 64
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
-[node name="ProgressBar" type="ProgressBar" parent="UI/VBoxContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="UI/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-theme_override_constants/separation = 20
-alignment = 1
-
-[node name="PanelContainer" type="PanelContainer" parent="UI/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Healthbar" type="TextureProgressBar" parent="UI/OuterMargin/HBoxContainer/ViewVBox"]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
+value = 32.0
+texture_under = SubResource("GradientTexture2D_6mi4h")
+texture_progress = SubResource("GradientTexture2D_3l30f")
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="UI/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="SubViewport" type="SubViewport" parent="UI/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer/MarginContainer/SubViewportContainer"]
-handle_input_locally = false
-size = Vector2i(250, 250)
-render_target_update_mode = 4
-
-[node name="Minimap" parent="UI/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer/MarginContainer/SubViewportContainer/SubViewport" instance=ExtResource("4_0da32")]
-
-[node name="NinePatchRect2" type="NinePatchRect" parent="UI/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer"]
-layout_mode = 2
-texture = ExtResource("8_1pkee")
-patch_margin_left = 64
-patch_margin_top = 64
-patch_margin_right = 64
-patch_margin_bottom = 64
-axis_stretch_horizontal = 2
-axis_stretch_vertical = 2
-
-[node name="Button" type="Button" parent="UI/VBoxContainer/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-text = "Stats"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/VBoxContainer/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-theme_override_constants/separation = 20
-alignment = 1
-
-[node name="Label" type="Label" parent="UI/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
-layout_mode = 2
-text = "dolor et aegritudo
-
-momento mori"
+[node name="Label" type="Label" parent="UI/OuterMargin/HBoxContainer/ViewVBox/Healthbar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "32/100"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="UI/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="InfoVBox" type="VBoxContainer" parent="UI/OuterMargin/HBoxContainer"]
 layout_mode = 2
+alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer"]
+[node name="MinimapContainer" type="PanelContainer" parent="UI/OuterMargin/HBoxContainer/InfoVBox"]
 layout_mode = 2
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 30
-theme_override_constants/margin_right = 30
-theme_override_constants/margin_bottom = 30
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
-[node name="TextureRect" type="TextureRect" parent="UI/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer/MarginContainer"]
-custom_minimum_size = Vector2(125, 125)
+[node name="BorderExpand" type="MarginContainer" parent="UI/OuterMargin/HBoxContainer/InfoVBox/MinimapContainer"]
 layout_mode = 2
-size_flags_vertical = 8
-texture = ExtResource("5_g3fs2")
-expand_mode = 1
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
 
-[node name="NinePatchRect3" type="NinePatchRect" parent="UI/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer"]
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="UI/OuterMargin/HBoxContainer/InfoVBox/MinimapContainer/BorderExpand"]
 layout_mode = 2
-texture = ExtResource("8_1pkee")
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="SubViewport" type="SubViewport" parent="UI/OuterMargin/HBoxContainer/InfoVBox/MinimapContainer/BorderExpand/SubViewportContainer2"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(230, 230)
+render_target_update_mode = 4
+
+[node name="Minimap" parent="UI/OuterMargin/HBoxContainer/InfoVBox/MinimapContainer/BorderExpand/SubViewportContainer2/SubViewport" instance=ExtResource("4_0da32")]
+
+[node name="WoodBorder" type="NinePatchRect" parent="UI/OuterMargin/HBoxContainer/InfoVBox/MinimapContainer"]
+layout_mode = 2
+texture = ExtResource("6_8a06b")
 patch_margin_left = 64
 patch_margin_top = 64
 patch_margin_right = 64
 patch_margin_bottom = 64
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="StatsContainer" type="PanelContainer" parent="UI/OuterMargin/HBoxContainer/InfoVBox"]
+layout_mode = 2
+
+[node name="StatNames" type="Label" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Composition
+Favor
+Miasma
+Piety
+Premonition"
+
+[node name="StatValues" type="Label" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "13
+14
+15
+0
+43573
+"
+horizontal_alignment = 2
+
+[node name="PortraitContainer" type="PanelContainer" parent="UI/OuterMargin/HBoxContainer/InfoVBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="BorderExpand" type="MarginContainer" parent="UI/OuterMargin/HBoxContainer/InfoVBox/PortraitContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Portrait" type="TextureRect" parent="UI/OuterMargin/HBoxContainer/InfoVBox/PortraitContainer/BorderExpand"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+texture = ExtResource("5_g3fs2")
+expand_mode = 1
+
+[node name="PortraitCover" type="TextureRect" parent="UI/OuterMargin/HBoxContainer/InfoVBox/PortraitContainer/BorderExpand" groups=["gui_cover"]]
+visible = false
+layout_mode = 2
+texture = SubResource("GradientTexture2D_o5hyk")
+
+[node name="WoodBorder" type="NinePatchRect" parent="UI/OuterMargin/HBoxContainer/InfoVBox/PortraitContainer"]
+layout_mode = 2
+texture = ExtResource("6_8a06b")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
