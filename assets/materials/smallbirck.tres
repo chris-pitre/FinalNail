@@ -1,6 +1,9 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://df30sdy12o43m"]
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://df30sdy12o43m"]
 
-[ext_resource type="Texture2D" uid="uid://b5nblu7npnuo4" path="res://assets/textures/smallbirck.png" id="1_xqgv1"]
+[ext_resource type="Texture2D" uid="uid://c4frkohtv7sps" path="res://assets/textures/smallbirck.png" id="1_xqgv1"]
+[ext_resource type="Texture2D" uid="uid://b3kd5ywk03hs0" path="res://assets/textures/smallbirck_n.png" id="2_ha476"]
 
 [resource]
 albedo_texture = ExtResource("1_xqgv1")
+normal_enabled = true
+normal_texture = ExtResource("2_ha476")

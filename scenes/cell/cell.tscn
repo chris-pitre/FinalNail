@@ -1,17 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://cjgwygl1psnne"]
+[gd_scene load_steps=14 format=3 uid="uid://cjgwygl1psnne"]
 
 [ext_resource type="Script" path="res://scenes/cell/cell.gd" id="1_whknc"]
-[ext_resource type="Texture2D" uid="uid://t21j8c3i3rix" path="res://assets/textures/graystone.png" id="2_3nv14"]
 [ext_resource type="Material" uid="uid://cwmifmfw4402q" path="res://assets/materials/birck.tres" id="3_n0awh"]
-[ext_resource type="Texture2D" uid="uid://cmhjjxo2knjvd" path="res://assets/textures/birck2.png" id="3_tlw0r"]
-[ext_resource type="Texture2D" uid="uid://bs3vvi8n7tvtx" path="res://assets/textures/smallbirckbothpillars.png" id="4_1ko2n"]
+[ext_resource type="Texture2D" uid="uid://bsvuuwfpmpim1" path="res://assets/textures/smallbirckbothpillars.png" id="4_1ko2n"]
 [ext_resource type="Material" uid="uid://kis31lqcl3w0" path="res://assets/materials/gray.tres" id="4_2xaie"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c688l"]
-albedo_texture = ExtResource("2_3nv14")
-
 [sub_resource type="QuadMesh" id="QuadMesh_supd2"]
-material = SubResource("StandardMaterial3D_c688l")
 size = Vector2(2, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dmiyj"]
@@ -19,30 +13,25 @@ albedo_texture = ExtResource("4_1ko2n")
 uv1_offset = Vector3(0, 1, 0)
 
 [sub_resource type="QuadMesh" id="QuadMesh_t2nvy"]
-material = SubResource("StandardMaterial3D_c688l")
 size = Vector2(2, 2)
 
 [sub_resource type="QuadMesh" id="QuadMesh_6aybd"]
-material = SubResource("StandardMaterial3D_c688l")
 size = Vector2(2, 2)
 
 [sub_resource type="QuadMesh" id="QuadMesh_ymdb7"]
-material = SubResource("StandardMaterial3D_c688l")
 size = Vector2(2, 2)
 
 [sub_resource type="QuadMesh" id="QuadMesh_err8c"]
-material = SubResource("StandardMaterial3D_c688l")
 size = Vector2(2, 2)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c18if"]
-albedo_texture = ExtResource("3_tlw0r")
 
 [sub_resource type="BoxMesh" id="BoxMesh_1lv18"]
 lightmap_size_hint = Vector2i(14, 36)
-material = SubResource("StandardMaterial3D_c18if")
 size = Vector3(2, 2, 0)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0xxdt"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_abicl"]
+size = Vector3(0.5, 2, 0.5)
 
 [node name="Cell" type="Node3D"]
 script = ExtResource("1_whknc")
@@ -81,3 +70,25 @@ mesh = SubResource("BoxMesh_1lv18")
 [node name="CellCollision" type="CollisionShape3D" parent="Collision"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_0xxdt")
+
+[node name="Pillars" type="Node3D" parent="."]
+
+[node name="Pillar1" type="MeshInstance3D" parent="Pillars"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1)
+mesh = SubResource("BoxMesh_abicl")
+skeleton = NodePath("../..")
+
+[node name="Pillar2" type="MeshInstance3D" parent="Pillars"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 1)
+mesh = SubResource("BoxMesh_abicl")
+skeleton = NodePath("../..")
+
+[node name="Pillar3" type="MeshInstance3D" parent="Pillars"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, -1)
+mesh = SubResource("BoxMesh_abicl")
+skeleton = NodePath("../..")
+
+[node name="Pillar4" type="MeshInstance3D" parent="Pillars"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -1)
+mesh = SubResource("BoxMesh_abicl")
+skeleton = NodePath("../..")

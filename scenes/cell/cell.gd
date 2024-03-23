@@ -10,7 +10,7 @@ extends Node3D
 
 
 func set_faces(cell_list: Array[Vector2i], tile_open: bool, cell_theme: CellTheme) -> void:
-	bottom.material_override = cell_theme.floor
+	bottom.material_override = cell_theme.floor_tex
 	east.material_override = cell_theme.wall
 	west.material_override = cell_theme.wall
 	north.material_override = cell_theme.wall

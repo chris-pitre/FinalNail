@@ -27,4 +27,5 @@ func generate_level():
 		
 		var tile_data = map.get_cell_tile_data(0, tile)
 		var tile_open = tile_data.get_custom_data("OpenAir")
+		#print(map.get_cell_atlas_coords(0, tile,))
 		cell.set_faces(used_cells, tile_open, cell_theme)
