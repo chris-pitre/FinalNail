@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://c62k2e27wds1u"]
+[gd_scene load_steps=34 format=3 uid="uid://c62k2e27wds1u"]
 
 [ext_resource type="PackedScene" uid="uid://b1pu7ddiid0ow" path="res://scenes/world/world.tscn" id="1_yich0"]
 [ext_resource type="Texture2D" uid="uid://bk483y6tvh6nq" path="res://assets/icons/cogbutton.png" id="2_bib5k"]
@@ -7,14 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://bmt885g0bl15h" path="res://assets/icons/bagbutton.png" id="3_mde73"]
 [ext_resource type="PackedScene" uid="uid://dh1mo8mixskss" path="res://scenes/ui/minimap.tscn" id="4_0da32"]
 [ext_resource type="Texture2D" uid="uid://b2k3p5p6y3xfo" path="res://assets/icons/scrollbutton.png" id="4_j0gde"]
-[ext_resource type="Texture2D" uid="uid://bfyk7otkr0iyf" path="res://assets/portraits/bellmet1.png" id="5_g3fs2"]
-[ext_resource type="Texture2D" uid="uid://cqfsyyj5uak36" path="res://assets/icons/compassunder.png" id="6_4gtar"]
+[ext_resource type="Texture2D" uid="uid://c4qojo5ch3eq3" path="res://assets/portraits/bellmet1.png" id="5_g3fs2"]
 [ext_resource type="Texture2D" uid="uid://bhsueomjnheek" path="res://assets/textures/woodframesmall.png" id="6_8a06b"]
 [ext_resource type="Shader" path="res://src/shaders/vignette.gdshader" id="7_slnml"]
 [ext_resource type="Texture2D" uid="uid://cbgy2acshjh72" path="res://assets/textures/woodframe.png" id="8_1pkee"]
 [ext_resource type="PackedScene" uid="uid://djne241eqnkhg" path="res://scenes/ui/cursor.tscn" id="11_uqah4"]
+[ext_resource type="PackedScene" uid="uid://b3on85708w0wg" path="res://scenes/ui/compass.tscn" id="13_k46fj"]
 [ext_resource type="Shader" path="res://src/shaders/mosqit.gdshader" id="13_xlk0h"]
-[ext_resource type="Texture2D" uid="uid://boscr0nk4eqai" path="res://assets/icons/compassover.png" id="14_flepu"]
 
 [sub_resource type="Gradient" id="Gradient_b2j0i"]
 colors = PackedColorArray(0.0576377, 2.83971e-06, 0.317881, 1, 0.198681, 0.00388911, 0.229368, 1)
@@ -441,23 +440,12 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Compass" type="TextureRect" parent="UI"]
-custom_minimum_size = Vector2(256, 256)
-layout_mode = 2
-offset_left = -72.0
-offset_top = 904.0
-offset_right = 184.0
-offset_bottom = 1160.0
-size_flags_horizontal = 0
-size_flags_vertical = 8
-texture = ExtResource("6_4gtar")
-expand_mode = 1
-
-[node name="CompassNeedle" type="TextureRect" parent="UI/Compass"]
+[node name="Compass" parent="UI" instance=ExtResource("13_k46fj")]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("14_flepu")
+offset_left = -24.0
+offset_top = 912.0
+offset_right = 232.0
+offset_bottom = 1168.0
 
 [node name="Cursor" parent="UI" instance=ExtResource("11_uqah4")]
 

@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3on85708w0wg"]
+
+[ext_resource type="Texture2D" uid="uid://cqfsyyj5uak36" path="res://assets/icons/compassunder.png" id="1_o4h7x"]
+[ext_resource type="Texture2D" uid="uid://boscr0nk4eqai" path="res://assets/icons/compassover.png" id="2_367rq"]
+[ext_resource type="Script" path="res://scenes/ui/compass.gd" id="2_hf4g1"]
+
+[node name="Compass" type="TextureRect"]
+custom_minimum_size = Vector2(256, 256)
+offset_left = -72.0
+offset_top = 904.0
+offset_right = 184.0
+offset_bottom = 1160.0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+texture = ExtResource("1_o4h7x")
+expand_mode = 1
+script = ExtResource("2_hf4g1")
+
+[node name="CompassNeedle" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+pivot_offset = Vector2(128, 128)
+texture = ExtResource("2_367rq")
