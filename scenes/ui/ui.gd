@@ -13,6 +13,7 @@ static var current: UI
 @onready var message = $OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/MessageGradient
 @onready var message_label = $OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/MessageGradient/MessageLabel
 @onready var message_timer = $OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/MessageGradient/MessageTimer
+@onready var world_vp_container = $OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/WorldContainer
 
 
 func _ready() -> void:
@@ -47,6 +48,10 @@ func display_message(msg: String, time: float) -> void:
 	tween.tween_property(message, "modulate", Color.WHITE, 0.2)
 	message_timer.start(time)
 	message_label.text = "[center]%s[/center]" % msg
+
+
+func set_view_tooltip(tooltip: String) -> void:
+	world_vp_container.set_meta("tooltip", tooltip)
 
 
 func _on_message_timer_timeout() -> void:

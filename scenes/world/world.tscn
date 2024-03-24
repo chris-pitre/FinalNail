@@ -34,16 +34,16 @@ shader_parameter/moon_color = Color(1, 0.95, 0.7, 1)
 shader_parameter/moon_size = 0.06
 shader_parameter/moon_blur = 0.1
 shader_parameter/clouds_edge_color = Color(0.529412, 0.462745, 0.435294, 1)
-shader_parameter/clouds_top_color = Color(0.768627, 0.670588, 0.631373, 1)
+shader_parameter/clouds_top_color = Color(0.901961, 0.784314, 0.737255, 1)
 shader_parameter/clouds_middle_color = Color(0.678431, 0.592157, 0.556863, 1)
-shader_parameter/clouds_bottom_color = Color(0.458824, 0.4, 0.376471, 1)
+shader_parameter/clouds_bottom_color = Color(0.501961, 0.435294, 0.411765, 1)
 shader_parameter/clouds_speed = 2.0
-shader_parameter/clouds_direction = 0.2
-shader_parameter/clouds_scale = 1.0
-shader_parameter/clouds_cutoff = 0.02
+shader_parameter/clouds_direction = 0.05
+shader_parameter/clouds_scale = 1.5
+shader_parameter/clouds_cutoff = 0.0
 shader_parameter/clouds_fuzziness = 0.59
 shader_parameter/clouds_weight = 0.0
-shader_parameter/clouds_blur = 0.28
+shader_parameter/clouds_blur = 0.31
 shader_parameter/stars_speed = 1.0
 shader_parameter/overwritten_time = 0.0
 
@@ -53,6 +53,9 @@ sky_material = SubResource("ShaderMaterial_2bf4u")
 [sub_resource type="Environment" id="Environment_yf5dv"]
 background_mode = 2
 sky = SubResource("Sky_cj5yh")
+ambient_light_source = 2
+ambient_light_color = Color(0.65098, 0.65098, 0.65098, 1)
+reflected_light_source = 1
 ssao_enabled = true
 fog_light_color = Color(0.101961, 0.117647, 0.137255, 1)
 
@@ -70,7 +73,6 @@ environment = SubResource("Environment_yf5dv")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
-light_energy = 0.03
-light_indirect_energy = 0.0
 shadow_enabled = true
-shadow_normal_bias = 0.1
+directional_shadow_split_1 = 0.05
+directional_shadow_split_2 = 0.1

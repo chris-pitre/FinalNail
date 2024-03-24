@@ -17,14 +17,13 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://src/singletons/global.gd"
 PlayerData="*res://src/singletons/player_data.gd"
 SignalBus="*res://src/singletons/signal_bus.gd"
 
 [display]
 
-window/size/viewport_width=1280
-window/size/viewport_height=720
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 
 [input]

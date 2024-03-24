@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://dp3q2k1wi25xe"]
+
+[ext_resource type="Script" path="res://scenes/props/map_prop.gd" id="1_lalt2"]
+
+[sub_resource type="Gradient" id="Gradient_c4d1g"]
+offsets = PackedFloat32Array(0.0143369, 1)
+colors = PackedColorArray(1, 0.941176, 0.831373, 1, 1, 0.827451, 0.498039, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_48kjm"]
+frequency = 0.0568
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6dhq4"]
+color_ramp = SubResource("Gradient_c4d1g")
+noise = SubResource("FastNoiseLite_48kjm")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q8b0o"]
+albedo_texture = SubResource("NoiseTexture2D_6dhq4")
+
+[sub_resource type="QuadMesh" id="QuadMesh_mma87"]
+size = Vector2(0.2, 0.3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g8wfx"]
+size = Vector3(0.2, 0.05, 0.3)
+
+[node name="Note" type="Node3D"]
+script = ExtResource("1_lalt2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.00766691, 0)
+material_override = SubResource("StandardMaterial3D_q8b0o")
+mesh = SubResource("QuadMesh_mma87")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_g8wfx")
+
+[connection signal="mouse_entered" from="Area3D" to="." method="_on_area_3d_mouse_entered"]
+[connection signal="mouse_exited" from="Area3D" to="." method="_on_area_3d_mouse_exited"]

@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dh1mo8mixskss" path="res://scenes/ui/minimap.tscn" id="4_0da32"]
 [ext_resource type="Texture2D" uid="uid://b2k3p5p6y3xfo" path="res://assets/icons/scrollbutton.png" id="4_j0gde"]
 [ext_resource type="Texture2D" uid="uid://bfyk7otkr0iyf" path="res://assets/portraits/bellmet1.png" id="5_g3fs2"]
-[ext_resource type="Texture2D" path="res://assets/textures/woodframesmall.png" id="6_8a06b"]
+[ext_resource type="Texture2D" uid="uid://bhsueomjnheek" path="res://assets/textures/woodframesmall.png" id="6_8a06b"]
 [ext_resource type="Shader" path="res://src/shaders/vignette.gdshader" id="7_slnml"]
 [ext_resource type="Texture2D" uid="uid://cbgy2acshjh72" path="res://assets/textures/woodframe.png" id="8_1pkee"]
 [ext_resource type="PackedScene" uid="uid://djne241eqnkhg" path="res://scenes/ui/cursor.tscn" id="11_uqah4"]
@@ -160,11 +160,14 @@ texture_normal = ExtResource("4_j0gde")
 
 [node name="ViewVBox" type="VBoxContainer" parent="UI/OuterMargin/ContentHBox"]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
 alignment = 1
 
 [node name="Viewport" type="PanelContainer" parent="UI/OuterMargin/ContentHBox/ViewVBox"]
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 16.0
 
 [node name="BorderExpand" type="MarginContainer" parent="UI/OuterMargin/ContentHBox/ViewVBox/Viewport"]
 layout_mode = 2
@@ -173,19 +176,20 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="UI/OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand"]
-custom_minimum_size = Vector2(800, 550)
+[node name="WorldContainer" type="SubViewportContainer" parent="UI/OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand" groups=["tooltip"]]
+custom_minimum_size = Vector2(200, 150)
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="UI/OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/SubViewportContainer"]
+[node name="WorldViewport" type="SubViewport" parent="UI/OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/WorldContainer"]
 handle_input_locally = false
-size = Vector2i(800, 550)
+use_taa = true
+use_debanding = true
+physics_object_picking = true
+size = Vector2i(1319, 920)
 render_target_update_mode = 4
 
-[node name="World" parent="UI/OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/SubViewportContainer/SubViewport" instance=ExtResource("1_yich0")]
+[node name="World" parent="UI/OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/WorldContainer/WorldViewport" instance=ExtResource("1_yich0")]
 
 [node name="ViewportCover" type="TextureRect" parent="UI/OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand" groups=["gui_cover"]]
 visible = false
@@ -238,9 +242,15 @@ texture_progress = SubResource("GradientTexture2D_3l30f")
 
 [node name="Label" type="Label" parent="UI/OuterMargin/ContentHBox/ViewVBox/Healthbar"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.5
+offset_top = -14.5
+offset_right = 44.5
+offset_bottom = 14.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -251,36 +261,33 @@ vertical_alignment = 1
 
 [node name="InfoVBox" type="VBoxContainer" parent="UI/OuterMargin/ContentHBox"]
 layout_mode = 2
+size_flags_horizontal = 3
 alignment = 1
 
-[node name="MinimapContainer" type="PanelContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox"]
+[node name="MinimapAspect" type="AspectRatioContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_vertical = 3
 
-[node name="BorderExpand" type="MarginContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox/MinimapContainer"]
+[node name="BorderExpand" type="MarginContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox/MinimapAspect"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="SubViewportContainer2" type="SubViewportContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox/MinimapContainer/BorderExpand"]
+[node name="MinimapContainer" type="SubViewportContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox/MinimapAspect/BorderExpand"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="UI/OuterMargin/ContentHBox/InfoVBox/MinimapContainer/BorderExpand/SubViewportContainer2"]
+[node name="MinimapViewport" type="SubViewport" parent="UI/OuterMargin/ContentHBox/InfoVBox/MinimapAspect/BorderExpand/MinimapContainer"]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(230, 230)
+size = Vector2i(328, 328)
 render_target_update_mode = 4
 
-[node name="Minimap" parent="UI/OuterMargin/ContentHBox/InfoVBox/MinimapContainer/BorderExpand/SubViewportContainer2/SubViewport" instance=ExtResource("4_0da32")]
+[node name="Minimap" parent="UI/OuterMargin/ContentHBox/InfoVBox/MinimapAspect/BorderExpand/MinimapContainer/MinimapViewport" instance=ExtResource("4_0da32")]
 
-[node name="WoodBorder" type="NinePatchRect" parent="UI/OuterMargin/ContentHBox/InfoVBox/MinimapContainer"]
+[node name="WoodBorder" type="NinePatchRect" parent="UI/OuterMargin/ContentHBox/InfoVBox/MinimapAspect"]
 layout_mode = 2
 texture = ExtResource("6_8a06b")
 patch_margin_left = 64
@@ -292,6 +299,8 @@ axis_stretch_vertical = 2
 
 [node name="StatsVBox" type="VBoxContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox"]
 layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
 
 [node name="StatContainer" type="PanelContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox"]
 layout_mode = 2
@@ -374,36 +383,41 @@ text = "43573
 "
 horizontal_alignment = 2
 
-[node name="PortraitContainer" type="PanelContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox"]
+[node name="PortraitAspect" type="AspectRatioContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox"]
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_vertical = 3
 
-[node name="BorderExpand" type="MarginContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox/PortraitContainer"]
+[node name="BorderExpand" type="MarginContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox/PortraitAspect"]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Portrait" type="TextureRect" parent="UI/OuterMargin/ContentHBox/InfoVBox/PortraitContainer/BorderExpand" groups=["tooltip"]]
+[node name="Portrait" type="TextureRect" parent="UI/OuterMargin/ContentHBox/InfoVBox/PortraitAspect/BorderExpand" groups=["tooltip"]]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 texture = ExtResource("5_g3fs2")
 expand_mode = 1
 metadata/tooltip = "It's you."
 
-[node name="ColorRect" type="ColorRect" parent="UI/OuterMargin/ContentHBox/InfoVBox/PortraitContainer/BorderExpand"]
+[node name="ColorRect" type="ColorRect" parent="UI/OuterMargin/ContentHBox/InfoVBox/PortraitAspect/BorderExpand/Portrait"]
 material = SubResource("ShaderMaterial_ba1nb")
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="PortraitCover" type="TextureRect" parent="UI/OuterMargin/ContentHBox/InfoVBox/PortraitContainer/BorderExpand" groups=["gui_cover"]]
+[node name="PortraitCover" type="TextureRect" parent="UI/OuterMargin/ContentHBox/InfoVBox/PortraitAspect/BorderExpand" groups=["gui_cover"]]
 visible = false
 layout_mode = 2
 mouse_filter = 2
 texture = SubResource("GradientTexture2D_o5hyk")
 
-[node name="WoodBorder" type="NinePatchRect" parent="UI/OuterMargin/ContentHBox/InfoVBox/PortraitContainer"]
+[node name="WoodBorder" type="NinePatchRect" parent="UI/OuterMargin/ContentHBox/InfoVBox/PortraitAspect"]
 layout_mode = 2
 texture = ExtResource("6_8a06b")
 patch_margin_left = 32

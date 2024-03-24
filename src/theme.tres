@@ -1,4 +1,7 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cwq2xtxplyyqf"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://cwq2xtxplyyqf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mlgr8"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="SystemFont" id="SystemFont_phdlo"]
 font_names = PackedStringArray("Bookman Old Style")
@@ -6,7 +9,8 @@ hinting = 2
 
 [resource]
 default_font = SubResource("SystemFont_phdlo")
-default_font_size = 24
+default_font_size = 36
 Label/colors/font_color = Color(0, 0, 0, 1)
 Label/colors/font_outline_color = Color(0, 0.878431, 0.788235, 1)
 Label/constants/outline_size = 10
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_mlgr8")

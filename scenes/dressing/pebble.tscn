@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfaacrqc1dgnr"]
+
+[ext_resource type="Material" uid="uid://kis31lqcl3w0" path="res://assets/materials/gray.tres" id="1_cclxd"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_iyv1k"]
+material = ExtResource("1_cclxd")
+radius = 0.05
+height = 0.05
+radial_segments = 6
+rings = 3
+is_hemisphere = true
+
+[node name="MeshInstance3D" type="MeshInstance3D"]
+mesh = SubResource("SphereMesh_iyv1k")

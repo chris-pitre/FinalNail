@@ -47,7 +47,3 @@ func set_faces(cell_list: Array[Vector2i], tile_open: bool, corners: Dictionary,
 			nw_pillar.visible = true
 		if corners["NE"]:
 			ne_pillar.visible = true
-	
-	
-	
-	
