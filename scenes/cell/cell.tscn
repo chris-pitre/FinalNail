@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://cjgwygl1psnne"]
+[gd_scene load_steps=16 format=3 uid="uid://cjgwygl1psnne"]
 
 [ext_resource type="Script" path="res://scenes/cell/cell.gd" id="1_whknc"]
+[ext_resource type="Material" uid="uid://b6cxkxuuau7fp" path="res://assets/materials/cobblestone.tres" id="2_8ngoa"]
 [ext_resource type="Material" uid="uid://cwmifmfw4402q" path="res://assets/materials/birck.tres" id="3_n0awh"]
 [ext_resource type="Texture2D" uid="uid://bsvuuwfpmpim1" path="res://assets/textures/smallbirckbothpillars.png" id="4_1ko2n"]
 [ext_resource type="Texture2D" uid="uid://di50ng7jmtboq" path="res://assets/textures/smallbircktrim.png" id="4_lppg5"]
@@ -39,7 +40,7 @@ script = ExtResource("1_whknc")
 
 [node name="BottomFace" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 0, 0)
-material_override = ExtResource("3_n0awh")
+material_override = ExtResource("2_8ngoa")
 cast_shadow = 2
 mesh = SubResource("QuadMesh_ofxii")
 
