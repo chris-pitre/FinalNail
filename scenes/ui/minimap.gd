@@ -11,7 +11,7 @@ func _ready():
 	_player_moved(0, 0)
 	
 func _player_moved(x, y):
-	set_cell(0, Vector2i(x, y), 0, Vector2i(0, 0))
+	set_cells_terrain_connect(0, [Vector2i(x, y)], 0, 0)
 	new_pos = Vector2(16 * x + 8, 16 * y + 8)
 
 func _physics_process(delta):

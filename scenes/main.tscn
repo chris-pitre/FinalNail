@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://c62k2e27wds1u"]
+[gd_scene load_steps=33 format=3 uid="uid://c62k2e27wds1u"]
 
 [ext_resource type="PackedScene" uid="uid://b1pu7ddiid0ow" path="res://scenes/world/world.tscn" id="1_yich0"]
 [ext_resource type="Texture2D" uid="uid://bk483y6tvh6nq" path="res://assets/icons/cogbutton.png" id="2_bib5k"]
@@ -7,11 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://bmt885g0bl15h" path="res://assets/icons/bagbutton.png" id="3_mde73"]
 [ext_resource type="PackedScene" uid="uid://dh1mo8mixskss" path="res://scenes/ui/minimap.tscn" id="4_0da32"]
 [ext_resource type="Texture2D" uid="uid://b2k3p5p6y3xfo" path="res://assets/icons/scrollbutton.png" id="4_j0gde"]
-[ext_resource type="Texture2D" uid="uid://c4qojo5ch3eq3" path="res://assets/portraits/bellmet1.png" id="5_g3fs2"]
+[ext_resource type="Texture2D" uid="uid://bfyk7otkr0iyf" path="res://assets/portraits/bellmet1.png" id="5_g3fs2"]
 [ext_resource type="Texture2D" uid="uid://bhsueomjnheek" path="res://assets/textures/woodframesmall.png" id="6_8a06b"]
 [ext_resource type="Shader" path="res://src/shaders/vignette.gdshader" id="7_slnml"]
 [ext_resource type="Texture2D" uid="uid://cbgy2acshjh72" path="res://assets/textures/woodframe.png" id="8_1pkee"]
 [ext_resource type="PackedScene" uid="uid://bffshd3t3axkl" path="res://scenes/ui/cursor.tscn" id="11_uqah4"]
+[ext_resource type="Shader" path="res://src/shaders/mosqit.gdshader" id="13_xlk0h"]
 
 [sub_resource type="Gradient" id="Gradient_b2j0i"]
 colors = PackedColorArray(0.0576377, 2.83971e-06, 0.317881, 1, 0.198681, 0.00388911, 0.229368, 1)
@@ -21,6 +22,20 @@ gradient = SubResource("Gradient_b2j0i")
 fill = 1
 fill_from = Vector2(1, 1)
 fill_to = Vector2(0.478632, 0.482906)
+
+[sub_resource type="Gradient" id="Gradient_oqbe3"]
+offsets = PackedFloat32Array(0.818182, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2j2fu"]
+noise_type = 2
+frequency = 0.0631
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w8x81"]
+width = 1280
+height = 720
+color_ramp = SubResource("Gradient_oqbe3")
+noise = SubResource("FastNoiseLite_2j2fu")
 
 [sub_resource type="Gradient" id="Gradient_5dhlo"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
@@ -50,6 +65,23 @@ colors = PackedColorArray(0.67451, 0, 0, 1, 1, 0, 0.756863, 1)
 gradient = SubResource("Gradient_n5qvh")
 width = 800
 height = 32
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8sdn8"]
+frequency = 0.0025
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5y1k5"]
+seamless = true
+noise = SubResource("FastNoiseLite_8sdn8")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ba1nb"]
+shader = ExtResource("13_xlk0h")
+shader_parameter/intensity = 7.0
+shader_parameter/alpha = 1.0
+shader_parameter/vig_color = Color(0, 1, 1, 0.219608)
+shader_parameter/speed = 0.2
+shader_parameter/amplitude = 1.0
+shader_parameter/aliasing = 0.01
+shader_parameter/noiseTexture = SubResource("NoiseTexture2D_5y1k5")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_34rqv"]
 
@@ -89,6 +121,10 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_e63py")
 
+[node name="Sprite2D" type="Sprite2D" parent="UI/Background"]
+texture = SubResource("NoiseTexture2D_w8x81")
+centered = false
+
 [node name="OuterMargin" type="MarginContainer" parent="UI"]
 layout_mode = 1
 anchors_preset = 15
@@ -101,66 +137,69 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/OuterMargin"]
+[node name="ContentHBox" type="HBoxContainer" parent="UI/OuterMargin"]
 layout_mode = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="ButtonsVBox" type="VBoxContainer" parent="UI/OuterMargin/HBoxContainer"]
+[node name="ButtonsVBox" type="VBoxContainer" parent="UI/OuterMargin/ContentHBox"]
 layout_mode = 2
 alignment = 1
 
-[node name="OptionsButton" type="TextureButton" parent="UI/OuterMargin/HBoxContainer/ButtonsVBox"]
+[node name="OptionsButton" type="TextureButton" parent="UI/OuterMargin/ContentHBox/ButtonsVBox"]
 layout_mode = 2
 texture_normal = ExtResource("2_bib5k")
 
-[node name="InventoryButton" type="TextureButton" parent="UI/OuterMargin/HBoxContainer/ButtonsVBox"]
+[node name="InventoryButton" type="TextureButton" parent="UI/OuterMargin/ContentHBox/ButtonsVBox"]
 layout_mode = 2
 texture_normal = ExtResource("3_mde73")
 
-[node name="NotesButton" type="TextureButton" parent="UI/OuterMargin/HBoxContainer/ButtonsVBox"]
+[node name="NotesButton" type="TextureButton" parent="UI/OuterMargin/ContentHBox/ButtonsVBox"]
 layout_mode = 2
 texture_normal = ExtResource("4_j0gde")
 
-[node name="ViewVBox" type="VBoxContainer" parent="UI/OuterMargin/HBoxContainer"]
+[node name="ViewVBox" type="VBoxContainer" parent="UI/OuterMargin/ContentHBox"]
 layout_mode = 2
 size_flags_horizontal = 0
 alignment = 1
 
-[node name="Viewport" type="PanelContainer" parent="UI/OuterMargin/HBoxContainer/ViewVBox"]
+[node name="Viewport" type="PanelContainer" parent="UI/OuterMargin/ContentHBox/ViewVBox"]
 layout_mode = 2
 
-[node name="BorderExpand" type="MarginContainer" parent="UI/OuterMargin/HBoxContainer/ViewVBox/Viewport"]
+[node name="BorderExpand" type="MarginContainer" parent="UI/OuterMargin/ContentHBox/ViewVBox/Viewport"]
 layout_mode = 2
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="UI/OuterMargin/HBoxContainer/ViewVBox/Viewport/BorderExpand"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="UI/OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand"]
+custom_minimum_size = Vector2(800, 550)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
+stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="UI/OuterMargin/HBoxContainer/ViewVBox/Viewport/BorderExpand/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="UI/OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/SubViewportContainer"]
 handle_input_locally = false
 size = Vector2i(800, 550)
 render_target_update_mode = 4
 
-[node name="World" parent="UI/OuterMargin/HBoxContainer/ViewVBox/Viewport/BorderExpand/SubViewportContainer/SubViewport" instance=ExtResource("1_yich0")]
+[node name="World" parent="UI/OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/SubViewportContainer/SubViewport" instance=ExtResource("1_yich0")]
 
-[node name="ViewportCover" type="TextureRect" parent="UI/OuterMargin/HBoxContainer/ViewVBox/Viewport/BorderExpand" groups=["gui_cover"]]
+[node name="ViewportCover" type="TextureRect" parent="UI/OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand" groups=["gui_cover"]]
 visible = false
 layout_mode = 2
 texture = SubResource("GradientTexture2D_o5hyk")
 
-[node name="DialogueGradient" type="TextureRect" parent="UI/OuterMargin/HBoxContainer/ViewVBox/Viewport/BorderExpand"]
+[node name="MessageGradient" type="TextureRect" parent="UI/OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand"]
+modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_vertical = 8
 texture = SubResource("GradientTexture2D_5j5sa")
 
-[node name="DialogueLabel" type="RichTextLabel" parent="UI/OuterMargin/HBoxContainer/ViewVBox/Viewport/BorderExpand/DialogueGradient"]
+[node name="MessageLabel" type="RichTextLabel" parent="UI/OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/MessageGradient"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 1
 anchors_preset = 7
@@ -177,7 +216,10 @@ size_flags_vertical = 8
 bbcode_enabled = true
 text = "[center]water ice salt ay water ice salt ay[/center]"
 
-[node name="WoodBorder" type="NinePatchRect" parent="UI/OuterMargin/HBoxContainer/ViewVBox/Viewport"]
+[node name="MessageTimer" type="Timer" parent="UI/OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/MessageGradient"]
+one_shot = true
+
+[node name="WoodBorder" type="NinePatchRect" parent="UI/OuterMargin/ContentHBox/ViewVBox/Viewport"]
 layout_mode = 2
 texture = ExtResource("8_1pkee")
 patch_margin_left = 64
@@ -187,14 +229,14 @@ patch_margin_bottom = 64
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
-[node name="Healthbar" type="TextureProgressBar" parent="UI/OuterMargin/HBoxContainer/ViewVBox"]
+[node name="Healthbar" type="TextureProgressBar" parent="UI/OuterMargin/ContentHBox/ViewVBox"]
 layout_mode = 2
 size_flags_horizontal = 4
 value = 32.0
 texture_under = SubResource("GradientTexture2D_6mi4h")
 texture_progress = SubResource("GradientTexture2D_3l30f")
 
-[node name="Label" type="Label" parent="UI/OuterMargin/HBoxContainer/ViewVBox/Healthbar"]
+[node name="Label" type="Label" parent="UI/OuterMargin/ContentHBox/ViewVBox/Healthbar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -207,16 +249,16 @@ text = "32/100"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="InfoVBox" type="VBoxContainer" parent="UI/OuterMargin/HBoxContainer"]
+[node name="InfoVBox" type="VBoxContainer" parent="UI/OuterMargin/ContentHBox"]
 layout_mode = 2
 alignment = 1
 
-[node name="MinimapContainer" type="PanelContainer" parent="UI/OuterMargin/HBoxContainer/InfoVBox"]
+[node name="MinimapContainer" type="PanelContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="BorderExpand" type="MarginContainer" parent="UI/OuterMargin/HBoxContainer/InfoVBox/MinimapContainer"]
+[node name="BorderExpand" type="MarginContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox/MinimapContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -225,20 +267,20 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="SubViewportContainer2" type="SubViewportContainer" parent="UI/OuterMargin/HBoxContainer/InfoVBox/MinimapContainer/BorderExpand"]
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox/MinimapContainer/BorderExpand"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="SubViewport" type="SubViewport" parent="UI/OuterMargin/HBoxContainer/InfoVBox/MinimapContainer/BorderExpand/SubViewportContainer2"]
+[node name="SubViewport" type="SubViewport" parent="UI/OuterMargin/ContentHBox/InfoVBox/MinimapContainer/BorderExpand/SubViewportContainer2"]
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(230, 230)
 render_target_update_mode = 4
 
-[node name="Minimap" parent="UI/OuterMargin/HBoxContainer/InfoVBox/MinimapContainer/BorderExpand/SubViewportContainer2/SubViewport" instance=ExtResource("4_0da32")]
+[node name="Minimap" parent="UI/OuterMargin/ContentHBox/InfoVBox/MinimapContainer/BorderExpand/SubViewportContainer2/SubViewport" instance=ExtResource("4_0da32")]
 
-[node name="WoodBorder" type="NinePatchRect" parent="UI/OuterMargin/HBoxContainer/InfoVBox/MinimapContainer"]
+[node name="WoodBorder" type="NinePatchRect" parent="UI/OuterMargin/ContentHBox/InfoVBox/MinimapContainer"]
 layout_mode = 2
 texture = ExtResource("6_8a06b")
 patch_margin_left = 64
@@ -248,113 +290,120 @@ patch_margin_bottom = 64
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
-[node name="StatsVBox" type="VBoxContainer" parent="UI/OuterMargin/HBoxContainer/InfoVBox"]
+[node name="StatsVBox" type="VBoxContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox"]
 layout_mode = 2
 
-[node name="StatContainer" type="PanelContainer" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsVBox"]
+[node name="StatContainer" type="PanelContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox"]
 layout_mode = 2
 
-[node name="StatName" type="Label" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsVBox/StatContainer" groups=["tooltip"]]
+[node name="StatName" type="Label" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer" groups=["tooltip"]]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Composition"
 metadata/tooltip = "The balance of your soul; affects health"
 
-[node name="StatValue" type="Label" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsVBox/StatContainer"]
+[node name="StatValue" type="Label" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "13"
 horizontal_alignment = 2
 
-[node name="StatContainer2" type="PanelContainer" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsVBox"]
+[node name="StatContainer2" type="PanelContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox"]
 layout_mode = 2
 
-[node name="StatName" type="Label" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsVBox/StatContainer2" groups=["tooltip"]]
+[node name="StatName" type="Label" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer2" groups=["tooltip"]]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Spirit
 "
 metadata/tooltip = "The strength of your soul; affects mana"
 
-[node name="StatValue" type="Label" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsVBox/StatContainer2"]
+[node name="StatValue" type="Label" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer2"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "14
 "
 horizontal_alignment = 2
 
-[node name="StatContainer3" type="PanelContainer" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsVBox"]
+[node name="StatContainer3" type="PanelContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox"]
 layout_mode = 2
 
-[node name="StatName" type="Label" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsVBox/StatContainer3" groups=["tooltip"]]
+[node name="StatName" type="Label" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer3" groups=["tooltip"]]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Corpus
 "
 metadata/tooltip = "The integrity of your physical manifestation; affects damage"
 
-[node name="StatValue" type="Label" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsVBox/StatContainer3"]
+[node name="StatValue" type="Label" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer3"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "15"
 horizontal_alignment = 2
 
-[node name="StatContainer4" type="PanelContainer" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsVBox"]
+[node name="StatContainer4" type="PanelContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox"]
 layout_mode = 2
 
-[node name="StatName" type="Label" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsVBox/StatContainer4" groups=["tooltip"]]
+[node name="StatName" type="Label" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer4" groups=["tooltip"]]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Premonition"
-metadata/tooltip = "Your sense of dangert; affects XP gain"
+metadata/tooltip = "Your sense of danger; affects XP gain"
 
-[node name="StatValue" type="Label" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsVBox/StatContainer4"]
+[node name="StatValue" type="Label" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer4"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "0
 "
 horizontal_alignment = 2
 
-[node name="StatContainer5" type="PanelContainer" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsVBox"]
+[node name="StatContainer5" type="PanelContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox"]
 layout_mode = 2
 
-[node name="StatName" type="Label" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsVBox/StatContainer5" groups=["tooltip"]]
+[node name="StatName" type="Label" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer5" groups=["tooltip"]]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Piety
 "
 metadata/tooltip = "Your favor with your divine warden; affects decree powers"
 
-[node name="StatValue" type="Label" parent="UI/OuterMargin/HBoxContainer/InfoVBox/StatsVBox/StatContainer5"]
+[node name="StatValue" type="Label" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer5"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "43573
 "
 horizontal_alignment = 2
 
-[node name="PortraitContainer" type="PanelContainer" parent="UI/OuterMargin/HBoxContainer/InfoVBox"]
+[node name="PortraitContainer" type="PanelContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="BorderExpand" type="MarginContainer" parent="UI/OuterMargin/HBoxContainer/InfoVBox/PortraitContainer"]
+[node name="BorderExpand" type="MarginContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox/PortraitContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Portrait" type="TextureRect" parent="UI/OuterMargin/HBoxContainer/InfoVBox/PortraitContainer/BorderExpand"]
+[node name="Portrait" type="TextureRect" parent="UI/OuterMargin/ContentHBox/InfoVBox/PortraitContainer/BorderExpand" groups=["tooltip"]]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 texture = ExtResource("5_g3fs2")
 expand_mode = 1
+metadata/tooltip = "It's you."
 
-[node name="PortraitCover" type="TextureRect" parent="UI/OuterMargin/HBoxContainer/InfoVBox/PortraitContainer/BorderExpand" groups=["gui_cover"]]
+[node name="ColorRect" type="ColorRect" parent="UI/OuterMargin/ContentHBox/InfoVBox/PortraitContainer/BorderExpand"]
+material = SubResource("ShaderMaterial_ba1nb")
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="PortraitCover" type="TextureRect" parent="UI/OuterMargin/ContentHBox/InfoVBox/PortraitContainer/BorderExpand" groups=["gui_cover"]]
 visible = false
 layout_mode = 2
+mouse_filter = 2
 texture = SubResource("GradientTexture2D_o5hyk")
 
-[node name="WoodBorder" type="NinePatchRect" parent="UI/OuterMargin/HBoxContainer/InfoVBox/PortraitContainer"]
+[node name="WoodBorder" type="NinePatchRect" parent="UI/OuterMargin/ContentHBox/InfoVBox/PortraitContainer"]
 layout_mode = 2
 texture = ExtResource("6_8a06b")
 patch_margin_left = 32
@@ -376,3 +425,5 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="Cursor" parent="UI" instance=ExtResource("11_uqah4")]
+
+[connection signal="timeout" from="UI/OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/MessageGradient/MessageTimer" to="UI" method="_on_message_timer_timeout"]

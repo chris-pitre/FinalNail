@@ -1,10 +1,12 @@
-[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://cwmifmfw4402q"]
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://cwmifmfw4402q"]
 
 [ext_resource type="Texture2D" uid="uid://cmhjjxo2knjvd" path="res://assets/textures/birck2.png" id="1_n7qth"]
 [ext_resource type="Texture2D" uid="uid://7kkypu2ww33c" path="res://assets/textures/birck2_n.png" id="2_iw3pv"]
+[ext_resource type="Texture2D" uid="uid://sfysdhaer7fh" path="res://assets/textures/birck2_s.png" id="3_u5xdc"]
 
 [resource]
 albedo_texture = ExtResource("1_n7qth")
+roughness_texture = ExtResource("3_u5xdc")
 normal_enabled = true
 normal_texture = ExtResource("2_iw3pv")
 uv1_scale = Vector3(4, 4, 4)

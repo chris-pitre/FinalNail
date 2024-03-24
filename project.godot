@@ -17,6 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+Global="*res://src/singletons/global.gd"
+PlayerData="*res://src/singletons/player_data.gd"
 SignalBus="*res://src/singletons/signal_bus.gd"
 
 [display]

@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://cjgwygl1psnne"]
+[gd_scene load_steps=15 format=3 uid="uid://cjgwygl1psnne"]
 
 [ext_resource type="Script" path="res://scenes/cell/cell.gd" id="1_whknc"]
 [ext_resource type="Material" uid="uid://cwmifmfw4402q" path="res://assets/materials/birck.tres" id="3_n0awh"]
 [ext_resource type="Texture2D" uid="uid://bsvuuwfpmpim1" path="res://assets/textures/smallbirckbothpillars.png" id="4_1ko2n"]
-[ext_resource type="Material" uid="uid://kis31lqcl3w0" path="res://assets/materials/gray.tres" id="4_2xaie"]
+[ext_resource type="Material" uid="uid://df30sdy12o43m" path="res://assets/materials/smallbirck.tres" id="4_py8i7"]
+[ext_resource type="Material" path="res://assets/materials/smallbircktriplanar.tres" id="6_tqfe3"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_supd2"]
 size = Vector2(2, 2)
@@ -24,14 +25,12 @@ size = Vector2(2, 2)
 [sub_resource type="QuadMesh" id="QuadMesh_err8c"]
 size = Vector2(2, 2)
 
-[sub_resource type="BoxMesh" id="BoxMesh_1lv18"]
-lightmap_size_hint = Vector2i(14, 36)
-size = Vector3(2, 2, 0)
+[sub_resource type="QuadMesh" id="QuadMesh_ofxii"]
+size = Vector2(2, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0xxdt"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_abicl"]
-material = ExtResource("3_n0awh")
 size = Vector3(0.5, 2, 0.5)
 
 [node name="Cell" type="Node3D"]
@@ -54,17 +53,18 @@ mesh = SubResource("QuadMesh_6aybd")
 
 [node name="WestFace" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1, 1, 0)
-material_override = SubResource("StandardMaterial3D_dmiyj")
+material_override = ExtResource("4_py8i7")
 mesh = SubResource("QuadMesh_ymdb7")
 
 [node name="SouthFace" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, 1)
+material_override = ExtResource("4_py8i7")
 mesh = SubResource("QuadMesh_err8c")
 
 [node name="TopFace" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.000246048, 2.00001, 0.00649685)
-material_override = ExtResource("4_2xaie")
-mesh = SubResource("BoxMesh_1lv18")
+material_override = ExtResource("3_n0awh")
+mesh = SubResource("QuadMesh_ofxii")
 
 [node name="Collision" type="Area3D" parent="."]
 
@@ -73,28 +73,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_0xxdt")
 
 [node name="Pillars" type="Node3D" parent="."]
-visible = false
 
 [node name="SouthEastPillar" type="MeshInstance3D" parent="Pillars"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1)
-visible = false
+material_override = ExtResource("6_tqfe3")
 mesh = SubResource("BoxMesh_abicl")
 skeleton = NodePath("../..")
 
 [node name="SouthWestPillar" type="MeshInstance3D" parent="Pillars"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 1)
-visible = false
+material_override = ExtResource("6_tqfe3")
 mesh = SubResource("BoxMesh_abicl")
 skeleton = NodePath("../..")
 
 [node name="NorthWestPillar" type="MeshInstance3D" parent="Pillars"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, -1)
-visible = false
+material_override = ExtResource("6_tqfe3")
 mesh = SubResource("BoxMesh_abicl")
 skeleton = NodePath("../..")
 
 [node name="NorthEastPillar" type="MeshInstance3D" parent="Pillars"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -1)
-visible = false
+material_override = ExtResource("6_tqfe3")
 mesh = SubResource("BoxMesh_abicl")
 skeleton = NodePath("../..")
