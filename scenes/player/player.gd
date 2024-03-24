@@ -12,6 +12,8 @@ var moving: bool = false
 
 @onready var move_raycast: RayCast3D = $MoveRaycast
 
+static var move_instant: bool = false
+
 func _input(event):
 	if event.is_pressed() and not moving:
 		if event.is_action("move_forward"):
@@ -46,30 +48,32 @@ func do_movement(dir: DIRECTION):
 func do_rotate(is_right: bool):
 	var dir = 1 if is_right else -1
 	moving = true
-	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	if move_instant:
+		rotation -= Vector3(0, dir * (PI / 2), 0)
+	else:
+		var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+		await tween.tween_property(self, "rotation", rotation - Vector3(0, dir * (PI / 2), 0), 0.15).finished
 	
-	await tween.tween_property(self, "rotation", rotation - Vector3(0, dir * (PI / 2), 0), 0.15).finished
 	SignalBus.player_dir_updated.emit(is_right)
 	
 	moving = false
   
 
 func slide(dir: Vector3, success: bool):
-	moving = true
-	
-	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
-	
+	moving = true		
 	if not success:
 		dir /= 4
-	
-	await tween.tween_property(self, "global_position", global_position + dir, 0.15).finished
-	
-	if not success:
-		tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
-		await tween.tween_property(self, "global_position", global_position - dir, 0.15).finished
+		
+	if move_instant and success:
+		global_position += dir
+	elif not move_instant:
+		var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+		await tween.tween_property(self, "global_position", global_position + dir, 0.15).finished
+		if not success:
+			tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+			await tween.tween_property(self, "global_position", global_position - dir, 0.15).finished
 		
 	global_position = Vector3(round(global_position.x), round(global_position.y), round(global_position.z))
 	SignalBus.player_pos_updated.emit(global_position.x / 2, global_position.z / 2)
 	
 	moving = false
-		
