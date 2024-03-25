@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3 uid="uid://dk0peaub608km"]
+
+[ext_resource type="PackedScene" uid="uid://bi0du7rujukxq" path="res://scenes/combat/spell_node.tscn" id="1_0dimb"]
+[ext_resource type="Script" path="res://scenes/combat/spell_cast.gd" id="1_uw1tu"]
+[ext_resource type="Shader" path="res://src/shaders/spell_cast.gdshader" id="3_87ajx"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_88atx"]
+noise_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bxygn"]
+seamless = true
+noise = SubResource("FastNoiseLite_88atx")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_roj2u"]
+shader = ExtResource("3_87ajx")
+shader_parameter/speed = 0.1
+shader_parameter/noiseTexture = SubResource("NoiseTexture2D_bxygn")
+
+[sub_resource type="Gradient" id="Gradient_81xgr"]
+colors = PackedColorArray(1, 0.556863, 0.901961, 0, 0.271399, 0.814583, 0.860995, 1)
+
+[node name="SpellCast" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_uw1tu")
+
+[node name="SpellNodes" type="GridContainer" parent="."]
+layout_mode = 2
+theme_override_constants/h_separation = 200
+theme_override_constants/v_separation = 200
+columns = 3
+
+[node name="SpellNode1" parent="SpellNodes" instance=ExtResource("1_0dimb")]
+layout_mode = 2
+
+[node name="SpellNode2" parent="SpellNodes" instance=ExtResource("1_0dimb")]
+layout_mode = 2
+
+[node name="SpellNode3" parent="SpellNodes" instance=ExtResource("1_0dimb")]
+layout_mode = 2
+
+[node name="SpellNode4" parent="SpellNodes" instance=ExtResource("1_0dimb")]
+layout_mode = 2
+
+[node name="SpellNode5" parent="SpellNodes" instance=ExtResource("1_0dimb")]
+layout_mode = 2
+
+[node name="SpellNode6" parent="SpellNodes" instance=ExtResource("1_0dimb")]
+layout_mode = 2
+
+[node name="SpellNode7" parent="SpellNodes" instance=ExtResource("1_0dimb")]
+layout_mode = 2
+
+[node name="SpellNode8" parent="SpellNodes" instance=ExtResource("1_0dimb")]
+layout_mode = 2
+
+[node name="SpellNode9" parent="SpellNodes" instance=ExtResource("1_0dimb")]
+layout_mode = 2
+
+[node name="SpellLine" type="Line2D" parent="."]
+material = SubResource("ShaderMaterial_roj2u")
+width = 40.0
+gradient = SubResource("Gradient_81xgr")
+texture_mode = 2
+joint_mode = 2
+end_cap_mode = 2

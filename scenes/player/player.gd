@@ -15,7 +15,7 @@ var input_queue: Array = []
 
 static var move_instant: bool = false
 
-func _process(delta):
+func _process(_delta):
 	if not input_queue.is_empty() and not moving:
 		var command = input_queue.pop_front()
 		command[0].call(command[1])
