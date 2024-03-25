@@ -37,6 +37,7 @@ func tween_line(point_pos, point_idx):
 func _draw_spell(center_pos):
 	var num_points = spell_line.get_point_count()
 	if num_points <= 0:
-		spell_line.add_point(center_pos, num_points)
+		spell_line.add_point(spell_line.to_local(center_pos), num_points)
 	else:
-		point_queue.push_back(center_pos)
+		point_queue.push_back(spell_line.to_local(center_pos))
+
