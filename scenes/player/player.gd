@@ -9,25 +9,44 @@ enum DIRECTION {
 }
 
 var moving: bool = false
+var input_queue: Array = []
 
 @onready var move_raycast: RayCast3D = $MoveRaycast
 
 static var move_instant: bool = false
 
+func _process(delta):
+	if not input_queue.is_empty() and not moving:
+		var command = input_queue.pop_front()
+		command[0].call(command[1])
+
 func _input(event):
-	if event.is_pressed() and not moving:
+	if event.is_pressed() and (move_instant or input_queue.size() <= 2):
 		if event.is_action("move_forward"):
-			do_movement(DIRECTION.FORWARD)
+			input_queue.push_back([Callable(do_movement), DIRECTION.FORWARD]) 
 		if event.is_action("move_backward"):
-			do_movement(DIRECTION.BACKWARD)
+			input_queue.push_back([Callable(do_movement), DIRECTION.BACKWARD]) 
 		if event.is_action("move_left"):
-			do_movement(DIRECTION.LEFT)
+			input_queue.push_back([Callable(do_movement), DIRECTION.LEFT]) 
 		if event.is_action("move_right"):
-			do_movement(DIRECTION.RIGHT)
+			input_queue.push_back([Callable(do_movement), DIRECTION.RIGHT]) 
 		if event.is_action("rotate_left"):
-			do_rotate(false)
+			input_queue.push_back([Callable(do_rotate), false]) 
 		if event.is_action("rotate_right"):
-			do_rotate(true)
+			input_queue.push_back([Callable(do_rotate), true]) 
+	if event.is_released():
+		if event.is_action("move_forward"):
+			input_queue.erase([Callable(do_movement), DIRECTION.FORWARD]) 
+		if event.is_action("move_backward"):
+			input_queue.erase([Callable(do_movement), DIRECTION.BACKWARD]) 
+		if event.is_action("move_left"):
+			input_queue.erase([Callable(do_movement), DIRECTION.LEFT]) 
+		if event.is_action("move_right"):
+			input_queue.erase([Callable(do_movement), DIRECTION.RIGHT]) 
+		if event.is_action("rotate_left"):
+			input_queue.erase([Callable(do_rotate), false]) 
+		if event.is_action("rotate_right"):
+			input_queue.erase([Callable(do_rotate), true])
 					
 func do_movement(dir: DIRECTION):
 	var vec_dir = -basis.z
@@ -62,6 +81,7 @@ func do_rotate(is_right: bool):
 func slide(dir: Vector3, success: bool):
 	moving = true		
 	if not success:
+		input_queue.clear()
 		dir /= 4
 		
 	if move_instant and success:

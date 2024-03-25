@@ -6,7 +6,7 @@ func _ready():
 	SignalBus.player_dir_updated.connect(_rotate_needle)
 	
 func _rotate_needle(is_right: bool):
-	var dir = 1 if is_right else -1
+	var dir = -1 if is_right else 1
 	if Player.move_instant:
 		needle.rotation += dir * (PI / 2)
 	else:
