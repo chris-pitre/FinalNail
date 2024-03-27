@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://c62k2e27wds1u"]
+[gd_scene load_steps=36 format=3 uid="uid://c62k2e27wds1u"]
 
 [ext_resource type="PackedScene" uid="uid://b1pu7ddiid0ow" path="res://scenes/world/world.tscn" id="1_yich0"]
 [ext_resource type="Texture2D" uid="uid://bk483y6tvh6nq" path="res://assets/icons/cogbutton.png" id="2_bib5k"]
@@ -7,12 +7,14 @@
 [ext_resource type="Texture2D" uid="uid://bmt885g0bl15h" path="res://assets/icons/bagbutton.png" id="3_mde73"]
 [ext_resource type="PackedScene" uid="uid://dh1mo8mixskss" path="res://scenes/ui/minimap.tscn" id="4_0da32"]
 [ext_resource type="Texture2D" uid="uid://b2k3p5p6y3xfo" path="res://assets/icons/scrollbutton.png" id="4_j0gde"]
-[ext_resource type="Texture2D" uid="uid://c4qojo5ch3eq3" path="res://assets/portraits/bellmet1.png" id="5_g3fs2"]
+[ext_resource type="Texture2D" uid="uid://bxdte7i1gco4v" path="res://assets/portraits/bellmet1.png" id="5_g3fs2"]
 [ext_resource type="Texture2D" uid="uid://bhsueomjnheek" path="res://assets/textures/woodframesmall.png" id="6_8a06b"]
 [ext_resource type="Shader" path="res://src/shaders/vignette.gdshader" id="7_slnml"]
 [ext_resource type="Texture2D" uid="uid://cbgy2acshjh72" path="res://assets/textures/woodframe.png" id="8_1pkee"]
 [ext_resource type="PackedScene" uid="uid://djne241eqnkhg" path="res://scenes/ui/cursor.tscn" id="11_uqah4"]
-[ext_resource type="PackedScene" uid="uid://b3on85708w0wg" path="res://scenes/ui/compass.tscn" id="13_k46fj"]
+[ext_resource type="Texture2D" uid="uid://bxcw8ptise563" path="res://assets/textures/paper.png" id="12_18ds4"]
+[ext_resource type="Script" path="res://src/components/tooltipper.gd" id="12_cafuu"]
+[ext_resource type="PackedScene" path="res://scenes/ui/compass.tscn" id="13_k46fj"]
 [ext_resource type="Shader" path="res://src/shaders/mosqit.gdshader" id="13_xlk0h"]
 
 [sub_resource type="Gradient" id="Gradient_b2j0i"]
@@ -264,11 +266,13 @@ vertical_alignment = 1
 [node name="InfoVBox" type="VBoxContainer" parent="UI/OuterMargin/ContentHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 alignment = 1
 
 [node name="MinimapAspect" type="AspectRatioContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox"]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="BorderExpand" type="MarginContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox/MinimapAspect"]
 layout_mode = 2
@@ -302,16 +306,23 @@ axis_stretch_vertical = 2
 [node name="StatsVBox" type="VBoxContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox"]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 alignment = 1
 
 [node name="StatContainer" type="PanelContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox"]
 layout_mode = 2
+mouse_filter = 2
 
-[node name="StatName" type="Label" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer" groups=["tooltip"]]
+[node name="StatName" type="Label" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
+mouse_filter = 1
 text = "Composition"
 metadata/tooltip = "The balance of your soul; affects health"
+
+[node name="TooltipperComponent" type="Node" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer/StatName"]
+script = ExtResource("12_cafuu")
+tooltip = "The balance of your soul."
 
 [node name="StatValue" type="Label" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer"]
 layout_mode = 2
@@ -321,13 +332,19 @@ horizontal_alignment = 2
 
 [node name="StatContainer2" type="PanelContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox"]
 layout_mode = 2
+mouse_filter = 2
 
-[node name="StatName" type="Label" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer2" groups=["tooltip"]]
+[node name="StatName" type="Label" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer2"]
 layout_mode = 2
 size_flags_horizontal = 0
+mouse_filter = 1
 text = "Spirit
 "
 metadata/tooltip = "The strength of your soul; affects mana"
+
+[node name="TooltipperComponent" type="Node" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer2/StatName"]
+script = ExtResource("12_cafuu")
+tooltip = "The fortitude of your soul."
 
 [node name="StatValue" type="Label" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer2"]
 layout_mode = 2
@@ -338,13 +355,19 @@ horizontal_alignment = 2
 
 [node name="StatContainer3" type="PanelContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox"]
 layout_mode = 2
+mouse_filter = 2
 
-[node name="StatName" type="Label" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer3" groups=["tooltip"]]
+[node name="StatName" type="Label" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer3"]
 layout_mode = 2
 size_flags_horizontal = 0
+mouse_filter = 1
 text = "Corpus
 "
 metadata/tooltip = "The integrity of your physical manifestation; affects damage"
+
+[node name="TooltipperComponent" type="Node" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer3/StatName"]
+script = ExtResource("12_cafuu")
+tooltip = "Your ability to withstand the weathering of the dungeon."
 
 [node name="StatValue" type="Label" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer3"]
 layout_mode = 2
@@ -354,12 +377,18 @@ horizontal_alignment = 2
 
 [node name="StatContainer4" type="PanelContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox"]
 layout_mode = 2
+mouse_filter = 2
 
-[node name="StatName" type="Label" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer4" groups=["tooltip"]]
+[node name="StatName" type="Label" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer4"]
 layout_mode = 2
 size_flags_horizontal = 0
+mouse_filter = 1
 text = "Premonition"
 metadata/tooltip = "Your sense of danger; affects XP gain"
+
+[node name="TooltipperComponent" type="Node" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer4/StatName"]
+script = ExtResource("12_cafuu")
+tooltip = "Your sense of danger."
 
 [node name="StatValue" type="Label" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer4"]
 layout_mode = 2
@@ -370,13 +399,19 @@ horizontal_alignment = 2
 
 [node name="StatContainer5" type="PanelContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox"]
 layout_mode = 2
+mouse_filter = 2
 
-[node name="StatName" type="Label" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer5" groups=["tooltip"]]
+[node name="StatName" type="Label" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer5"]
 layout_mode = 2
 size_flags_horizontal = 0
+mouse_filter = 1
 text = "Piety
 "
 metadata/tooltip = "Your favor with your divine warden; affects decree powers"
+
+[node name="TooltipperComponent" type="Node" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer5/StatName"]
+script = ExtResource("12_cafuu")
+tooltip = "Your favor with your divine warden."
 
 [node name="StatValue" type="Label" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer5"]
 layout_mode = 2
@@ -388,6 +423,7 @@ horizontal_alignment = 2
 [node name="PortraitAspect" type="AspectRatioContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox"]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="BorderExpand" type="MarginContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox/PortraitAspect"]
 layout_mode = 2
@@ -396,7 +432,7 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Portrait" type="TextureRect" parent="UI/OuterMargin/ContentHBox/InfoVBox/PortraitAspect/BorderExpand" groups=["tooltip"]]
+[node name="Portrait" type="TextureRect" parent="UI/OuterMargin/ContentHBox/InfoVBox/PortraitAspect/BorderExpand"]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 texture = ExtResource("5_g3fs2")
@@ -411,7 +447,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="TooltipperComponent" type="Node" parent="UI/OuterMargin/ContentHBox/InfoVBox/PortraitAspect/BorderExpand/Portrait"]
+script = ExtResource("12_cafuu")
+tooltip = "It's you."
 
 [node name="PortraitCover" type="TextureRect" parent="UI/OuterMargin/ContentHBox/InfoVBox/PortraitAspect/BorderExpand" groups=["gui_cover"]]
 visible = false
@@ -428,6 +469,163 @@ patch_margin_right = 32
 patch_margin_bottom = 32
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
+
+[node name="PaperScrollMenu" type="Control" parent="UI"]
+clip_contents = true
+layout_mode = 1
+anchor_left = 0.8
+anchor_right = 0.991667
+grow_horizontal = 0
+
+[node name="PaperBG" type="TextureRect" parent="UI/PaperScrollMenu"]
+custom_minimum_size = Vector2(368, 1064)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -184.0
+offset_right = 184.0
+offset_bottom = 1064.0
+grow_horizontal = 2
+mouse_filter = 2
+texture = ExtResource("12_18ds4")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/PaperScrollMenu/PaperBG"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Options" type="Control" parent="UI/PaperScrollMenu/PaperBG/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options"]
+layout_mode = 2
+offset_right = 304.0
+offset_bottom = 1000.0
+mouse_filter = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="NameOption" type="VBoxContainer" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="OptionName" type="Label" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/NameOption"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.423529, 0.262745, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 28
+text = "Name"
+
+[node name="TextEdit" type="TextEdit" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/NameOption"]
+custom_minimum_size = Vector2(0, 54)
+layout_mode = 2
+placeholder_text = "Hox"
+context_menu_enabled = false
+shortcut_keys_enabled = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+middle_mouse_paste_enabled = false
+scroll_fit_content_height = true
+
+[node name="InstantMovementOption" type="MarginContainer" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="OptionName" type="Label" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/InstantMovementOption"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.423529, 0.262745, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 28
+text = "Instant Movement"
+
+[node name="CheckBox" type="CheckBox" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/InstantMovementOption"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="MoveBufferOption" type="MarginContainer" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="OptionName" type="Label" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/MoveBufferOption"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.423529, 0.262745, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 28
+text = "Move Buffering"
+
+[node name="CheckBox" type="CheckBox" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/MoveBufferOption"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="MasterVolOption" type="VBoxContainer" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="OptionName" type="Label" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/MasterVolOption"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.423529, 0.262745, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 28
+text = "Master"
+
+[node name="HSlider" type="HSlider" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/MasterVolOption"]
+layout_mode = 2
+
+[node name="SFXVolOption" type="VBoxContainer" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="OptionName" type="Label" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/SFXVolOption"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.423529, 0.262745, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 28
+text = "SFX"
+
+[node name="HSlider" type="HSlider" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/SFXVolOption"]
+layout_mode = 2
+
+[node name="AmbienceVolOption" type="VBoxContainer" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="OptionName" type="Label" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/AmbienceVolOption"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.423529, 0.262745, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 28
+text = "Ambience
+"
+
+[node name="HSlider" type="HSlider" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/AmbienceVolOption"]
+layout_mode = 2
+
+[node name="PainOption" type="VBoxContainer" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="OptionName" type="Label" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/PainOption"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.423529, 0.262745, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 28
+text = "Pain"
+
+[node name="HSlider" type="HSlider" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/PainOption"]
+layout_mode = 2
 
 [node name="VignetteFog" type="ColorRect" parent="UI"]
 material = SubResource("ShaderMaterial_3l43o")
@@ -449,4 +647,5 @@ offset_bottom = 1168.0
 
 [node name="Cursor" parent="UI" instance=ExtResource("11_uqah4")]
 
+[connection signal="pressed" from="UI/OuterMargin/ContentHBox/ButtonsVBox/OptionsButton" to="UI" method="_on_options_button_pressed"]
 [connection signal="timeout" from="UI/OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/MessageGradient/MessageTimer" to="UI" method="_on_message_timer_timeout"]

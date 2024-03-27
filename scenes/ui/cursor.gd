@@ -1,7 +1,9 @@
 class_name Cursor
 extends Control
 
-@onready var tooltip_label: Label = $Label
+@onready var tooltip_labels: Control  = $TooltipLabels
+@onready var tooltip_right: Label = $TooltipLabels/LabelRight
+@onready var tooltip_left: Label = $TooltipLabels/LabelLeft
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -9,11 +11,19 @@ func _input(event: InputEvent) -> void:
 		
 		global_position = get_global_mouse_position()
 		
-		var hovering_tooltip: bool = false
-		for tooltip_control: Control in get_tree().get_nodes_in_group("tooltip"):
-			if tooltip_control.get_global_rect().has_point(glbl_mouse_pos):
-				if tooltip_control.has_meta("tooltip"):
-					hovering_tooltip = true
-					tooltip_label.text = tooltip_control.get_meta("tooltip")
-		
-		tooltip_label.visible = hovering_tooltip
+		if get_global_mouse_position().x > 960:
+			if not tooltip_left.visible:
+				tooltip_left.show()
+				tooltip_right.hide()
+		else:
+			if tooltip_left.visible:
+				tooltip_left.hide()
+				tooltip_right.show()
+
+func show_tooltip(msg: String) -> void:
+	tooltip_left.text = msg
+	tooltip_right.text = msg
+	tooltip_labels.show()
+
+func hide_tooltip() -> void:
+	tooltip_labels.hide()
