@@ -6,7 +6,7 @@
 [ext_resource type="Theme" uid="uid://cwq2xtxplyyqf" path="res://src/theme.tres" id="2_m8jm6"]
 [ext_resource type="Texture2D" uid="uid://bmt885g0bl15h" path="res://assets/icons/bagbutton.png" id="3_mde73"]
 [ext_resource type="PackedScene" uid="uid://dh1mo8mixskss" path="res://scenes/ui/minimap.tscn" id="4_0da32"]
-[ext_resource type="Texture2D" uid="uid://bxdte7i1gco4v" path="res://assets/portraits/bellmet1.png" id="5_g3fs2"]
+[ext_resource type="Texture2D" uid="uid://c4qojo5ch3eq3" path="res://assets/portraits/bellmet1.png" id="5_g3fs2"]
 [ext_resource type="Texture2D" uid="uid://duxtah1wxspxk" path="res://assets/icons/journalbutton.png" id="6_6ced4"]
 [ext_resource type="Texture2D" uid="uid://bhsueomjnheek" path="res://assets/textures/woodframesmall.png" id="6_8a06b"]
 [ext_resource type="Shader" path="res://src/shaders/vignette.gdshader" id="7_slnml"]
@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://djne241eqnkhg" path="res://scenes/ui/cursor.tscn" id="11_uqah4"]
 [ext_resource type="Texture2D" uid="uid://bxcw8ptise563" path="res://assets/textures/paper.png" id="12_18ds4"]
 [ext_resource type="Script" path="res://src/components/tooltipper.gd" id="12_cafuu"]
-[ext_resource type="PackedScene" path="res://scenes/ui/compass.tscn" id="13_k46fj"]
+[ext_resource type="PackedScene" uid="uid://b3on85708w0wg" path="res://scenes/ui/compass.tscn" id="13_k46fj"]
 [ext_resource type="Shader" path="res://src/shaders/mosqit.gdshader" id="13_xlk0h"]
 
 [sub_resource type="Gradient" id="Gradient_b2j0i"]
@@ -211,7 +211,7 @@ handle_input_locally = false
 use_taa = true
 use_debanding = true
 physics_object_picking = true
-size = Vector2i(1296, 920)
+size = Vector2i(200, 150)
 render_target_update_mode = 4
 
 [node name="World" parent="UI/OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/WorldContainer/WorldViewport" instance=ExtResource("1_yich0")]
@@ -309,7 +309,7 @@ stretch = true
 [node name="MinimapViewport" type="SubViewport" parent="UI/OuterMargin/ContentHBox/InfoVBox/MinimapAspect/BorderExpand/MinimapContainer"]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(328, 328)
+size = Vector2i(2, 2)
 render_target_update_mode = 4
 
 [node name="Minimap" parent="UI/OuterMargin/ContentHBox/InfoVBox/MinimapAspect/BorderExpand/MinimapContainer/MinimapViewport" instance=ExtResource("4_0da32")]

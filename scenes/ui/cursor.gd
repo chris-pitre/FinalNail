@@ -9,7 +9,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		var glbl_mouse_pos = get_global_mouse_position()
 		
-		global_position = get_global_mouse_position()
+		global_position = glbl_mouse_pos
 		
 		if get_global_mouse_position().x > 960:
 			if not tooltip_left.visible:

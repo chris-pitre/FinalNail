@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://o7gn20hcextm"]
+
+[ext_resource type="Script" path="res://scenes/props/gate.gd" id="1_17j07"]
+[ext_resource type="PackedScene" uid="uid://5q10u4or3r3q" path="res://assets/models/gate.glb" id="1_ycdl1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wybha"]
+size = Vector3(2, 2, 2)
+
+[node name="Gate" instance=ExtResource("1_ycdl1")]
+script = ExtResource("1_17j07")
+
+[node name="Armature" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/1/rotation = Quaternion(0, 0.00337469, 0, 0.999994)
+bones/2/rotation = Quaternion(0, -0.00337469, 0, 0.999994)
+
+[node name="Area3D" type="Area3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1.001)
+shape = SubResource("BoxShape3D_wybha")

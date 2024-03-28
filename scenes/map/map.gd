@@ -49,7 +49,7 @@ func generate_level():
 	for map_object in map_objects:
 		var object = map_object.scene.instantiate()
 		add_child(object)
-		object.global_position = Vector3(map_object.position.x / 16.0 + 0.5, 0.0, map_object.position.y / 16.0 - 0.5)
+		object.global_position = Vector3(map_object.position.x / 16.0 - 0.5, 0.0, map_object.position.y / 16.0 - 0.5) * 2
 		object.rotate_y(map_object.rotation)
 
 func get_corners(tile_data: TileData) -> Dictionary:
