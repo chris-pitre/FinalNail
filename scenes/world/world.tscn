@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://b1pu7ddiid0ow"]
+[gd_scene load_steps=14 format=3 uid="uid://b1pu7ddiid0ow"]
 
 [ext_resource type="PackedScene" uid="uid://cf0ng65ho3ys0" path="res://scenes/map/map.tscn" id="1_hdrip"]
 [ext_resource type="PackedScene" uid="uid://db0sndhg6hj30" path="res://scenes/tilemaps/test_level.tscn" id="2_c2dl5"]
 [ext_resource type="Material" uid="uid://cwmifmfw4402q" path="res://assets/materials/birck.tres" id="3_7ewkn"]
-[ext_resource type="Material" path="res://assets/materials/cobblestone.tres" id="4_2ua1v"]
+[ext_resource type="Material" uid="uid://b6cxkxuuau7fp" path="res://assets/materials/cobblestone.tres" id="4_2ua1v"]
+[ext_resource type="Material" uid="uid://4exl02hr0bke" path="res://assets/materials/grass.tres" id="4_kbseo"]
 [ext_resource type="Script" path="res://src/cell_theme.gd" id="4_roce2"]
 [ext_resource type="Material" uid="uid://df30sdy12o43m" path="res://assets/materials/smallbirck.tres" id="5_wrpaq"]
 [ext_resource type="PackedScene" uid="uid://bud544xv1crtu" path="res://scenes/player/player.tscn" id="6_kvtnq"]
@@ -12,6 +13,7 @@
 [sub_resource type="Resource" id="Resource_rlf4f"]
 script = ExtResource("4_roce2")
 floor_tex = ExtResource("4_2ua1v")
+floor_out = ExtResource("4_kbseo")
 wall = ExtResource("5_wrpaq")
 ceiling = ExtResource("3_7ewkn")
 pillars = true
@@ -52,10 +54,11 @@ sky_material = SubResource("ShaderMaterial_2bf4u")
 
 [sub_resource type="Environment" id="Environment_yf5dv"]
 background_mode = 2
+background_energy_multiplier = 0.4
 sky = SubResource("Sky_cj5yh")
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 0.2
+ambient_light_energy = 0.1
 reflected_light_source = 1
 ssao_enabled = true
 fog_light_color = Color(0.101961, 0.117647, 0.137255, 1)
@@ -74,6 +77,7 @@ environment = SubResource("Environment_yf5dv")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_energy = 0.3
 shadow_enabled = true
 directional_shadow_split_1 = 0.05
 directional_shadow_split_2 = 0.1
