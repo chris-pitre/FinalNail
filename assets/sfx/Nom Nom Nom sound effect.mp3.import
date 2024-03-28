@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bnga82mf4413h"
+path="res://.godot/imported/Nom Nom Nom sound effect.mp3-89ee60cdc10f154c03c3ca8e8fc2129f.mp3str"
+
+[deps]
+
+source_file="res://assets/sfx/Nom Nom Nom sound effect.mp3"
+dest_files=["res://.godot/imported/Nom Nom Nom sound effect.mp3-89ee60cdc10f154c03c3ca8e8fc2129f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
