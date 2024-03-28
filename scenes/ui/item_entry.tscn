@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://7amkckokeqyf"]
+
+[node name="ItemEntry" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ItemEntryVBox" type="VBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ItemInfo" type="MarginContainer" parent="ItemEntryVBox"]
+layout_mode = 2
+
+[node name="ItemName" type="Label" parent="ItemEntryVBox/ItemInfo"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "ItemName"
+
+[node name="ItemNumber" type="Label" parent="ItemEntryVBox/ItemInfo"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "0"
+horizontal_alignment = 2
+
+[node name="Button" type="Button" parent="ItemEntryVBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Use"

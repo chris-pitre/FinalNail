@@ -22,6 +22,6 @@ func _toggle():
 		moving = false
 		is_left = not is_left
 
-func _on_area_3d_input_event(camera, event, position, normal, shape_idx):
+func _on_area_3d_input_event(camera, event, pos, normal, shape_idx):
 	if event.is_action_pressed("lmb") and not moving:
 		_toggle()

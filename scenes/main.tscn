@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://c62k2e27wds1u"]
+[gd_scene load_steps=42 format=3 uid="uid://c62k2e27wds1u"]
 
 [ext_resource type="PackedScene" uid="uid://b1pu7ddiid0ow" path="res://scenes/world/world.tscn" id="1_yich0"]
 [ext_resource type="Texture2D" uid="uid://bk483y6tvh6nq" path="res://assets/icons/cogbutton.png" id="2_bib5k"]
@@ -6,7 +6,7 @@
 [ext_resource type="Theme" uid="uid://cwq2xtxplyyqf" path="res://src/theme.tres" id="2_m8jm6"]
 [ext_resource type="Texture2D" uid="uid://bmt885g0bl15h" path="res://assets/icons/bagbutton.png" id="3_mde73"]
 [ext_resource type="PackedScene" uid="uid://dh1mo8mixskss" path="res://scenes/ui/minimap.tscn" id="4_0da32"]
-[ext_resource type="Texture2D" uid="uid://c4qojo5ch3eq3" path="res://assets/portraits/bellmet1.png" id="5_g3fs2"]
+[ext_resource type="Texture2D" uid="uid://bxdte7i1gco4v" path="res://assets/portraits/bellmet1.png" id="5_g3fs2"]
 [ext_resource type="Texture2D" uid="uid://duxtah1wxspxk" path="res://assets/icons/journalbutton.png" id="6_6ced4"]
 [ext_resource type="Texture2D" uid="uid://bhsueomjnheek" path="res://assets/textures/woodframesmall.png" id="6_8a06b"]
 [ext_resource type="Shader" path="res://src/shaders/vignette.gdshader" id="7_slnml"]
@@ -15,9 +15,12 @@
 [ext_resource type="PackedScene" uid="uid://djne241eqnkhg" path="res://scenes/ui/cursor.tscn" id="11_uqah4"]
 [ext_resource type="Texture2D" uid="uid://bxcw8ptise563" path="res://assets/textures/paper.png" id="12_18ds4"]
 [ext_resource type="Script" path="res://src/components/tooltipper.gd" id="12_cafuu"]
-[ext_resource type="PackedScene" uid="uid://b3on85708w0wg" path="res://scenes/ui/compass.tscn" id="13_k46fj"]
+[ext_resource type="PackedScene" path="res://scenes/ui/compass.tscn" id="13_k46fj"]
 [ext_resource type="Shader" path="res://src/shaders/mosqit.gdshader" id="13_xlk0h"]
+[ext_resource type="Theme" uid="uid://cf7epahqf8y5y" path="res://src/paper_theme.tres" id="14_qrejk"]
 [ext_resource type="PackedScene" uid="uid://bxrbu0ifssc7k" path="res://scenes/ui/battle_choices.tscn" id="15_xq3yf"]
+[ext_resource type="PackedScene" uid="uid://l036fxrvhnet" path="res://scenes/ui/inventory.tscn" id="16_8h35l"]
+[ext_resource type="Texture2D" uid="uid://clcojjhs5sl5b" path="res://assets/textures/scrollend.png" id="18_wgwwn"]
 
 [sub_resource type="Gradient" id="Gradient_b2j0i"]
 colors = PackedColorArray(0.0576377, 2.83971e-06, 0.317881, 1, 0.198681, 0.00388911, 0.229368, 1)
@@ -504,6 +507,57 @@ patch_margin_bottom = 32
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
+[node name="Journal" type="Control" parent="UI/OuterMargin"]
+custom_minimum_size = Vector2(600, 800)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme = ExtResource("14_qrejk")
+
+[node name="PaperTexture" type="TextureRect" parent="UI/OuterMargin/Journal"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_18ds4")
+stretch_mode = 1
+
+[node name="PageMargin" type="MarginContainer" parent="UI/OuterMargin/Journal/PaperTexture"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="JournalText" type="Label" parent="UI/OuterMargin/Journal/PaperTexture/PageMargin"]
+custom_minimum_size = Vector2(100, 32)
+layout_mode = 2
+size_flags_vertical = 1
+text = "this is an awesome freaking lore entry
+you won't even begin to understand it ever cause its so freaking awesome
+maybe vaatividya will even make a video about it if we make it obscure enough
+so basically there's this guy and he is super dead
+but so is everyone else and like
+he has to kill them again even though they already dead
+but its like awesome cause u have to fight them
+orwk[greg0fd=fbvfcb[pvc[
+dfblfdsbpte
+4t4t4t;43tg-df-gfdgs
+grf-dsgper[ges
+g5[sg[5s[;g5
+s;hg[fsbgfbg/fd/bgfd
+[[b/gf[bgf
+d[[ya[y5yap5a=y=5"
+autowrap_mode = 3
+
 [node name="PaperScrollMenu" type="Control" parent="UI"]
 clip_contents = true
 layout_mode = 1
@@ -512,6 +566,7 @@ anchor_right = 0.991667
 offset_right = -0.000610352
 offset_bottom = 1080.0
 grow_horizontal = 0
+theme = ExtResource("14_qrejk")
 
 [node name="PaperBG" type="TextureRect" parent="UI/PaperScrollMenu"]
 custom_minimum_size = Vector2(368, 1064)
@@ -528,7 +583,7 @@ texture = ExtResource("12_18ds4")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/PaperScrollMenu/PaperBG"]
+[node name="ScrollMenus" type="MarginContainer" parent="UI/PaperScrollMenu/PaperBG"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -541,12 +596,12 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="Options" type="Control" parent="UI/PaperScrollMenu/PaperBG/MarginContainer"]
+[node name="Options" type="Control" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus"]
 visible = false
 layout_mode = 2
 mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options"]
 layout_mode = 2
 offset_right = 304.0
 offset_bottom = 1000.0
@@ -554,18 +609,18 @@ mouse_filter = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="NameOption" type="VBoxContainer" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer"]
+[node name="NameOption" type="VBoxContainer" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="OptionName" type="Label" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/NameOption"]
+[node name="OptionName" type="Label" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer/NameOption"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.423529, 0.262745, 0, 1)
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 28
 text = "Name"
 
-[node name="TextEdit" type="TextEdit" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/NameOption"]
+[node name="TextEdit" type="TextEdit" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer/NameOption"]
 custom_minimum_size = Vector2(0, 54)
 layout_mode = 2
 placeholder_text = "Hox"
@@ -577,89 +632,89 @@ drag_and_drop_selection_enabled = false
 middle_mouse_paste_enabled = false
 scroll_fit_content_height = true
 
-[node name="InstantMovementOption" type="MarginContainer" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer"]
+[node name="InstantMovementOption" type="MarginContainer" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="OptionName" type="Label" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/InstantMovementOption"]
+[node name="OptionName" type="Label" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer/InstantMovementOption"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.423529, 0.262745, 0, 1)
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 28
 text = "Instant Movement"
 
-[node name="InstantMovementCheckBox" type="CheckBox" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/InstantMovementOption"]
+[node name="InstantMovementCheckBox" type="CheckBox" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer/InstantMovementOption"]
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="FPSOption" type="MarginContainer" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer"]
+[node name="FPSOption" type="MarginContainer" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="OptionName" type="Label" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/FPSOption"]
+[node name="OptionName" type="Label" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer/FPSOption"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.423529, 0.262745, 0, 1)
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 28
 text = "Show FPS"
 
-[node name="FPSCheckBox" type="CheckBox" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/FPSOption"]
+[node name="FPSCheckBox" type="CheckBox" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer/FPSOption"]
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="MoveBuffer" type="VBoxContainer" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer"]
+[node name="MoveBuffer" type="VBoxContainer" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="OptionName" type="Label" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/MoveBuffer"]
+[node name="OptionName" type="Label" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer/MoveBuffer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.423529, 0.262745, 0, 1)
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 28
 text = "Move Buffering"
 
-[node name="SpinBox" type="SpinBox" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/MoveBuffer"]
+[node name="SpinBox" type="SpinBox" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer/MoveBuffer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 max_value = 8.0
 value = 2.0
 
-[node name="MasterVolOption" type="VBoxContainer" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer"]
+[node name="MasterVolOption" type="VBoxContainer" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="OptionName" type="Label" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/MasterVolOption"]
+[node name="OptionName" type="Label" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer/MasterVolOption"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.423529, 0.262745, 0, 1)
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 28
 text = "Master"
 
-[node name="MasterSlider" type="HSlider" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/MasterVolOption"]
+[node name="MasterSlider" type="HSlider" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer/MasterVolOption"]
 layout_mode = 2
 value = 50.0
 
-[node name="SFXVolOption" type="VBoxContainer" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer"]
+[node name="SFXVolOption" type="VBoxContainer" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="OptionName" type="Label" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/SFXVolOption"]
+[node name="OptionName" type="Label" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer/SFXVolOption"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.423529, 0.262745, 0, 1)
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 28
 text = "SFX"
 
-[node name="SFXSlider" type="HSlider" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/SFXVolOption"]
+[node name="SFXSlider" type="HSlider" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer/SFXVolOption"]
 layout_mode = 2
 value = 50.0
 
-[node name="AmbienceVolOption" type="VBoxContainer" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer"]
+[node name="AmbienceVolOption" type="VBoxContainer" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="OptionName" type="Label" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/AmbienceVolOption"]
+[node name="OptionName" type="Label" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer/AmbienceVolOption"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.423529, 0.262745, 0, 1)
 theme_override_constants/outline_size = 0
@@ -667,28 +722,48 @@ theme_override_font_sizes/font_size = 28
 text = "Ambience
 "
 
-[node name="AmbienceSlider" type="HSlider" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/AmbienceVolOption"]
+[node name="AmbienceSlider" type="HSlider" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer/AmbienceVolOption"]
 layout_mode = 2
 value = 50.0
 
-[node name="PainOption" type="VBoxContainer" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer"]
+[node name="PainOption" type="VBoxContainer" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="OptionName" type="Label" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/PainOption"]
+[node name="OptionName" type="Label" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer/PainOption"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.423529, 0.262745, 0, 1)
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 28
 text = "Pain"
 
-[node name="PainSlider" type="HSlider" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/PainOption"]
+[node name="PainSlider" type="HSlider" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer/PainOption"]
 layout_mode = 2
 value = 100.0
 
-[node name="BattleChoices" parent="UI/PaperScrollMenu/PaperBG/MarginContainer" instance=ExtResource("15_xq3yf")]
+[node name="Inventory" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus" instance=ExtResource("16_8h35l")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="BattleChoices" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus" instance=ExtResource("15_xq3yf")]
 visible = false
 layout_mode = 2
+mouse_filter = 2
+
+[node name="RollContainer" type="MarginContainer" parent="UI/PaperScrollMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_bottom = 4
+
+[node name="ScrollRoll" type="TextureRect" parent="UI/PaperScrollMenu/RollContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+texture = ExtResource("18_wgwwn")
 
 [node name="VignetteFog" type="ColorRect" parent="UI"]
 material = SubResource("ShaderMaterial_3l43o")
@@ -726,10 +801,12 @@ horizontal_alignment = 2
 script = SubResource("GDScript_5no0r")
 
 [connection signal="pressed" from="UI/OuterMargin/ContentHBox/ButtonsVBox/OptionsButton" to="UI" method="_on_options_button_pressed"]
+[connection signal="pressed" from="UI/OuterMargin/ContentHBox/ButtonsVBox/InventoryButton" to="UI" method="_on_inventory_button_pressed"]
+[connection signal="pressed" from="UI/OuterMargin/ContentHBox/ButtonsVBox/JournalButton" to="UI" method="_on_journal_button_pressed"]
 [connection signal="timeout" from="UI/OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/MessageGradient/MessageTimer" to="UI" method="_on_message_timer_timeout"]
-[connection signal="toggled" from="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/InstantMovementOption/InstantMovementCheckBox" to="UI" method="_on_instant_movement_check_box_toggled"]
-[connection signal="toggled" from="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/FPSOption/FPSCheckBox" to="UI" method="_on_fps_check_box_toggled"]
-[connection signal="value_changed" from="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/MoveBuffer/SpinBox" to="UI" method="_on_spin_box_value_changed"]
-[connection signal="value_changed" from="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/MasterVolOption/MasterSlider" to="UI" method="_on_master_slider_value_changed"]
-[connection signal="value_changed" from="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/SFXVolOption/SFXSlider" to="UI" method="_on_sfx_slider_value_changed"]
-[connection signal="value_changed" from="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/AmbienceVolOption/AmbienceSlider" to="UI" method="_on_ambience_slider_value_changed"]
+[connection signal="toggled" from="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer/InstantMovementOption/InstantMovementCheckBox" to="UI" method="_on_instant_movement_check_box_toggled"]
+[connection signal="toggled" from="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer/FPSOption/FPSCheckBox" to="UI" method="_on_fps_check_box_toggled"]
+[connection signal="value_changed" from="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer/MoveBuffer/SpinBox" to="UI" method="_on_spin_box_value_changed"]
+[connection signal="value_changed" from="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer/MasterVolOption/MasterSlider" to="UI" method="_on_master_slider_value_changed"]
+[connection signal="value_changed" from="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer/SFXVolOption/SFXSlider" to="UI" method="_on_sfx_slider_value_changed"]
+[connection signal="value_changed" from="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer/AmbienceVolOption/AmbienceSlider" to="UI" method="_on_ambience_slider_value_changed"]

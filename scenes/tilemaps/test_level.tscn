@@ -3,10 +3,10 @@
 [ext_resource type="TileSet" uid="uid://qd2lm2embmp1" path="res://src/tilesets/tileset.tres" id="1_ciyx5"]
 [ext_resource type="PackedScene" uid="uid://b3lw626j6w3ij" path="res://scenes/map/map_object.tscn" id="2_pk418"]
 [ext_resource type="PackedScene" uid="uid://dp3q2k1wi25xe" path="res://scenes/props/note.tscn" id="3_xgi8i"]
-[ext_resource type="PackedScene" uid="uid://4wnorkawil2h" path="res://scenes/map/door_object.tscn" id="4_fadgt"]
+[ext_resource type="PackedScene" path="res://scenes/map/door_object.tscn" id="4_fadgt"]
 [ext_resource type="PackedScene" uid="uid://dm55nyi2o268d" path="res://scenes/props/dropgate.tscn" id="4_jm8it"]
-[ext_resource type="PackedScene" uid="uid://ngrc5rmir1ps" path="res://scenes/map/lever_object.tscn" id="6_utnn8"]
-[ext_resource type="PackedScene" uid="uid://dtodrumvypb65" path="res://scenes/props/lever.tscn" id="7_kieit"]
+[ext_resource type="PackedScene" path="res://scenes/map/lever_object.tscn" id="6_utnn8"]
+[ext_resource type="PackedScene" path="res://scenes/props/lever.tscn" id="7_kieit"]
 
 [node name="TestLevel" type="TileMap"]
 tile_set = ExtResource("1_ciyx5")

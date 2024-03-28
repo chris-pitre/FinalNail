@@ -7,8 +7,7 @@ const HELM_PORTRAIT_VERY_DAMAGED = preload("res://assets/portraits/bellmet3.png"
 
 static var current: UI
 
-var options_open: bool = false
-
+var scroll_open: bool = false
 var scroll_opening: bool = false
 
 @onready var stat_value_1 = $OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer/StatValue
@@ -24,10 +23,13 @@ var scroll_opening: bool = false
 @onready var fps_counter = $FPSCounter
 @onready var world_vp_container = $OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/WorldContainer
 @onready var paper_scroll_menu = $PaperScrollMenu
-@onready var options_menu = $PaperScrollMenu/PaperBG/MarginContainer/Options
-@onready var battle_choices_menu = $PaperScrollMenu/PaperBG/MarginContainer/BattleChoices
+@onready var options_menu = $PaperScrollMenu/PaperBG/ScrollMenus/Options
+@onready var inventory_menu = $PaperScrollMenu/PaperBG/ScrollMenus/Inventory
+@onready var journal_menu = $PaperScrollMenu/PaperBG/ScrollMenus/Journal
+@onready var battle_choices_menu = $PaperScrollMenu/PaperBG/ScrollMenus/BattleChoices
 @onready var cursor: Cursor = $Cursor
 @onready var portrait_texture = $OuterMargin/ContentHBox/InfoVBox/PortraitAspect/BorderExpand/Portrait
+@onready var scroll_menus = $PaperScrollMenu/PaperBG/ScrollMenus
 
 func _ready() -> void:
 	current = self
@@ -81,15 +83,24 @@ func set_view_tooltip(tooltip: String) -> void:
 	world_vp_container.set_meta("tooltip", tooltip)
 
 
-func open_options_menu() -> void:
-	open_scroll(options_menu)
-
-
-func close_options_menu() -> void:
-	close_scroll(options_menu)
+func toggle_scroll(menu: Control) -> void:
+	if scroll_open:
+		if menu.visible:
+			close_scroll()
+		else:
+			await close_scroll()
+			open_scroll(menu)
+	else:
+		open_scroll(menu)
 
 
 func open_scroll(menu: Control) -> void:
+	if scroll_opening:
+		return
+	
+	scroll_open = true
+	for scroll_menu in scroll_menus.get_children():
+		scroll_menu.hide()
 	menu.visible = true
 	scroll_opening = true
 	var tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
@@ -97,12 +108,15 @@ func open_scroll(menu: Control) -> void:
 	scroll_opening = false
 
 
-func close_scroll(menu: Control) -> void:
+func close_scroll() -> void:
+	if scroll_opening:
+		return
+	
 	scroll_opening = true
 	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 	await tween.tween_property(paper_scroll_menu, "size", Vector2(368, 0), 0.3).finished
-	menu.visible = false
 	scroll_opening = false
+	scroll_open = false
 
 
 func _on_message_timer_timeout() -> void:
@@ -111,14 +125,15 @@ func _on_message_timer_timeout() -> void:
 
 
 func _on_options_button_pressed() -> void:
-	if scroll_opening:
-		return
-	
-	if options_open:
-		close_options_menu()
-	else:
-		open_options_menu()
-	options_open = not options_open
+	toggle_scroll(options_menu)
+
+
+func _on_inventory_button_pressed() -> void:
+	toggle_scroll(inventory_menu)
+
+
+func _on_journal_button_pressed() -> void:
+	toggle_scroll(journal_menu)
 
 
 func _show_tooltip(msg: String) -> void:

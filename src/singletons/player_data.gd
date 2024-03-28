@@ -27,3 +27,9 @@ func _set_max_health(amount: int) -> void:
 
 func set_stat(stat: STAT, amount: int) -> void:
 	stats[stat] = amount
+
+func save_data() -> void:
+	pass
+
+func load_data() -> void:
+	pass
