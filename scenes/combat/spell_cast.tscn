@@ -37,8 +37,8 @@ offset_right = 350.0
 offset_bottom = 350.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/h_separation = 200
-theme_override_constants/v_separation = 200
+theme_override_constants/h_separation = 125
+theme_override_constants/v_separation = 125
 columns = 3
 
 [node name="SpellNode1" parent="SpellNodes" instance=ExtResource("1_0dimb")]
