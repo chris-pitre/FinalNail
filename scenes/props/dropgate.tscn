@@ -6,16 +6,6 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_4esml"]
 size = Vector3(2, 2, 2)
 
-[sub_resource type="Animation" id="Animation_r53yj"]
-resource_name = "open"
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Cube_001")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 1, 0, 0.6, 1, 0, 3, 0)
-
 [sub_resource type="Animation" id="Animation_yqoty"]
 resource_name = "close"
 tracks/0/type = "position_3d"
@@ -25,6 +15,16 @@ tracks/0/path = NodePath("Cube_001")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array(0, 1, 0, 3, 0, 0.6, 1, 0, 1, 0)
+
+[sub_resource type="Animation" id="Animation_r53yj"]
+resource_name = "open"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cube_001")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 1, 0, 0.6, 1, 0, 3, 0)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_eqew5"]
 _data = {
