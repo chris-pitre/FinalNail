@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://c62k2e27wds1u"]
+[gd_scene load_steps=37 format=3 uid="uid://c62k2e27wds1u"]
 
 [ext_resource type="PackedScene" uid="uid://b1pu7ddiid0ow" path="res://scenes/world/world.tscn" id="1_yich0"]
 [ext_resource type="Texture2D" uid="uid://bk483y6tvh6nq" path="res://assets/icons/cogbutton.png" id="2_bib5k"]
@@ -101,6 +101,11 @@ shader_parameter/speed = 0.02
 shader_parameter/amplitude = 0.2
 shader_parameter/aliasing = 0.01
 shader_parameter/noiseTexture = SubResource("NoiseTexture2D_h65fc")
+
+[sub_resource type="GDScript" id="GDScript_5no0r"]
+script/source = "extends Label
+
+"
 
 [node name="Main" type="Node"]
 
@@ -574,7 +579,22 @@ theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 28
 text = "Instant Movement"
 
-[node name="CheckBox" type="CheckBox" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/InstantMovementOption"]
+[node name="InstantMovementCheckBox" type="CheckBox" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/InstantMovementOption"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="FPSOption" type="MarginContainer" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="OptionName" type="Label" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/FPSOption"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.423529, 0.262745, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 28
+text = "Show FPS"
+
+[node name="FPSCheckBox" type="CheckBox" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/FPSOption"]
 layout_mode = 2
 size_flags_horizontal = 8
 
@@ -677,9 +697,25 @@ offset_bottom = 1168.0
 
 [node name="Cursor" parent="UI" instance=ExtResource("11_uqah4")]
 
+[node name="FPSCounter" type="Label" parent="UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -81.0
+offset_bottom = 43.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "FPS: 0"
+horizontal_alignment = 2
+script = SubResource("GDScript_5no0r")
+
 [connection signal="pressed" from="UI/OuterMargin/ContentHBox/ButtonsVBox/OptionsButton" to="UI" method="_on_options_button_pressed"]
 [connection signal="timeout" from="UI/OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/MessageGradient/MessageTimer" to="UI" method="_on_message_timer_timeout"]
-[connection signal="toggled" from="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/InstantMovementOption/CheckBox" to="UI" method="_on_check_box_toggled"]
+[connection signal="toggled" from="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/InstantMovementOption/InstantMovementCheckBox" to="UI" method="_on_instant_movement_check_box_toggled"]
+[connection signal="toggled" from="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/FPSOption/FPSCheckBox" to="UI" method="_on_fps_check_box_toggled"]
 [connection signal="value_changed" from="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/MoveBuffer/SpinBox" to="UI" method="_on_spin_box_value_changed"]
 [connection signal="value_changed" from="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/MasterVolOption/MasterSlider" to="UI" method="_on_master_slider_value_changed"]
 [connection signal="value_changed" from="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/SFXVolOption/SFXSlider" to="UI" method="_on_sfx_slider_value_changed"]

@@ -19,6 +19,7 @@ var options_open: bool = false
 @onready var message = $OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/MessageGradient
 @onready var message_label = $OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/MessageGradient/MessageLabel
 @onready var message_timer = $OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/MessageGradient/MessageTimer
+@onready var fps_counter = $FPSCounter
 @onready var world_vp_container = $OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/WorldContainer
 @onready var paper_scroll_menu = $PaperScrollMenu
 @onready var cursor: Cursor = $Cursor
@@ -33,6 +34,10 @@ func _ready() -> void:
 	SignalBus.tooltip_show.connect(_show_tooltip)
 	SignalBus.tooltip_hide.connect(_hide_tooltip)
 	SignalBus.message_show.connect(display_message)
+
+
+func _process(delta: float) -> void:
+	fps_counter.text = "FPS: %d" % Engine.get_frames_per_second()
 
 
 func set_stat(stat: PlayerData.STAT, amount: int) -> void:
@@ -103,10 +108,6 @@ func _hide_tooltip() -> void:
 	cursor.hide_tooltip()
 
 
-func _on_check_box_toggled(toggled_on: bool) -> void:
-	Player.move_instant = toggled_on
-
-
 func _on_spin_box_value_changed(value: float) -> void:
 	Player.input_queue_size = int(value)
 
@@ -136,3 +137,11 @@ func _on_ambience_slider_value_changed(value: float) -> void:
 		AudioServer.set_bus_mute(bus_idx, true)
 	else:
 		AudioServer.set_bus_volume_db(bus_idx, final_db)
+
+
+func _on_instant_movement_check_box_toggled(toggled_on: bool) -> void:
+	Player.move_instant = toggled_on
+
+
+func _on_fps_check_box_toggled(toggled_on: bool) -> void:
+	fps_counter.visible = toggled_on

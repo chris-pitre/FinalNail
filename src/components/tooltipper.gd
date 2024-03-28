@@ -4,7 +4,7 @@ extends Node
 @export_multiline var tooltip: String = "default tooltip"
 
 func _ready() -> void:
-	if get_parent() is Control:
+	if get_parent() is Control or get_parent() is Area3D:
 		get_parent().mouse_entered.connect(_mouse_entered)
 		get_parent().mouse_exited.connect(_mouse_exited)
 
