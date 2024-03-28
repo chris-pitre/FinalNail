@@ -6,8 +6,8 @@
 [ext_resource type="Theme" uid="uid://cwq2xtxplyyqf" path="res://src/theme.tres" id="2_m8jm6"]
 [ext_resource type="Texture2D" uid="uid://bmt885g0bl15h" path="res://assets/icons/bagbutton.png" id="3_mde73"]
 [ext_resource type="PackedScene" uid="uid://dh1mo8mixskss" path="res://scenes/ui/minimap.tscn" id="4_0da32"]
-[ext_resource type="Texture2D" uid="uid://b2k3p5p6y3xfo" path="res://assets/icons/scrollbutton.png" id="4_j0gde"]
 [ext_resource type="Texture2D" uid="uid://bxdte7i1gco4v" path="res://assets/portraits/bellmet1.png" id="5_g3fs2"]
+[ext_resource type="Texture2D" uid="uid://duxtah1wxspxk" path="res://assets/icons/journalbutton.png" id="6_6ced4"]
 [ext_resource type="Texture2D" uid="uid://bhsueomjnheek" path="res://assets/textures/woodframesmall.png" id="6_8a06b"]
 [ext_resource type="Shader" path="res://src/shaders/vignette.gdshader" id="7_slnml"]
 [ext_resource type="Texture2D" uid="uid://cbgy2acshjh72" path="res://assets/textures/woodframe.png" id="8_1pkee"]
@@ -151,16 +151,37 @@ size_flags_horizontal = 4
 alignment = 1
 
 [node name="OptionsButton" type="TextureButton" parent="UI/OuterMargin/ContentHBox/ButtonsVBox"]
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 texture_normal = ExtResource("2_bib5k")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="TooltipperComponent" type="Node" parent="UI/OuterMargin/ContentHBox/ButtonsVBox/OptionsButton"]
+script = ExtResource("12_cafuu")
+tooltip = "Options"
 
 [node name="InventoryButton" type="TextureButton" parent="UI/OuterMargin/ContentHBox/ButtonsVBox"]
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 texture_normal = ExtResource("3_mde73")
+ignore_texture_size = true
+stretch_mode = 5
 
-[node name="NotesButton" type="TextureButton" parent="UI/OuterMargin/ContentHBox/ButtonsVBox"]
+[node name="TooltipperComponent" type="Node" parent="UI/OuterMargin/ContentHBox/ButtonsVBox/InventoryButton"]
+script = ExtResource("12_cafuu")
+tooltip = "Inventory"
+
+[node name="JournalButton" type="TextureButton" parent="UI/OuterMargin/ContentHBox/ButtonsVBox"]
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
-texture_normal = ExtResource("4_j0gde")
+texture_normal = ExtResource("6_6ced4")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="TooltipperComponent" type="Node" parent="UI/OuterMargin/ContentHBox/ButtonsVBox/JournalButton"]
+script = ExtResource("12_cafuu")
+tooltip = "Journal"
 
 [node name="ViewVBox" type="VBoxContainer" parent="UI/OuterMargin/ContentHBox"]
 layout_mode = 2
@@ -190,7 +211,7 @@ handle_input_locally = false
 use_taa = true
 use_debanding = true
 physics_object_picking = true
-size = Vector2i(1319, 920)
+size = Vector2i(1296, 920)
 render_target_update_mode = 4
 
 [node name="World" parent="UI/OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/WorldContainer/WorldViewport" instance=ExtResource("1_yich0")]

@@ -1,16 +1,17 @@
 extends Node
 
+signal health_changed(health, max_health)
+signal stat_changed(stat: String, amount: int)
+
 enum STAT {
 	COMPOSITION,
 	SPIRIT,
 	CORPUS,
 	PREMONITION,
-	PIETY
+	PIETY,
 }
 
-signal health_changed(health, max_health)
-signal stat_changed(stat: String, amount: int)
-
+var found_notes: Array[String] = []
 var health: int = 100:
 	set = _set_health
 var max_health: int = 100
