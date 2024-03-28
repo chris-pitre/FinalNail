@@ -1,0 +1,77 @@
+[gd_scene load_steps=7 format=3 uid="uid://bxrbu0ifssc7k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_id551"]
+bg_color = Color(0.0705882, 0.0705882, 0.0705882, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_io1jw"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_13xv3"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_opvq4"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_41mtw"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="Theme" id="Theme_gyi5q"]
+Button/styles/disabled = SubResource("StyleBoxFlat_id551")
+Button/styles/focus = SubResource("StyleBoxFlat_io1jw")
+Button/styles/hover = SubResource("StyleBoxFlat_13xv3")
+Button/styles/normal = SubResource("StyleBoxFlat_opvq4")
+Button/styles/pressed = SubResource("StyleBoxFlat_41mtw")
+
+[node name="BattleChoices" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="MainChoices" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="AttackButton" type="Button" parent="MainChoices"]
+layout_mode = 2
+theme = SubResource("Theme_gyi5q")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+action_mode = 0
+text = "Attack"
+
+[node name="DecreesButton" type="Button" parent="MainChoices"]
+layout_mode = 2
+theme = SubResource("Theme_gyi5q")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+action_mode = 0
+text = "Decrees"
+
+[node name="ItemsButton" type="Button" parent="MainChoices"]
+layout_mode = 2
+theme = SubResource("Theme_gyi5q")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+action_mode = 0
+text = "Items
+"
