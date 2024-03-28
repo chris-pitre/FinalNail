@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://kis31lqcl3w0"]
 
-[ext_resource type="Texture2D" uid="uid://diqgjjtp37wnv" path="res://assets/textures/graystone.png" id="1_kpmrx"]
+[ext_resource type="Texture2D" uid="uid://ciqu2mf7ms4vf" path="res://assets/textures/graystone.png" id="1_kpmrx"]
 [ext_resource type="Texture2D" uid="uid://cvhfsb1wevbxg" path="res://assets/textures/graystone_n.png" id="2_fkqty"]
 
 [resource]

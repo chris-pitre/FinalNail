@@ -1,6 +1,8 @@
 class_name Map
 extends Node3D
 
+const GRASS_PATCH = preload("res://scenes/dressing/grass_patch.tscn")
+const DIRT_DECAL = preload("res://scenes/dressing/dirt_decal.tscn")
 const PEBBLE = preload("res://scenes/dressing/pebble.tscn")
 const CELL = preload("res://scenes/cell/cell.tscn")
 
@@ -43,6 +45,25 @@ func generate_level():
 			pebble.scale *= rng.randf_range(0.2, 1.5)
 			pebble.rotate_x(rng.randf())
 			pebble.rotate_y(rng.randf())
+		
+		if tile_open:
+			for i in range(rng.randi_range(0, 16)):
+				var grass = GRASS_PATCH.instantiate()
+				cell.add_child(grass)
+				var rand_shift = Vector3(rng.randf_range(-1.0, 1.0), rng.randf_range(-0.04, 0.0), rng.randf_range(-1.0, 1.0))
+				grass.global_position = cell.global_position + rand_shift
+				grass.scale *= rng.randf_range(0.2, 1.5)
+				grass.rotate_x(rng.randf())
+				grass.rotate_y(rng.randf())
+		else:
+			for i in range(rng.randi_range(0, 2)):
+				var dirt = DIRT_DECAL.instantiate()
+				cell.add_child(dirt)
+				var rand_shift = Vector3(rng.randf_range(-1.0, 1.0), rng.randf_range(-0.04, 0.0), rng.randf_range(-1.0, 1.0))
+				dirt.global_position = cell.global_position + rand_shift
+				dirt.scale *= rng.randf_range(0.2, 1.5)
+				dirt.rotate_x(rng.randf())
+				dirt.rotate_y(rng.randf())
 	
 	var map_objects = map.get_children()
 	

@@ -17,7 +17,7 @@ extends Node3D
 @onready var ne_pillar := $Pillars/NorthEastPillar
 
 func set_faces(cell_list: Array[Vector2i], tile_open: bool, corners: Dictionary, cell_theme: CellTheme) -> void:
-	bottom.material_override = cell_theme.floor_tex
+	bottom.material_override = cell_theme.floor_out if tile_open else cell_theme.floor_tex
 	east.material_override = cell_theme.wall
 	west.material_override = cell_theme.wall
 	north.material_override = cell_theme.wall

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpdseo25nti14"]
+
+[ext_resource type="Texture2D" uid="uid://ch1jq38vod5ss" path="res://assets/textures/dirtsplotch.png" id="1_w78nu"]
+
+[node name="Decal" type="Decal"]
+texture_albedo = ExtResource("1_w78nu")
+normal_fade = 0.5
+distance_fade_enabled = true
+cull_mask = 1

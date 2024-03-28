@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckhjgj1qa01fq"]
+
+[ext_resource type="Texture2D" uid="uid://bcerm8vqgq5kh" path="res://assets/textures/grasspatch.png" id="1_emmwn"]
+
+[node name="GrassPatch" type="Sprite3D"]
+offset = Vector2(0, 64)
+pixel_size = 0.002
+billboard = 2
+shaded = true
+texture = ExtResource("1_emmwn")
