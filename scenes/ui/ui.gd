@@ -1,6 +1,10 @@
 class_name UI
 extends Control
 
+const HELM_PORTRAIT_HEALTHY = preload("res://assets/portraits/bellmet1.png")
+const HELM_PORTRAIT_DAMAGED = preload("res://assets/portraits/bellmet2.png")
+const HELM_PORTRAIT_VERY_DAMAGED = preload("res://assets/portraits/bellmet3.png")
+
 static var current: UI
 
 var options_open: bool = false
@@ -18,11 +22,12 @@ var options_open: bool = false
 @onready var world_vp_container = $OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/WorldContainer
 @onready var paper_scroll_menu = $PaperScrollMenu
 @onready var cursor: Cursor = $Cursor
-
+@onready var portrait_texture = $OuterMargin/ContentHBox/InfoVBox/PortraitAspect/BorderExpand/Portrait
 
 func _ready() -> void:
 	current = self
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	paper_scroll_menu.size = Vector2(368, 0)
 	PlayerData.health_changed.connect(set_health)
 	PlayerData.stat_changed.connect(set_stat)
 	SignalBus.tooltip_show.connect(_show_tooltip)
@@ -48,6 +53,12 @@ func set_health(amount: int, max_amount: int) -> void:
 	health_bar.max_value = max_amount
 	health_bar.value = amount
 	health_bar_label.text = "%d/%d" % [amount, max_amount]
+	if amount < max_amount * 0.33:
+		portrait_texture.texture = HELM_PORTRAIT_VERY_DAMAGED
+	elif amount < max_amount * 0.67:
+		portrait_texture.texture = HELM_PORTRAIT_DAMAGED
+	else:
+		portrait_texture.texture = HELM_PORTRAIT_HEALTHY
 
 
 func display_message(msg: String, time: float) -> void:
@@ -90,3 +101,38 @@ func _show_tooltip(msg: String) -> void:
 
 func _hide_tooltip() -> void:
 	cursor.hide_tooltip()
+
+
+func _on_check_box_toggled(toggled_on: bool) -> void:
+	Player.move_instant = toggled_on
+
+
+func _on_spin_box_value_changed(value: float) -> void:
+	Player.input_queue_size = int(value)
+
+
+func _on_master_slider_value_changed(value: float) -> void:
+	var bus_idx = 0
+	var final_db = (value - 50.0) / 2.0
+	if value == 0:
+		AudioServer.set_bus_mute(bus_idx, true)
+	else:
+		AudioServer.set_bus_volume_db(bus_idx, final_db)
+
+
+func _on_sfx_slider_value_changed(value: float) -> void:
+	var bus_idx = 1
+	var final_db = (value - 50.0) / 2.0
+	if value == 0:
+		AudioServer.set_bus_mute(bus_idx, true)
+	else:
+		AudioServer.set_bus_volume_db(bus_idx, final_db)
+
+
+func _on_ambience_slider_value_changed(value: float) -> void:
+	var bus_idx = 2
+	var final_db = (value - 50.0) / 2.0
+	if value == 0:
+		AudioServer.set_bus_mute(bus_idx, true)
+	else:
+		AudioServer.set_bus_volume_db(bus_idx, final_db)

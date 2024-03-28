@@ -14,6 +14,7 @@ var input_queue: Array = []
 @onready var move_raycast: RayCast3D = $MoveRaycast
 
 static var move_instant: bool = false
+static var input_queue_size: int = 2
 
 func _process(_delta):
 	if not input_queue.is_empty() and not moving:
@@ -21,7 +22,7 @@ func _process(_delta):
 		command[0].call(command[1])
 
 func _input(event):
-	if event.is_pressed() and (move_instant or input_queue.size() <= 2):
+	if event.is_pressed() and (move_instant or input_queue.size() <= input_queue_size):
 		if event.is_action("move_forward"):
 			input_queue.push_back([Callable(do_movement), DIRECTION.FORWARD]) 
 		if event.is_action("move_backward"):

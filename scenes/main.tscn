@@ -475,6 +475,8 @@ clip_contents = true
 layout_mode = 1
 anchor_left = 0.8
 anchor_right = 0.991667
+offset_right = -0.000610352
+offset_bottom = 1080.0
 grow_horizontal = 0
 
 [node name="PaperBG" type="TextureRect" parent="UI/PaperScrollMenu"]
@@ -555,20 +557,23 @@ text = "Instant Movement"
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="MoveBufferOption" type="MarginContainer" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer"]
+[node name="MoveBuffer" type="VBoxContainer" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="OptionName" type="Label" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/MoveBufferOption"]
+[node name="OptionName" type="Label" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/MoveBuffer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.423529, 0.262745, 0, 1)
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 28
 text = "Move Buffering"
 
-[node name="CheckBox" type="CheckBox" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/MoveBufferOption"]
+[node name="SpinBox" type="SpinBox" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/MoveBuffer"]
 layout_mode = 2
-size_flags_horizontal = 8
+size_flags_horizontal = 0
+size_flags_vertical = 4
+max_value = 8.0
+value = 2.0
 
 [node name="MasterVolOption" type="VBoxContainer" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer"]
 layout_mode = 2
@@ -581,8 +586,9 @@ theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 28
 text = "Master"
 
-[node name="HSlider" type="HSlider" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/MasterVolOption"]
+[node name="MasterSlider" type="HSlider" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/MasterVolOption"]
 layout_mode = 2
+value = 50.0
 
 [node name="SFXVolOption" type="VBoxContainer" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer"]
 layout_mode = 2
@@ -595,8 +601,9 @@ theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 28
 text = "SFX"
 
-[node name="HSlider" type="HSlider" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/SFXVolOption"]
+[node name="SFXSlider" type="HSlider" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/SFXVolOption"]
 layout_mode = 2
+value = 50.0
 
 [node name="AmbienceVolOption" type="VBoxContainer" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer"]
 layout_mode = 2
@@ -610,8 +617,9 @@ theme_override_font_sizes/font_size = 28
 text = "Ambience
 "
 
-[node name="HSlider" type="HSlider" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/AmbienceVolOption"]
+[node name="AmbienceSlider" type="HSlider" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/AmbienceVolOption"]
 layout_mode = 2
+value = 50.0
 
 [node name="PainOption" type="VBoxContainer" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer"]
 layout_mode = 2
@@ -624,8 +632,9 @@ theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 28
 text = "Pain"
 
-[node name="HSlider" type="HSlider" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/PainOption"]
+[node name="PainSlider" type="HSlider" parent="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/PainOption"]
 layout_mode = 2
+value = 100.0
 
 [node name="VignetteFog" type="ColorRect" parent="UI"]
 material = SubResource("ShaderMaterial_3l43o")
@@ -649,3 +658,8 @@ offset_bottom = 1168.0
 
 [connection signal="pressed" from="UI/OuterMargin/ContentHBox/ButtonsVBox/OptionsButton" to="UI" method="_on_options_button_pressed"]
 [connection signal="timeout" from="UI/OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/MessageGradient/MessageTimer" to="UI" method="_on_message_timer_timeout"]
+[connection signal="toggled" from="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/InstantMovementOption/CheckBox" to="UI" method="_on_check_box_toggled"]
+[connection signal="value_changed" from="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/MoveBuffer/SpinBox" to="UI" method="_on_spin_box_value_changed"]
+[connection signal="value_changed" from="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/MasterVolOption/MasterSlider" to="UI" method="_on_master_slider_value_changed"]
+[connection signal="value_changed" from="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/SFXVolOption/SFXSlider" to="UI" method="_on_sfx_slider_value_changed"]
+[connection signal="value_changed" from="UI/PaperScrollMenu/PaperBG/MarginContainer/Options/VBoxContainer/AmbienceVolOption/AmbienceSlider" to="UI" method="_on_ambience_slider_value_changed"]
