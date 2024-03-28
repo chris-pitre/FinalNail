@@ -1,21 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://b3lw626j6w3ij"]
+[gd_scene load_steps=3 format=3 uid="uid://b3lw626j6w3ij"]
 
 [ext_resource type="Script" path="res://scenes/map/map_object.gd" id="1_t7k6l"]
-
-[sub_resource type="Gradient" id="Gradient_fsw5f"]
-interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.524116)
-colors = PackedColorArray(1, 0, 0, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_emlsr"]
-gradient = SubResource("Gradient_fsw5f")
-width = 8
-height = 8
-fill_to = Vector2(1, 1)
+[ext_resource type="Texture2D" uid="uid://cl10apbwajddh" path="res://src/gradients/red_triangle.tres" id="2_jdktk"]
 
 [node name="MapObject" type="Node2D"]
 script = ExtResource("1_t7k6l")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 0.785398
-texture = SubResource("GradientTexture2D_emlsr")
+texture = ExtResource("2_jdktk")

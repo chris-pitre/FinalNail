@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://db0sndhg6hj30"]
+[gd_scene load_steps=8 format=3 uid="uid://db0sndhg6hj30"]
 
 [ext_resource type="TileSet" uid="uid://qd2lm2embmp1" path="res://src/tilesets/tileset.tres" id="1_ciyx5"]
 [ext_resource type="PackedScene" uid="uid://b3lw626j6w3ij" path="res://scenes/map/map_object.tscn" id="2_pk418"]
 [ext_resource type="PackedScene" uid="uid://dp3q2k1wi25xe" path="res://scenes/props/note.tscn" id="3_xgi8i"]
+[ext_resource type="PackedScene" uid="uid://4wnorkawil2h" path="res://scenes/map/door_object.tscn" id="4_fadgt"]
 [ext_resource type="PackedScene" uid="uid://dm55nyi2o268d" path="res://scenes/props/dropgate.tscn" id="4_jm8it"]
+[ext_resource type="PackedScene" uid="uid://ngrc5rmir1ps" path="res://scenes/map/lever_object.tscn" id="6_utnn8"]
+[ext_resource type="PackedScene" uid="uid://dtodrumvypb65" path="res://scenes/props/lever.tscn" id="7_kieit"]
 
 [node name="TestLevel" type="TileMap"]
 tile_set = ExtResource("1_ciyx5")
@@ -15,7 +18,14 @@ position = Vector2(24, -8)
 rotation = 3.75527
 scene = ExtResource("3_xgi8i")
 
-[node name="Door" parent="." instance=ExtResource("2_pk418")]
+[node name="DoorObject" parent="." instance=ExtResource("4_fadgt")]
 position = Vector2(136, 8)
-rotation = 4.71239
+rotation = -1.57079
+listen_id = 1
 scene = ExtResource("4_jm8it")
+
+[node name="LeverObject" parent="." instance=ExtResource("6_utnn8")]
+position = Vector2(152, -24)
+rotation = -1.57079
+emit_id = 1
+scene = ExtResource("7_kieit")

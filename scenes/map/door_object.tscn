@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://4wnorkawil2h"]
+
+[ext_resource type="Script" path="res://scenes/map/door_object.gd" id="1_n0v6i"]
+[ext_resource type="Texture2D" uid="uid://dc8lwwljrm6p" path="res://src/gradients/cyan_triangle.tres" id="1_qhm47"]
+
+[node name="DoorObject" type="Node2D"]
+script = ExtResource("1_n0v6i")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 0.785398
+texture = ExtResource("1_qhm47")

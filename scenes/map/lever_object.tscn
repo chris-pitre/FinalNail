@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://ngrc5rmir1ps"]
+
+[ext_resource type="Script" path="res://scenes/map/lever_object.gd" id="1_sgocr"]
+[ext_resource type="Texture2D" uid="uid://clriqd73lmeb8" path="res://src/gradients/green_triangle.tres" id="2_15vve"]
+
+[node name="LeverObject" type="Node2D"]
+script = ExtResource("1_sgocr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 0.785398
+texture = ExtResource("2_15vve")
