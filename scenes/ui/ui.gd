@@ -9,6 +9,8 @@ static var current: UI
 
 var options_open: bool = false
 
+var scroll_opening: bool = false
+
 @onready var stat_value_1 = $OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer/StatValue
 @onready var stat_value_2 = $OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer2/StatValue
 @onready var stat_value_3 = $OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer3/StatValue
@@ -22,6 +24,8 @@ var options_open: bool = false
 @onready var fps_counter = $FPSCounter
 @onready var world_vp_container = $OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/WorldContainer
 @onready var paper_scroll_menu = $PaperScrollMenu
+@onready var options_menu = $PaperScrollMenu/PaperBG/MarginContainer/Options
+@onready var battle_choices_menu = $PaperScrollMenu/PaperBG/MarginContainer/BattleChoices
 @onready var cursor: Cursor = $Cursor
 @onready var portrait_texture = $OuterMargin/ContentHBox/InfoVBox/PortraitAspect/BorderExpand/Portrait
 
@@ -78,13 +82,27 @@ func set_view_tooltip(tooltip: String) -> void:
 
 
 func open_options_menu() -> void:
-	var tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
-	tween.tween_property(paper_scroll_menu, "size", Vector2(368, 1080), 0.3)
+	open_scroll(options_menu)
 
 
 func close_options_menu() -> void:
+	close_scroll(options_menu)
+
+
+func open_scroll(menu: Control) -> void:
+	menu.visible = true
+	scroll_opening = true
+	var tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
+	await tween.tween_property(paper_scroll_menu, "size", Vector2(368, 1080), 0.3).finished
+	scroll_opening = false
+
+
+func close_scroll(menu: Control) -> void:
+	scroll_opening = true
 	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
-	tween.tween_property(paper_scroll_menu, "size", Vector2(368, 0), 0.3)
+	await tween.tween_property(paper_scroll_menu, "size", Vector2(368, 0), 0.3).finished
+	menu.visible = false
+	scroll_opening = false
 
 
 func _on_message_timer_timeout() -> void:
@@ -93,6 +111,9 @@ func _on_message_timer_timeout() -> void:
 
 
 func _on_options_button_pressed() -> void:
+	if scroll_opening:
+		return
+	
 	if options_open:
 		close_options_menu()
 	else:

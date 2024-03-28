@@ -356,7 +356,7 @@ metadata/tooltip = "The balance of your soul; affects health"
 
 [node name="TooltipperComponent" type="Node" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer/StatName"]
 script = ExtResource("12_cafuu")
-tooltip = "The balance of your soul."
+tooltip = "The fortitude of your soul."
 
 [node name="StatValue" type="Label" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer"]
 layout_mode = 2
@@ -378,7 +378,7 @@ metadata/tooltip = "The strength of your soul; affects mana"
 
 [node name="TooltipperComponent" type="Node" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer2/StatName"]
 script = ExtResource("12_cafuu")
-tooltip = "The fortitude of your soul."
+tooltip = "The strength of your soul."
 
 [node name="StatValue" type="Label" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox/StatContainer2"]
 layout_mode = 2
@@ -505,7 +505,6 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
 [node name="PaperScrollMenu" type="Control" parent="UI"]
-visible = false
 clip_contents = true
 layout_mode = 1
 anchor_left = 0.8
@@ -543,6 +542,7 @@ theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
 [node name="Options" type="Control" parent="UI/PaperScrollMenu/PaperBG/MarginContainer"]
+visible = false
 layout_mode = 2
 mouse_filter = 2
 
@@ -687,6 +687,7 @@ layout_mode = 2
 value = 100.0
 
 [node name="BattleChoices" parent="UI/PaperScrollMenu/PaperBG/MarginContainer" instance=ExtResource("15_xq3yf")]
+visible = false
 layout_mode = 2
 
 [node name="VignetteFog" type="ColorRect" parent="UI"]
