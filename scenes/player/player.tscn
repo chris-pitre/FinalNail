@@ -39,8 +39,6 @@ bones/4/position = Vector3(1.91025, 9.03639, 1.9079e-06)
 bones/5/position = Vector3(0.168469, -0.00424279, -8.04464e-07)
 bones/5/rotation = Quaternion(-3.41823e-09, 2.2758e-07, 3.4691e-07, 1)
 bones/6/position = Vector3(0.24137, 0.00249078, -1.05871e-06)
-bones/7/rotation = Quaternion(-3.94635e-06, 3.94635e-06, 0.707107, 0.707107)
-bones/9/rotation = Quaternion(-3.94635e-06, -3.94635e-06, -0.707107, 0.707107)
 bones/11/position = Vector3(1.36181, -8.30533, -1.97413)
 bones/11/scale = Vector3(0, 0, 0)
 
