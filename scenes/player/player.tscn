@@ -13,6 +13,10 @@ script = ExtResource("1_dj456")
 current = true
 fov = 120.0
 
+[node name="CheckRaycast" type="RayCast3D" parent="Camera3D"]
+target_position = Vector3(0, 0, -2)
+collide_with_areas = true
+
 [node name="MoveRaycast" type="RayCast3D" parent="."]
 target_position = Vector3(0, 0, -2)
 collide_with_areas = true
@@ -42,10 +46,6 @@ bones/3/rotation = Quaternion(2.87795e-09, 2.32831e-10, 8.61816e-10, 1)
 bones/4/position = Vector3(1.91025, 9.03639, 1.9079e-06)
 bones/5/position = Vector3(0.168469, -0.00424279, -8.04464e-07)
 bones/6/position = Vector3(0.24137, 0.00249078, -1.05871e-06)
-bones/7/rotation = Quaternion(-3.94635e-06, 3.94635e-06, 0.707107, 0.707107)
-bones/9/rotation = Quaternion(-3.94635e-06, -3.94635e-06, -0.707107, 0.707107)
 bones/11/position = Vector3(3.5854, -6.2142, -3.37116)
-bones/11/rotation = Quaternion(-6.71544e-07, 0, 1, 0)
-bones/11/scale = Vector3(0, 0, 0)
 
 [editable path="Viewmodel/shove"]

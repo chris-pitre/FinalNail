@@ -46,6 +46,7 @@ func _ready() -> void:
 	SignalBus.tooltip_hide.connect(_hide_tooltip)
 	SignalBus.message_show.connect(display_message)
 	BattleManager.battle_start.connect(_show_battle_menu)
+	BattleManager.battle_end.connect(_show_battle_menu)
 
 
 func _process(delta: float) -> void:
@@ -78,12 +79,13 @@ func set_health(amount: int, max_amount: int) -> void:
 		portrait_texture.texture = HELM_PORTRAIT_HEALTHY
 
 
-func display_message(msg: String, time: float) -> void:
+func display_message(msg: String, time: float, silent: bool = false) -> void:
 	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 	tween.tween_property(message, "modulate", Color.WHITE, 0.2)
 	message_timer.start(time)
 	message_label.text = "[center]%s[/center]" % msg
-	Audio.play_sound("res://assets/sfx/ding.ogg", "SFX")
+	if not silent:
+		Audio.play_sound("res://assets/sfx/ding.ogg", "SFX")
 
 
 func set_view_tooltip(tooltip: String) -> void:

@@ -13,12 +13,18 @@ var input_queue: Array = []
 var last_input: Callable
 
 @onready var move_raycast: RayCast3D = $MoveRaycast
+@onready var check_raycast: RayCast3D = $Camera3D/CheckRaycast
+@onready var anim: AnimationPlayer = $Viewmodel/shove/AnimationPlayer
 
 static var move_instant: bool = false
 static var input_queue_size: int = 2
 
 func _ready():
 	BattleManager.battle_start.connect(clear_queue)
+	PlayerData.animation_played.connect(play_animation)
+	SignalBus.rotate_player.connect(do_rotate)
+	SignalBus.player_check_enemy.connect(check_enemy)
+	anim.play("idle")
 
 func _process(_delta):
 	if not input_queue.is_empty() and not moving:
@@ -59,6 +65,8 @@ func do_movement(dir: DIRECTION):
 		if collision.owner is Cell:
 			success = true
 	
+	check_enemy()
+	
 	slide(vec_dir, success)
 
 func do_rotate(is_right: bool):
@@ -69,7 +77,10 @@ func do_rotate(is_right: bool):
 	else:
 		var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 		await tween.tween_property(self, "rotation", rotation - Vector3(0, dir * (PI / 2), 0), 0.15).finished
-	
+		
+	check_enemy()
+		
+	PlayerData.facing = to_global(check_raycast.target_position)
 	SignalBus.player_dir_updated.emit(is_right)
 	
 	moving = false
@@ -100,3 +111,16 @@ func clear_queue():
 
 func play_footstep():
 	pass
+	
+func check_enemy():
+	if check_raycast.is_colliding():
+		var collision = check_raycast.get_collider()
+		if collision.owner is Enemy:
+			PlayerData.enemy_sighted = true
+		else:
+			PlayerData.enemy_sighted = false
+	
+func play_animation(anim_name: String) -> void:
+	anim.play(anim_name)
+	await anim.animation_finished
+	anim.play("idle")

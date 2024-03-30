@@ -1,7 +1,9 @@
 extends Node
 
+signal rotate_player(is_right)
 signal player_pos_updated(x, y)
 signal player_dir_updated(is_right)
+signal player_check_enemy()
 
 signal message_show(msg: String, time: float)
 signal tooltip_show(msg: String)
@@ -9,3 +11,4 @@ signal tooltip_hide()
 
 signal switch_flipped(id: int)
 
+signal toggle_spell_cast()

@@ -7,12 +7,16 @@ var point_queue: Array = []
 var attack_id: int = 0
 
 func _ready():
+	SignalBus.toggle_spell_cast.connect(_toggle_visibility)
 	for spell_node in $SpellNodes.get_children():
 		spell_node.node_spell_drawn.connect(_draw_spell)
+	$SpellNodes.modulate.a = 0
 	
 func _input(event):
-	if event.is_action_released("lmb"):
-		PlayerData.validate_attack(attack_id)
+	if not BattleManager.battle_active:
+		return
+		
+	if event.is_action_released("lmb") and attack_id > 0:
 		for point in spell_line.get_point_count():
 			if spell_line.get_point_count() > 1:
 				var tween = get_tree().create_tween()
@@ -20,6 +24,13 @@ func _input(event):
 				spell_line.remove_point(0)
 			else:
 				spell_line.clear_points()
+		var move = PlayerData.validate_attack(attack_id)
+		if move != null:
+			_toggle_visibility()
+			move[1].call()
+		else:
+			SignalBus.message_show.emit("This magic does not exist...", 1, true)
+			Audio.play_sound("res://assets/sfx/ding.ogg", "SFX", 0.0, 0.2)
 		attack_id = 0
 	
 	if event.is_action_pressed("lmb"):
@@ -41,11 +52,21 @@ func tween_line(point_pos, point_idx):
 
 func _draw_spell(center_pos, id):
 	attack_id += id
+	var move = PlayerData.validate_attack(attack_id)
+	if move != null:
+		SignalBus.message_show.emit(move[0], 1, true)
 	var num_points = spell_line.get_point_count()
 	if num_points <= 0:
 		spell_line.add_point(spell_line.to_local(center_pos), num_points)
 	else:
 		point_queue.push_back(spell_line.to_local(center_pos))
 
-func _show_nodes():
-	visible = true
+func _toggle_visibility():
+	if not visible:
+		visible = true
+		var tween = get_tree().create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+		await tween.tween_property($SpellNodes, "modulate:a", 0.4, randf_range(0.25, 0.75)).finished
+	else:
+		var tween = get_tree().create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+		await tween.tween_property($SpellNodes, "modulate:a", 0.0, randf_range(0.25, 0.75)).finished
+		visible = false

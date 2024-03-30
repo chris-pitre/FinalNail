@@ -14,7 +14,6 @@ size = Vector3(1.75, 1.75, 1.75)
 
 [node name="TestEnemy" type="Node3D"]
 script = ExtResource("1_iy0js")
-resists = 1
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

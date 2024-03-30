@@ -1,4 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://bxrbu0ifssc7k"]
+[gd_scene load_steps=8 format=3 uid="uid://bxrbu0ifssc7k"]
+
+[ext_resource type="Script" path="res://scenes/ui/battle_choices.gd" id="1_ul3l2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_id551"]
 bg_color = Color(0.0705882, 0.0705882, 0.0705882, 0)
@@ -25,6 +27,7 @@ Button/styles/pressed = SubResource("StyleBoxFlat_41mtw")
 [node name="BattleChoices" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("1_ul3l2")
 
 [node name="MainChoices" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -61,3 +64,6 @@ theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 action_mode = 0
 text = "Decrees"
+
+[connection signal="pressed" from="MainChoices/AttackButton" to="." method="_on_attack_button_pressed"]
+[connection signal="pressed" from="MainChoices/DecreesButton" to="." method="_on_decrees_button_pressed"]

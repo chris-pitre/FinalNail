@@ -24,23 +24,19 @@ colors = PackedColorArray(1, 0.556863, 0.901961, 0, 0.271399, 0.814583, 0.860995
 [node name="SpellCast" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 script = ExtResource("1_uw1tu")
 
 [node name="SpellNodes" type="GridContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -350.0
-offset_top = -350.0
-offset_right = 350.0
-offset_bottom = 350.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/h_separation = 100
-theme_override_constants/v_separation = 100
+theme_override_constants/h_separation = 125
+theme_override_constants/v_separation = 125
 columns = 3
 
 [node name="SpellNode1" parent="SpellNodes" instance=ExtResource("1_0dimb")]
