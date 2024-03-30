@@ -1,6 +1,8 @@
 class_name Player
 extends Node3D
 
+const STEPS_PATH = "res://assets/sfx/footsteps/"
+
 enum DIRECTION {
 	FORWARD,
 	RIGHT,
@@ -11,6 +13,7 @@ enum DIRECTION {
 var moving: bool = false
 var input_queue: Array = []
 var last_input: Callable
+var footstep_sounds: Dictionary = {}
 
 @onready var move_raycast: RayCast3D = $MoveRaycast
 @onready var check_raycast: RayCast3D = $Camera3D/CheckRaycast
@@ -25,6 +28,7 @@ func _ready():
 	SignalBus.rotate_player.connect(do_rotate)
 	SignalBus.player_check_enemy.connect(check_enemy)
 	anim.play("idle")
+	get_footstep_sounds()
 
 func _process(_delta):
 	if not input_queue.is_empty() and not moving:
@@ -32,6 +36,7 @@ func _process(_delta):
 		if input_queue.size() > 0 and not Input.is_action_pressed(command[2]) and input_queue.front() == command:
 			input_queue.clear()
 		else:
+			play_footstep()
 			command[0].call(command[1])
 
 func _input(event):
@@ -109,9 +114,30 @@ func slide(dir: Vector3, success: bool):
 func clear_queue():
 	input_queue.clear()
 
+func get_footstep_sounds() -> void:
+	var directory: DirAccess = DirAccess.open(STEPS_PATH)
+	var sound_folders: PackedStringArray = directory.get_directories()
+	for folder in sound_folders:
+		footstep_sounds[folder.get_basename()] = []
+		var sound_folder = DirAccess.open(STEPS_PATH + folder)
+		var sounds = sound_folder.get_files()
+		for sound in sounds:
+			var clipped_path = sound.replace(".import", "")
+			if sound.ends_with(".wav"):
+				footstep_sounds[folder.get_basename()].append(STEPS_PATH + folder + "/" + sound)
+
 func play_footstep():
-	pass
-	
+	var cell_pos = (Vector2(global_position.x, global_position.z) / 2).floor()
+	var terrain = Map.map.get_cell_tile_data(0, cell_pos).terrain
+	var sounds: Array
+	match terrain:
+		0:
+			sounds = footstep_sounds["stone"]
+		1:
+			sounds = footstep_sounds["grass"]
+	var rand_step = randi() % sounds.size()
+	Audio.play_sound(sounds[rand_step], "SFX")
+
 func check_enemy():
 	if check_raycast.is_colliding():
 		var collision = check_raycast.get_collider()

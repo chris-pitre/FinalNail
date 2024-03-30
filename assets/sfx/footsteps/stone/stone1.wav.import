@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://7ukrxirhviai"
-path="res://.godot/imported/hard_concrete_step_-01.wav-c6d58b41d539ecf60b527e36f40536f7.sample"
+path="res://.godot/imported/stone1.wav-f958e970064cfca9c9f23c9c8d710c87.sample"
 
 [deps]
 
-source_file="res://assets/sfx/footsteps/hard_concrete_step_-01.wav"
-dest_files=["res://.godot/imported/hard_concrete_step_-01.wav-c6d58b41d539ecf60b527e36f40536f7.sample"]
+source_file="res://assets/sfx/footsteps/stone/stone1.wav"
+dest_files=["res://.godot/imported/stone1.wav-f958e970064cfca9c9f23c9c8d710c87.sample"]
 
 [params]
 

@@ -10,7 +10,7 @@ func _ready():
 	SignalBus.toggle_spell_cast.connect(_toggle_visibility)
 	for spell_node in $SpellNodes.get_children():
 		spell_node.node_spell_drawn.connect(_draw_spell)
-	$SpellNodes.modulate.a = 0
+	$SpellNodes.visible = false
 	
 func _input(event):
 	if not BattleManager.battle_active:
@@ -64,6 +64,7 @@ func _draw_spell(center_pos, id):
 func _toggle_visibility():
 	if not visible:
 		visible = true
+		$SpellNodes.modulate.a = 0.0
 		var tween = get_tree().create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 		await tween.tween_property($SpellNodes, "modulate:a", 0.4, randf_range(0.25, 0.75)).finished
 	else:

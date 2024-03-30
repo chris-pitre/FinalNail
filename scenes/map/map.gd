@@ -10,7 +10,7 @@ const CELL = preload("res://scenes/cell/cell.tscn")
 @export var cell_theme: CellTheme
 
 var cells: Array[Cell]
-var map: TileMap
+static var map: TileMap
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 func _ready():
