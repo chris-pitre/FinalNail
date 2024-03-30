@@ -9,6 +9,12 @@ extends Node3D
 @onready var north := $NorthFace
 @onready var south := $SouthFace
 
+#uppertrim
+@onready var east_wall := $UpperTrim/EastWall
+@onready var west_wall := $UpperTrim/WestWall
+@onready var north_wall := $UpperTrim/NorthWall
+@onready var south_wall := $UpperTrim/SouthWall
+
 #corners
 @onready var pillars := $Pillars
 @onready var se_pillar := $Pillars/SouthEastPillar
@@ -16,7 +22,7 @@ extends Node3D
 @onready var nw_pillar := $Pillars/NorthWestPillar
 @onready var ne_pillar := $Pillars/NorthEastPillar
 
-func set_faces(cell_list: Array[Vector2i], tile_open: bool, corners: Dictionary, cell_theme: CellTheme) -> void:
+func set_faces(cell_list: Array[Vector2i], tile_open: bool, neighbors_open: Array, corners: Dictionary, cell_theme: CellTheme) -> void:
 	bottom.material_override = cell_theme.floor_out if tile_open else cell_theme.floor_tex
 	east.material_override = cell_theme.wall
 	west.material_override = cell_theme.wall
@@ -36,6 +42,21 @@ func set_faces(cell_list: Array[Vector2i], tile_open: bool, corners: Dictionary,
 		north.hide()
 	if tile_open:
 		top.hide()
+	
+	if tile_open:
+		if neighbors_open[0]:
+			east_wall.hide()
+		if neighbors_open[1]:
+			south_wall.hide()
+		if neighbors_open[2]:
+			west_wall.hide()
+		if neighbors_open[3]:
+			north_wall.hide()
+	else:
+		east_wall.hide()
+		south_wall.hide()
+		west_wall.hide()
+		north_wall.hide()
 	
 	if cell_theme.pillars:
 		pillars.visible = true

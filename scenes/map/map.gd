@@ -23,6 +23,7 @@ func _ready():
 
 func generate_level():
 	var used_cells = map.get_used_cells(0)
+	var neighbors = [Vector2i(1, 0), Vector2i(0, 1), Vector2i(-1, 0), Vector2i(0, -1)]
 	
 	for tile in used_cells:
 		var cell = CELL.instantiate()
@@ -33,9 +34,18 @@ func generate_level():
 		var tile_data = map.get_cell_tile_data(0, tile)
 		var tile_open = tile_data.terrain == 1
 		var corners = get_corners(tile_data)
+		var neighbors_open = []
+		for neighbor in neighbors:
+			var neighbor_data = map.get_cell_tile_data(0, tile + neighbor)
+			var neighbor_open
+			if neighbor_data:
+				neighbor_open = neighbor_data.terrain == 1
+			else:
+				neighbor_open = false
+			neighbors_open.append(neighbor_open)
 		
 		#print(map.get_cell_atlas_coords(0, tile,))
-		cell.set_faces(used_cells, tile_open, corners, cell_theme)
+		cell.set_faces(used_cells, tile_open, neighbors_open, corners, cell_theme)
 		
 		for i in range(rng.randi_range(0,32)):
 			var pebble = PEBBLE.instantiate()

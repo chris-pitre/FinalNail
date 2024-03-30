@@ -1,9 +1,9 @@
 [gd_scene load_steps=16 format=3 uid="uid://cjgwygl1psnne"]
 
 [ext_resource type="Script" path="res://scenes/cell/cell.gd" id="1_whknc"]
-[ext_resource type="Material" path="res://assets/materials/cobblestone.tres" id="2_yih3j"]
+[ext_resource type="Material" uid="uid://b6cxkxuuau7fp" path="res://assets/materials/cobblestone.tres" id="2_yih3j"]
 [ext_resource type="Material" uid="uid://cwmifmfw4402q" path="res://assets/materials/birck.tres" id="3_n0awh"]
-[ext_resource type="Texture2D" uid="uid://bsvuuwfpmpim1" path="res://assets/textures/smallbirckbothpillars.png" id="4_1ko2n"]
+[ext_resource type="Texture2D" uid="uid://b6exqwdrde6ge" path="res://assets/textures/smallbirckbothpillars.png" id="4_1ko2n"]
 [ext_resource type="Texture2D" uid="uid://di50ng7jmtboq" path="res://assets/textures/smallbircktrim.png" id="4_lppg5"]
 [ext_resource type="Material" uid="uid://df30sdy12o43m" path="res://assets/materials/smallbirck.tres" id="4_py8i7"]
 [ext_resource type="Texture2D" uid="uid://brmv2teuicjc4" path="res://assets/textures/smallbircktrim_n.png" id="5_it0q4"]
@@ -136,4 +136,34 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -1)
 visible = false
 material_override = ExtResource("6_tqfe3")
 mesh = SubResource("BoxMesh_abicl")
+skeleton = NodePath("../..")
+
+[node name="UpperTrim" type="Node3D" parent="."]
+
+[node name="NorthWall" type="MeshInstance3D" parent="UpperTrim"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.271, -1.05)
+material_override = SubResource("StandardMaterial3D_e1sem")
+cast_shadow = 2
+mesh = SubResource("BoxMesh_bmxim")
+skeleton = NodePath("../..")
+
+[node name="EastWall" type="MeshInstance3D" parent="UpperTrim"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.05, 2.271, 2.18557e-09)
+material_override = SubResource("StandardMaterial3D_e1sem")
+cast_shadow = 2
+mesh = SubResource("BoxMesh_bmxim")
+skeleton = NodePath("../..")
+
+[node name="WestWall" type="MeshInstance3D" parent="UpperTrim"]
+transform = Transform3D(1.31135e-07, 0, 1, 0, 1, 0, -1, 0, 1.31135e-07, -1.05, 2.271, 2.18557e-09)
+material_override = SubResource("StandardMaterial3D_e1sem")
+cast_shadow = 2
+mesh = SubResource("BoxMesh_bmxim")
+skeleton = NodePath("../..")
+
+[node name="SouthWall" type="MeshInstance3D" parent="UpperTrim"]
+transform = Transform3D(-1, 0, 8.74232e-08, 0, 1, 0, -8.74232e-08, 0, -1, 4.37114e-09, 2.271, 1.05)
+material_override = SubResource("StandardMaterial3D_e1sem")
+cast_shadow = 2
+mesh = SubResource("BoxMesh_bmxim")
 skeleton = NodePath("../..")

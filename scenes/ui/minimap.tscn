@@ -2,7 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://qd2lm2embmp1" path="res://src/tilesets/tileset.tres" id="1_pyo8c"]
 [ext_resource type="Script" path="res://scenes/ui/minimap.gd" id="2_uc1v2"]
-[ext_resource type="Texture2D" uid="uid://dbgt1snq7tvrh" path="res://assets/icons/arrow.png" id="3_nueew"]
+[ext_resource type="Texture2D" uid="uid://cl10apbwajddh" path="res://src/gradients/red_triangle.tres" id="3_e0wg4"]
 
 [node name="Minimap" type="TileMap"]
 tile_set = ExtResource("1_pyo8c")
@@ -11,6 +11,12 @@ script = ExtResource("2_uc1v2")
 
 [node name="MinimapCamera" type="Camera2D" parent="."]
 
-[node name="PlayerMarker" type="Sprite2D" parent="MinimapCamera"]
+[node name="PlayerMarker" type="Node2D" parent="MinimapCamera"]
+scale = Vector2(1, 2)
+
+[node name="Arrow" type="Sprite2D" parent="MinimapCamera/PlayerMarker"]
+texture_filter = 1
+position = Vector2(0, 2)
+rotation = 0.785397
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("3_nueew")
+texture = ExtResource("3_e0wg4")

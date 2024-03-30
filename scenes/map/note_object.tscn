@@ -1,8 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://bc12s35ws2bah"]
+[gd_scene load_steps=5 format=3 uid="uid://bc12s35ws2bah"]
 
 [ext_resource type="Script" path="res://scenes/map/note_object.gd" id="1_hvlwu"]
 [ext_resource type="PackedScene" uid="uid://dp3q2k1wi25xe" path="res://scenes/props/note.tscn" id="2_3wb5t"]
-[ext_resource type="Texture2D" uid="uid://cl10apbwajddh" path="res://src/gradients/red_triangle.tres" id="2_lfb3y"]
+
+[sub_resource type="Gradient" id="Gradient_s4u8m"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.524116)
+colors = PackedColorArray(1, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qdoye"]
+gradient = SubResource("Gradient_s4u8m")
+width = 8
+height = 8
+fill_to = Vector2(1, 1)
 
 [node name="NoteObject" type="Node2D"]
 script = ExtResource("1_hvlwu")
@@ -10,4 +20,4 @@ scene = ExtResource("2_3wb5t")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 0.785398
-texture = ExtResource("2_lfb3y")
+texture = SubResource("GradientTexture2D_qdoye")

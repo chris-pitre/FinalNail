@@ -10,6 +10,7 @@ enum DIRECTION {
 
 var moving: bool = false
 var input_queue: Array = []
+var last_input: Callable
 
 @onready var move_raycast: RayCast3D = $MoveRaycast
 
@@ -22,38 +23,28 @@ func _ready():
 func _process(_delta):
 	if not input_queue.is_empty() and not moving:
 		var command = input_queue.pop_front()
-		command[0].call(command[1])
+		if input_queue.size() > 0 and not Input.is_action_pressed(command[2]) and input_queue.front() == command:
+			input_queue.clear()
+		else:
+			command[0].call(command[1])
 
 func _input(event):
 	if BattleManager.battle_active:
 		return
 	if event.is_pressed() and (move_instant or input_queue.size() <= input_queue_size):
 		if event.is_action("move_forward"):
-			input_queue.push_back([Callable(do_movement), DIRECTION.FORWARD]) 
+			input_queue.push_back([Callable(do_movement), DIRECTION.FORWARD, "move_forward"]) 
 		if event.is_action("move_backward"):
-			input_queue.push_back([Callable(do_movement), DIRECTION.BACKWARD]) 
+			input_queue.push_back([Callable(do_movement), DIRECTION.BACKWARD, "move_backward"]) 
 		if event.is_action("move_left"):
-			input_queue.push_back([Callable(do_movement), DIRECTION.LEFT]) 
+			input_queue.push_back([Callable(do_movement), DIRECTION.LEFT, "move_left"]) 
 		if event.is_action("move_right"):
-			input_queue.push_back([Callable(do_movement), DIRECTION.RIGHT]) 
+			input_queue.push_back([Callable(do_movement), DIRECTION.RIGHT, "move_right"]) 
 		if event.is_action("rotate_left"):
-			input_queue.push_back([Callable(do_rotate), false]) 
+			input_queue.push_back([Callable(do_rotate), false, "rotate_left"]) 
 		if event.is_action("rotate_right"):
-			input_queue.push_back([Callable(do_rotate), true]) 
-	if event.is_released():
-		if event.is_action("move_forward"):
-			input_queue.erase([Callable(do_movement), DIRECTION.FORWARD]) 
-		if event.is_action("move_backward"):
-			input_queue.erase([Callable(do_movement), DIRECTION.BACKWARD]) 
-		if event.is_action("move_left"):
-			input_queue.erase([Callable(do_movement), DIRECTION.LEFT]) 
-		if event.is_action("move_right"):
-			input_queue.erase([Callable(do_movement), DIRECTION.RIGHT]) 
-		if event.is_action("rotate_left"):
-			input_queue.erase([Callable(do_rotate), false]) 
-		if event.is_action("rotate_right"):
-			input_queue.erase([Callable(do_rotate), true])
-					
+			input_queue.push_back([Callable(do_rotate), true, "rotate_right"])
+
 func do_movement(dir: DIRECTION):
 	var vec_dir = -basis.z
 	vec_dir = vec_dir.rotated(Vector3.DOWN, (PI / 2) * dir) * 2
@@ -106,3 +97,6 @@ func slide(dir: Vector3, success: bool):
 
 func clear_queue():
 	input_queue.clear()
+
+func play_footstep():
+	pass
