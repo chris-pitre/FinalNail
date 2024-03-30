@@ -14,6 +14,7 @@ var battle_active: bool = false
 func start_battle(player_first: bool):
 	battle_active = true
 	battle_start.emit()
+	SignalBus.message_show.emit("An intimidating figure blocks your path", 3)
 	if player_first:
 		player_turn()
 	else:
