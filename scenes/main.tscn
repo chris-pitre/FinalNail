@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://c62k2e27wds1u"]
+[gd_scene load_steps=46 format=3 uid="uid://c62k2e27wds1u"]
 
 [ext_resource type="PackedScene" uid="uid://b1pu7ddiid0ow" path="res://scenes/world/world.tscn" id="1_yich0"]
 [ext_resource type="Texture2D" uid="uid://bk483y6tvh6nq" path="res://assets/icons/cogbutton.png" id="2_bib5k"]
@@ -18,9 +18,12 @@
 [ext_resource type="PackedScene" uid="uid://b3on85708w0wg" path="res://scenes/ui/compass.tscn" id="13_k46fj"]
 [ext_resource type="Shader" path="res://src/shaders/mosqit.gdshader" id="13_xlk0h"]
 [ext_resource type="Theme" uid="uid://cf7epahqf8y5y" path="res://src/paper_theme.tres" id="14_qrejk"]
+[ext_resource type="Texture2D" uid="uid://evmmktqjkhvp" path="res://assets/icons/arrow_right.png" id="15_v3lnj"]
 [ext_resource type="PackedScene" uid="uid://bxrbu0ifssc7k" path="res://scenes/ui/battle_choices.tscn" id="15_xq3yf"]
+[ext_resource type="Texture2D" uid="uid://csedt8ci3ymsw" path="res://assets/icons/arrow_right_empty.png" id="16_7jo2t"]
 [ext_resource type="PackedScene" uid="uid://l036fxrvhnet" path="res://scenes/ui/inventory.tscn" id="16_8h35l"]
 [ext_resource type="Texture2D" uid="uid://clcojjhs5sl5b" path="res://assets/textures/scrollend.png" id="18_wgwwn"]
+[ext_resource type="Texture2D" uid="uid://b5kfr1sty6nqm" path="res://assets/textures/death.png" id="24_u1io0"]
 
 [sub_resource type="Gradient" id="Gradient_b2j0i"]
 colors = PackedColorArray(0.0576377, 2.83971e-06, 0.317881, 1, 0.198681, 0.00388911, 0.229368, 1)
@@ -107,6 +110,9 @@ shader_parameter/amplitude = 0.2
 shader_parameter/aliasing = 0.01
 shader_parameter/noiseTexture = SubResource("NoiseTexture2D_h65fc")
 
+[sub_resource type="SystemFont" id="SystemFont_6r6vd"]
+font_names = PackedStringArray("Perpetua Titling MT")
+
 [sub_resource type="GDScript" id="GDScript_5no0r"]
 script/source = "extends Label
 
@@ -158,7 +164,6 @@ alignment = 1
 [node name="ButtonsVBox" type="VBoxContainer" parent="UI/OuterMargin/ContentHBox"]
 layout_mode = 2
 size_flags_horizontal = 4
-alignment = 1
 
 [node name="OptionsButton" type="TextureButton" parent="UI/OuterMargin/ContentHBox/ButtonsVBox"]
 custom_minimum_size = Vector2(128, 128)
@@ -509,36 +514,71 @@ axis_stretch_vertical = 2
 
 [node name="Journal" type="Control" parent="UI/OuterMargin"]
 visible = false
-custom_minimum_size = Vector2(600, 800)
+custom_minimum_size = Vector2(600, 850)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 theme = ExtResource("14_qrejk")
 
-[node name="PaperTexture" type="TextureRect" parent="UI/OuterMargin/Journal"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/OuterMargin/Journal"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="JournalControls" type="PanelContainer" parent="UI/OuterMargin/Journal/VBoxContainer"]
+layout_mode = 2
+
+[node name="JournalInfoLabel" type="Label" parent="UI/OuterMargin/Journal/VBoxContainer/JournalControls"]
+custom_minimum_size = Vector2(100, 32)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+text = "Note 0/0"
+autowrap_mode = 3
+
+[node name="NavButtons" type="HBoxContainer" parent="UI/OuterMargin/Journal/VBoxContainer/JournalControls"]
+layout_mode = 2
+size_flags_horizontal = 8
+alignment = 2
+
+[node name="LeftButton" type="TextureButton" parent="UI/OuterMargin/Journal/VBoxContainer/JournalControls/NavButtons"]
+layout_mode = 2
+size_flags_horizontal = 8
+texture_normal = ExtResource("16_7jo2t")
+texture_hover = ExtResource("15_v3lnj")
+flip_h = true
+
+[node name="RightButton" type="TextureButton" parent="UI/OuterMargin/Journal/VBoxContainer/JournalControls/NavButtons"]
+layout_mode = 2
+size_flags_horizontal = 8
+texture_normal = ExtResource("16_7jo2t")
+texture_hover = ExtResource("15_v3lnj")
+
+[node name="PaperTexture" type="TextureRect" parent="UI/OuterMargin/Journal/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 texture = ExtResource("12_18ds4")
 stretch_mode = 1
 
-[node name="PageMargin" type="MarginContainer" parent="UI/OuterMargin/Journal/PaperTexture"]
+[node name="PageMargin" type="MarginContainer" parent="UI/OuterMargin/Journal/VBoxContainer/PaperTexture"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
-[node name="JournalText" type="Label" parent="UI/OuterMargin/Journal/PaperTexture/PageMargin"]
+[node name="JournalText" type="Label" parent="UI/OuterMargin/Journal/VBoxContainer/PaperTexture/PageMargin"]
 custom_minimum_size = Vector2(100, 32)
 layout_mode = 2
 size_flags_vertical = 1
@@ -598,7 +638,6 @@ theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
 [node name="Options" type="Control" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus"]
-visible = false
 layout_mode = 2
 mouse_filter = 2
 
@@ -609,29 +648,6 @@ offset_bottom = 1000.0
 mouse_filter = 2
 theme_override_constants/separation = 16
 alignment = 1
-
-[node name="NameOption" type="VBoxContainer" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="OptionName" type="Label" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer/NameOption"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.423529, 0.262745, 0, 1)
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 28
-text = "Name"
-
-[node name="TextEdit" type="TextEdit" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer/NameOption"]
-custom_minimum_size = Vector2(0, 54)
-layout_mode = 2
-placeholder_text = "Hox"
-context_menu_enabled = false
-shortcut_keys_enabled = false
-selecting_enabled = false
-deselect_on_focus_loss_enabled = false
-drag_and_drop_selection_enabled = false
-middle_mouse_paste_enabled = false
-scroll_fit_content_height = true
 
 [node name="InstantMovementOption" type="MarginContainer" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer"]
 layout_mode = 2
@@ -676,7 +692,7 @@ text = "Move Buffering"
 
 [node name="SpinBox" type="SpinBox" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer/MoveBuffer"]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 size_flags_vertical = 4
 max_value = 8.0
 value = 2.0
@@ -786,6 +802,35 @@ offset_bottom = 1168.0
 
 [node name="Cursor" parent="UI" instance=ExtResource("11_uqah4")]
 
+[node name="DeathScreen" type="Control" parent="UI"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Background" type="TextureRect" parent="UI/DeathScreen"]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("24_u1io0")
+
+[node name="Label" type="Label" parent="UI/DeathScreen/Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -440.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.45098, 0, 0.631373, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = SubResource("SystemFont_6r6vd")
+theme_override_font_sizes/font_size = 200
+text = "DEATH"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="FPSCounter" type="Label" parent="UI"]
 visible = false
 layout_mode = 1
@@ -805,6 +850,8 @@ script = SubResource("GDScript_5no0r")
 [connection signal="pressed" from="UI/OuterMargin/ContentHBox/ButtonsVBox/InventoryButton" to="UI" method="_on_inventory_button_pressed"]
 [connection signal="pressed" from="UI/OuterMargin/ContentHBox/ButtonsVBox/JournalButton" to="UI" method="_on_journal_button_pressed"]
 [connection signal="timeout" from="UI/OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/MessageGradient/MessageTimer" to="UI" method="_on_message_timer_timeout"]
+[connection signal="pressed" from="UI/OuterMargin/Journal/VBoxContainer/JournalControls/NavButtons/LeftButton" to="UI" method="_on_left_button_pressed"]
+[connection signal="pressed" from="UI/OuterMargin/Journal/VBoxContainer/JournalControls/NavButtons/RightButton" to="UI" method="_on_right_button_pressed"]
 [connection signal="toggled" from="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer/InstantMovementOption/InstantMovementCheckBox" to="UI" method="_on_instant_movement_check_box_toggled"]
 [connection signal="toggled" from="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer/FPSOption/FPSCheckBox" to="UI" method="_on_fps_check_box_toggled"]
 [connection signal="value_changed" from="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer/MoveBuffer/SpinBox" to="UI" method="_on_spin_box_value_changed"]

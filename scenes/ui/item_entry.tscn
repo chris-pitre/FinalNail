@@ -1,4 +1,7 @@
-[gd_scene format=3 uid="uid://7amkckokeqyf"]
+[gd_scene load_steps=3 format=3 uid="uid://7amkckokeqyf"]
+
+[ext_resource type="Script" path="res://scenes/ui/item_entry.gd" id="1_lpi58"]
+[ext_resource type="Script" path="res://src/components/tooltipper.gd" id="2_2j2w0"]
 
 [node name="ItemEntry" type="MarginContainer"]
 anchors_preset = 15
@@ -7,6 +10,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("1_lpi58")
 
 [node name="ItemEntryVBox" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -20,6 +24,9 @@ layout_mode = 2
 size_flags_horizontal = 0
 text = "ItemName"
 
+[node name="TooltipperComponent" type="Node" parent="ItemEntryVBox/ItemInfo/ItemName"]
+script = ExtResource("2_2j2w0")
+
 [node name="ItemNumber" type="Label" parent="ItemEntryVBox/ItemInfo"]
 layout_mode = 2
 size_flags_horizontal = 8
@@ -30,3 +37,5 @@ horizontal_alignment = 2
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Use"
+
+[connection signal="pressed" from="ItemEntryVBox/Button" to="." method="_on_button_pressed"]

@@ -77,6 +77,8 @@ func generate_level():
 			object.listen_id = map_object.listen_id
 		if map_object is LeverObject:
 			object.emit_id = map_object.emit_id
+		if map_object is NoteObject:
+			object.text = map_object.text
 
 func get_corners(tile_data: TileData) -> Dictionary:
 	var corners: Dictionary = {}

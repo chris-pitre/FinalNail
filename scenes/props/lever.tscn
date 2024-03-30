@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dtodrumvypb65"]
+[gd_scene load_steps=4 format=3 uid="uid://dscpx6b0qlcml"]
 
 [ext_resource type="PackedScene" uid="uid://bxpb03weyaw8d" path="res://assets/models/levar.glb" id="1_q2pdt"]
 [ext_resource type="Script" path="res://scenes/props/lever.gd" id="2_tklbl"]

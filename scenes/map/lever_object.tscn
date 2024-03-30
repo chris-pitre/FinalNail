@@ -1,10 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://ngrc5rmir1ps"]
+[gd_scene load_steps=4 format=3 uid="uid://3f3x6nmgxlwg"]
 
 [ext_resource type="Script" path="res://scenes/map/lever_object.gd" id="1_sgocr"]
 [ext_resource type="Texture2D" uid="uid://clriqd73lmeb8" path="res://src/gradients/green_triangle.tres" id="2_15vve"]
+[ext_resource type="PackedScene" uid="uid://dscpx6b0qlcml" path="res://scenes/props/lever.tscn" id="2_mjytp"]
 
 [node name="LeverObject" type="Node2D"]
 script = ExtResource("1_sgocr")
+scene = ExtResource("2_mjytp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 0.785398
