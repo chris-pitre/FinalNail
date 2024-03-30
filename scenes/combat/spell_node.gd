@@ -1,14 +1,16 @@
 class_name SpellNode
 extends TextureButton
 
+@export var id: int
+
 @onready var center := $Center
 var is_active: bool = true
 
-signal node_spell_drawn(center_pos)
+signal node_spell_drawn(center_pos, id)
 
 func _on_mouse_entered():
 	if is_active and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		node_spell_drawn.emit(center.global_position)
+		node_spell_drawn.emit(center.global_position, id)
 		is_active = false
 
 func _input(event):
@@ -17,5 +19,5 @@ func _input(event):
 
 func _on_button_down():
 	if is_active:
-		node_spell_drawn.emit(center.global_position)
+		node_spell_drawn.emit(center.global_position, id)
 		is_active = false

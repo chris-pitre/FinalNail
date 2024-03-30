@@ -20,6 +20,13 @@ var max_health: int = 100
 var items: Dictionary = {}
 var stats: Array[int] = [10, 10, 10, 10, 10]
 
+var known_moves: Dictionary = {
+	0b010101000: Callable(_attack_stab),
+	0b000010101: Callable(_attack_stab),
+	0b001010100: Callable(_attack_slash),
+	0b100010001: Callable(_attack_slash),
+	0b111101101: Callable(_attack_bash)
+}
 
 func _set_health(amount: int) -> void:
 	health = amount
@@ -58,3 +65,20 @@ func save_data() -> void:
 
 func load_data() -> void:
 	pass
+
+func validate_attack(id) -> bool:
+	var move = known_moves.get(id)
+	if move != null:
+		move.call()
+		return true
+	else:
+		return false
+
+func _attack_bash() -> void:
+	print("bash")
+	
+func _attack_stab() -> void:
+	print("stab")
+
+func _attack_slash() -> void:
+	print("slash")

@@ -43,30 +43,39 @@ columns = 3
 
 [node name="SpellNode1" parent="SpellNodes" instance=ExtResource("1_0dimb")]
 layout_mode = 2
+id = 256
 
 [node name="SpellNode2" parent="SpellNodes" instance=ExtResource("1_0dimb")]
 layout_mode = 2
+id = 128
 
 [node name="SpellNode3" parent="SpellNodes" instance=ExtResource("1_0dimb")]
 layout_mode = 2
+id = 64
 
 [node name="SpellNode4" parent="SpellNodes" instance=ExtResource("1_0dimb")]
 layout_mode = 2
+id = 32
 
 [node name="SpellNode5" parent="SpellNodes" instance=ExtResource("1_0dimb")]
 layout_mode = 2
+id = 16
 
 [node name="SpellNode6" parent="SpellNodes" instance=ExtResource("1_0dimb")]
 layout_mode = 2
+id = 8
 
 [node name="SpellNode7" parent="SpellNodes" instance=ExtResource("1_0dimb")]
 layout_mode = 2
+id = 4
 
 [node name="SpellNode8" parent="SpellNodes" instance=ExtResource("1_0dimb")]
 layout_mode = 2
+id = 2
 
 [node name="SpellNode9" parent="SpellNodes" instance=ExtResource("1_0dimb")]
 layout_mode = 2
+id = 1
 
 [node name="SpellLine" type="Line2D" parent="."]
 material = SubResource("ShaderMaterial_roj2u")

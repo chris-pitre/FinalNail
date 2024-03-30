@@ -45,6 +45,7 @@ func _ready() -> void:
 	SignalBus.tooltip_show.connect(_show_tooltip)
 	SignalBus.tooltip_hide.connect(_hide_tooltip)
 	SignalBus.message_show.connect(display_message)
+	BattleManager.battle_start.connect(_show_battle_menu)
 
 
 func _process(delta: float) -> void:
@@ -207,3 +208,6 @@ func _on_right_button_pressed() -> void:
 
 func _added_note() -> void:
 	journal_info_label.text = "%d/%d" % [cur_page + 1, PlayerData.found_notes.size()]
+	
+func _show_battle_menu() -> void:
+	toggle_scroll(battle_choices_menu)
