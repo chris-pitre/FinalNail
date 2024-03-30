@@ -11,6 +11,8 @@ func _ready() -> void:
 		if path.ends_with(".remap") or path.ends_with(".tres"):
 			var item_resource = ResourceLoader.load(ITEMS_PATH + path)
 			items.append(item_resource)
+	for item in items:
+		PlayerData.items[item.id] = 0
 
 
 func get_item_data(id: int) -> Item:

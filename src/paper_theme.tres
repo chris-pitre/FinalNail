@@ -1,7 +1,58 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://cf7epahqf8y5y"]
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://cf7epahqf8y5y"]
+
+[ext_resource type="Texture2D" uid="uid://4q0or4hi6d8u" path="res://assets/icons/checked.png" id="1_7x6u7"]
+[ext_resource type="Texture2D" uid="uid://baurxvvdekr7c" path="res://assets/icons/unchecked.png" id="2_guh8j"]
+[ext_resource type="Texture2D" uid="uid://5tp5wxc7e6cy" path="res://assets/icons/circle.png" id="3_gvh00"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qx5tx"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.341176, 0.180392, 0.180392, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7ug7n"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fsrwh"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.67451, 0.403922, 0.4, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j6inq"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.67451, 0.403922, 0.4, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_njpi3"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.509804, 0.286275, 0.286275, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 6
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mlgr8"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
+border_color = Color(0.341176, 0.180392, 0.180392, 1)
 
 [sub_resource type="SystemFont" id="SystemFont_phdlo"]
 font_names = PackedStringArray("Bookman Old Style")
@@ -10,6 +61,15 @@ hinting = 2
 [resource]
 default_font = SubResource("SystemFont_phdlo")
 default_font_size = 28
+Button/styles/normal = SubResource("StyleBoxFlat_qx5tx")
+CheckBox/icons/checked = ExtResource("1_7x6u7")
+CheckBox/icons/unchecked = ExtResource("2_guh8j")
+CheckBox/styles/normal = SubResource("StyleBoxEmpty_7ug7n")
+HSlider/icons/grabber = ExtResource("3_gvh00")
+HSlider/icons/grabber_highlight = ExtResource("3_gvh00")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_fsrwh")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_j6inq")
+HSlider/styles/slider = SubResource("StyleBoxFlat_njpi3")
 Label/colors/font_color = Color(0.341176, 0.180392, 0.180392, 1)
 Label/colors/font_outline_color = Color(0, 0.878431, 0.788235, 1)
 Label/constants/outline_size = 0

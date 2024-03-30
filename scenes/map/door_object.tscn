@@ -1,10 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://4wnorkawil2h"]
+[gd_scene load_steps=4 format=3 uid="uid://dyp1ksvfsp7a"]
 
 [ext_resource type="Script" path="res://scenes/map/door_object.gd" id="1_n0v6i"]
 [ext_resource type="Texture2D" uid="uid://dc8lwwljrm6p" path="res://src/gradients/cyan_triangle.tres" id="1_qhm47"]
+[ext_resource type="PackedScene" uid="uid://dm55nyi2o268d" path="res://scenes/props/dropgate.tscn" id="2_2tu8n"]
 
 [node name="DoorObject" type="Node2D"]
 script = ExtResource("1_n0v6i")
+scene = ExtResource("2_2tu8n")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 0.785398

@@ -4,3 +4,6 @@
 
 [resource]
 script = ExtResource("1_j45ww")
+name = "Soul Vial"
+id = "soulvial"
+description = "The essence of thousands is souls is stored within this vial. Restores HP to full."

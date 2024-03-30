@@ -7,6 +7,8 @@ const HELM_PORTRAIT_VERY_DAMAGED = preload("res://assets/portraits/bellmet3.png"
 
 static var current: UI
 
+var journal_open: bool = false
+var cur_page: int = 0
 var scroll_open: bool = false
 var scroll_opening: bool = false
 
@@ -25,11 +27,13 @@ var scroll_opening: bool = false
 @onready var paper_scroll_menu = $PaperScrollMenu
 @onready var options_menu = $PaperScrollMenu/PaperBG/ScrollMenus/Options
 @onready var inventory_menu = $PaperScrollMenu/PaperBG/ScrollMenus/Inventory
-@onready var journal_menu = $PaperScrollMenu/PaperBG/ScrollMenus/Journal
+@onready var journal_menu = $OuterMargin/Journal
 @onready var battle_choices_menu = $PaperScrollMenu/PaperBG/ScrollMenus/BattleChoices
 @onready var cursor: Cursor = $Cursor
 @onready var portrait_texture = $OuterMargin/ContentHBox/InfoVBox/PortraitAspect/BorderExpand/Portrait
 @onready var scroll_menus = $PaperScrollMenu/PaperBG/ScrollMenus
+@onready var journal_info_label = $OuterMargin/Journal/VBoxContainer/JournalControls/JournalInfoLabel
+@onready var journal_text = $OuterMargin/Journal/VBoxContainer/PaperTexture/PageMargin/JournalText
 
 func _ready() -> void:
 	current = self
@@ -37,6 +41,7 @@ func _ready() -> void:
 	paper_scroll_menu.size = Vector2(368, 0)
 	PlayerData.health_changed.connect(set_health)
 	PlayerData.stat_changed.connect(set_stat)
+	PlayerData.added_note.connect(_added_note)
 	SignalBus.tooltip_show.connect(_show_tooltip)
 	SignalBus.tooltip_hide.connect(_hide_tooltip)
 	SignalBus.message_show.connect(display_message)
@@ -133,7 +138,10 @@ func _on_inventory_button_pressed() -> void:
 
 
 func _on_journal_button_pressed() -> void:
-	toggle_scroll(journal_menu)
+	journal_open = not journal_open
+	journal_menu.visible = journal_open
+	journal_text.text = PlayerData.found_notes[cur_page]
+	journal_info_label.text = "%d/%d" % [cur_page + 1, PlayerData.found_notes.size()]
 
 
 func _show_tooltip(msg: String) -> void:
@@ -181,3 +189,21 @@ func _on_instant_movement_check_box_toggled(toggled_on: bool) -> void:
 
 func _on_fps_check_box_toggled(toggled_on: bool) -> void:
 	fps_counter.visible = toggled_on
+
+
+func _on_left_button_pressed() -> void:
+	cur_page -= 1
+	cur_page = wrapi(cur_page, 0, PlayerData.found_notes.size())
+	journal_text.text = PlayerData.found_notes[cur_page]
+	journal_info_label.text = "%d/%d" % [cur_page + 1, PlayerData.found_notes.size()]
+
+
+func _on_right_button_pressed() -> void:
+	cur_page += 1
+	cur_page = wrapi(cur_page, 0, PlayerData.found_notes.size())
+	journal_text.text = PlayerData.found_notes[cur_page]
+	journal_info_label.text = "%d/%d" % [cur_page + 1, PlayerData.found_notes.size()]
+
+
+func _added_note() -> void:
+	journal_info_label.text = "%d/%d" % [cur_page + 1, PlayerData.found_notes.size()]
