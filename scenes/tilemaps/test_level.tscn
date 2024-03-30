@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dyp1ksvfsp7a" path="res://scenes/map/door_object.tscn" id="4_fadgt"]
 [ext_resource type="PackedScene" uid="uid://3f3x6nmgxlwg" path="res://scenes/map/lever_object.tscn" id="6_utnn8"]
 
+
 [node name="TestLevel" type="TileMap"]
 tile_set = ExtResource("1_ciyx5")
 format = 2
@@ -21,3 +22,4 @@ listen_id = 1
 position = Vector2(152, -24)
 rotation = -1.57079
 emit_id = 1
+
