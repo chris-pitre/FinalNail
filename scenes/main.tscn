@@ -6,7 +6,7 @@
 [ext_resource type="Theme" uid="uid://cwq2xtxplyyqf" path="res://src/theme.tres" id="2_m8jm6"]
 [ext_resource type="Texture2D" uid="uid://bmt885g0bl15h" path="res://assets/icons/bagbutton.png" id="3_mde73"]
 [ext_resource type="PackedScene" uid="uid://dh1mo8mixskss" path="res://scenes/ui/minimap.tscn" id="4_0da32"]
-[ext_resource type="Texture2D" uid="uid://c4qojo5ch3eq3" path="res://assets/portraits/bellmet1.png" id="5_g3fs2"]
+[ext_resource type="Texture2D" uid="uid://bxdte7i1gco4v" path="res://assets/portraits/bellmet1.png" id="5_g3fs2"]
 [ext_resource type="Texture2D" uid="uid://duxtah1wxspxk" path="res://assets/icons/journalbutton.png" id="6_6ced4"]
 [ext_resource type="Texture2D" uid="uid://bhsueomjnheek" path="res://assets/textures/woodframesmall.png" id="6_8a06b"]
 [ext_resource type="Shader" path="res://src/shaders/vignette.gdshader" id="7_slnml"]
@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://djne241eqnkhg" path="res://scenes/ui/cursor.tscn" id="11_uqah4"]
 [ext_resource type="Texture2D" uid="uid://bxcw8ptise563" path="res://assets/textures/paper.png" id="12_18ds4"]
 [ext_resource type="Script" path="res://src/components/tooltipper.gd" id="12_cafuu"]
-[ext_resource type="PackedScene" uid="uid://b3on85708w0wg" path="res://scenes/ui/compass.tscn" id="13_k46fj"]
+[ext_resource type="PackedScene" path="res://scenes/ui/compass.tscn" id="13_k46fj"]
 [ext_resource type="Shader" path="res://src/shaders/mosqit.gdshader" id="13_xlk0h"]
 [ext_resource type="Theme" uid="uid://cf7epahqf8y5y" path="res://src/paper_theme.tres" id="14_qrejk"]
 [ext_resource type="Texture2D" uid="uid://evmmktqjkhvp" path="res://assets/icons/arrow_right.png" id="15_v3lnj"]
@@ -694,7 +694,7 @@ text = "Move Buffering"
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-max_value = 8.0
+max_value = 64.0
 value = 2.0
 
 [node name="MasterVolOption" type="VBoxContainer" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer"]
