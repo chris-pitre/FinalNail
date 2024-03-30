@@ -9,8 +9,3 @@ signal tooltip_hide()
 
 signal switch_flipped(id: int)
 
-signal player_turn_start()
-signal player_turn_end()
-
-signal enemy_turn_start()
-signal enemy_turn_end()

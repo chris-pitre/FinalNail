@@ -3,8 +3,9 @@
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_dj456"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yjxp8"]
+size = Vector3(1.5, 1.5, 1.5)
 
-[node name="Player" type="Node3D"]
+[node name="Player" type="Node3D" groups=["Player"]]
 script = ExtResource("1_dj456")
 
 [node name="Camera3D" type="Camera3D" parent="."]

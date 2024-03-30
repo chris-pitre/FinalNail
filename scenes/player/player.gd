@@ -16,12 +16,17 @@ var input_queue: Array = []
 static var move_instant: bool = false
 static var input_queue_size: int = 2
 
+func _ready():
+	BattleManager.battle_start.connect(clear_queue)
+
 func _process(_delta):
 	if not input_queue.is_empty() and not moving:
 		var command = input_queue.pop_front()
 		command[0].call(command[1])
 
 func _input(event):
+	if BattleManager.battle_active:
+		return
 	if event.is_pressed() and (move_instant or input_queue.size() <= input_queue_size):
 		if event.is_action("move_forward"):
 			input_queue.push_back([Callable(do_movement), DIRECTION.FORWARD]) 
@@ -98,3 +103,6 @@ func slide(dir: Vector3, success: bool):
 	SignalBus.player_pos_updated.emit(global_position.x / 2, global_position.z / 2)
 	
 	moving = false
+
+func clear_queue():
+	input_queue.clear()

@@ -40,6 +40,7 @@ func _ready() -> void:
 	SignalBus.tooltip_show.connect(_show_tooltip)
 	SignalBus.tooltip_hide.connect(_hide_tooltip)
 	SignalBus.message_show.connect(display_message)
+	BattleManager.battle_start.connect(_show_battle_menu)
 
 
 func _process(delta: float) -> void:
@@ -181,3 +182,6 @@ func _on_instant_movement_check_box_toggled(toggled_on: bool) -> void:
 
 func _on_fps_check_box_toggled(toggled_on: bool) -> void:
 	fps_counter.visible = toggled_on
+
+func _show_battle_menu() -> void:
+	toggle_scroll(battle_choices_menu)
