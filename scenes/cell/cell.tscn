@@ -137,3 +137,33 @@ visible = false
 material_override = ExtResource("6_tqfe3")
 mesh = SubResource("BoxMesh_abicl")
 skeleton = NodePath("../..")
+
+[node name="UpperTrim" type="Node3D" parent="."]
+
+[node name="NorthWall" type="MeshInstance3D" parent="UpperTrim"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.271, -1.05)
+material_override = SubResource("StandardMaterial3D_e1sem")
+cast_shadow = 2
+mesh = SubResource("BoxMesh_bmxim")
+skeleton = NodePath("../..")
+
+[node name="EastWall" type="MeshInstance3D" parent="UpperTrim"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.05, 2.271, 2.18557e-09)
+material_override = SubResource("StandardMaterial3D_e1sem")
+cast_shadow = 2
+mesh = SubResource("BoxMesh_bmxim")
+skeleton = NodePath("../..")
+
+[node name="WestWall" type="MeshInstance3D" parent="UpperTrim"]
+transform = Transform3D(1.31135e-07, 0, 1, 0, 1, 0, -1, 0, 1.31135e-07, -1.05, 2.271, 2.18557e-09)
+material_override = SubResource("StandardMaterial3D_e1sem")
+cast_shadow = 2
+mesh = SubResource("BoxMesh_bmxim")
+skeleton = NodePath("../..")
+
+[node name="SouthWall" type="MeshInstance3D" parent="UpperTrim"]
+transform = Transform3D(-1, 0, 8.74232e-08, 0, 1, 0, -8.74232e-08, 0, -1, 4.37114e-09, 2.271, 1.05)
+material_override = SubResource("StandardMaterial3D_e1sem")
+cast_shadow = 2
+mesh = SubResource("BoxMesh_bmxim")
+skeleton = NodePath("../..")

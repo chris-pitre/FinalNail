@@ -7,7 +7,7 @@ var item_id: String = ""
 
 
 func _ready() -> void:
-	PlayerData.item_used.connect(_player_used_item)
+	PlayerData.item_num_changed.connect(_player_used_item)
 
 
 func _player_used_item(_item_id: String, amt_left: int) -> void:

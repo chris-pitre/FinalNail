@@ -2,7 +2,7 @@ extends Node
 
 signal health_changed(health, max_health)
 signal stat_changed(stat: String, amount: int)
-signal item_used(item_name: String, amt_left: int)
+signal item_num_changed(item_id: String, amt_left: int)
 signal added_note()
 
 enum STAT {
@@ -44,6 +44,7 @@ func set_stat(stat: STAT, amount: int) -> void:
 
 func add_item(item_id: String, amt: int) -> void:
 	items[item_id] += amt
+	item_num_changed.emit(item_id, items[item_id])
 
 
 func use_item(item_id: String) -> void:
@@ -52,7 +53,7 @@ func use_item(item_id: String) -> void:
 			"soulvial":
 				health = max_health
 		items[item_id] -= 1
-		item_used.emit(item_id, items[item_id])
+		item_num_changed.emit(item_id, items[item_id])
 
 
 func add_note(text: String) -> void:
@@ -63,8 +64,10 @@ func add_note(text: String) -> void:
 func save_data() -> void:
 	pass
 
+
 func load_data() -> void:
 	pass
+
 
 func validate_attack(id) -> bool:
 	var move = known_moves.get(id)
