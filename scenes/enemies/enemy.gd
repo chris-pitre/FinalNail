@@ -27,6 +27,8 @@ func _check_for_player(x, y):
 		if raycast.is_colliding():
 			var collision = raycast.get_collider()
 			if collision.owner is Player:
+				var instant_move = Player.move_instant
+				Player.move_instant = false
 				BattleManager.start_battle(self)
 				SignalBus.player_check_enemy.emit()
 				while(not PlayerData.enemy_sighted):
@@ -36,6 +38,7 @@ func _check_for_player(x, y):
 					else:
 						SignalBus.rotate_player.emit(dot_product > 0)
 					await SignalBus.player_dir_updated
+				Player.move_instant = instant_move
 
 func take_damage(damage: int, spirit: int, skill_damage: int):
 	var dmg_effectiveness = pow(1.05, (spirit - stats[2]))
