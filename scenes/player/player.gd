@@ -97,3 +97,6 @@ func slide(dir: Vector3, success: bool):
 
 func clear_queue():
 	input_queue.clear()
+
+func play_footstep():
+	pass

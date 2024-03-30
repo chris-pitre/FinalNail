@@ -582,21 +582,7 @@ theme_override_constants/margin_bottom = 20
 custom_minimum_size = Vector2(100, 32)
 layout_mode = 2
 size_flags_vertical = 1
-text = "this is an awesome freaking lore entry
-you won't even begin to understand it ever cause its so freaking awesome
-maybe vaatividya will even make a video about it if we make it obscure enough
-so basically there's this guy and he is super dead
-but so is everyone else and like
-he has to kill them again even though they already dead
-but its like awesome cause u have to fight them
-orwk[greg0fd=fbvfcb[pvc[
-dfblfdsbpte
-4t4t4t;43tg-df-gfdgs
-grf-dsgper[ges
-g5[sg[5s[;g5
-s;hg[fsbgfbg/fd/bgfd
-[[b/gf[bgf
-d[[ya[y5yap5a=y=5"
+text = "journal entry"
 autowrap_mode = 3
 
 [node name="PaperScrollMenu" type="Control" parent="UI"]

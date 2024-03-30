@@ -13,7 +13,7 @@ enum STAT {
 	PIETY,
 }
 
-var found_notes: Array[String] = ["Days in the labyrinth: 327,334"]
+var found_notes: Array[String] = []
 var health: int = 100:
 	set = _set_health
 var max_health: int = 100

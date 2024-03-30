@@ -21,6 +21,7 @@ PlayerData="*res://src/singletons/player_data.gd"
 SignalBus="*res://src/singletons/signal_bus.gd"
 ItemDatabase="*res://src/singletons/item_database.gd"
 BattleManager="*res://src/singletons/battle_manager.gd"
+Audio="*res://src/singletons/audio.gd"
 
 [debug]
 

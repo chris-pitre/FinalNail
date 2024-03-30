@@ -7,6 +7,6 @@ colors = PackedColorArray(1, 0, 0, 1, 1, 1, 1, 0)
 
 [resource]
 gradient = SubResource("Gradient_fsw5f")
-width = 8
-height = 8
+width = 32
+height = 32
 fill_to = Vector2(1, 1)

@@ -83,6 +83,7 @@ func display_message(msg: String, time: float) -> void:
 	tween.tween_property(message, "modulate", Color.WHITE, 0.2)
 	message_timer.start(time)
 	message_label.text = "[center]%s[/center]" % msg
+	Audio.play_sound("res://assets/sfx/ding.ogg", "SFX")
 
 
 func set_view_tooltip(tooltip: String) -> void:
@@ -92,7 +93,10 @@ func set_view_tooltip(tooltip: String) -> void:
 func toggle_scroll(menu: Control) -> void:
 	if scroll_open:
 		if menu.visible:
-			close_scroll()
+			if BattleManager.battle_active:
+				open_scroll(battle_choices_menu)
+			else:
+				close_scroll()
 		else:
 			await close_scroll()
 			open_scroll(menu)
@@ -125,6 +129,11 @@ func close_scroll() -> void:
 	scroll_open = false
 
 
+func update_journal_text() -> void:
+	journal_text.text = PlayerData.found_notes[cur_page]
+	journal_info_label.text = "%d/%d" % [cur_page + 1, PlayerData.found_notes.size()]
+
+
 func _on_message_timer_timeout() -> void:
 	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 	tween.tween_property(message, "modulate", Color.TRANSPARENT, 0.2)
@@ -141,8 +150,10 @@ func _on_inventory_button_pressed() -> void:
 func _on_journal_button_pressed() -> void:
 	journal_open = not journal_open
 	journal_menu.visible = journal_open
-	journal_text.text = PlayerData.found_notes[cur_page]
-	journal_info_label.text = "%d/%d" % [cur_page + 1, PlayerData.found_notes.size()]
+	if PlayerData.found_notes.size() > 0:
+		update_journal_text() 
+	else:
+		journal_text.text = ""
 
 
 func _show_tooltip(msg: String) -> void:
@@ -195,15 +206,15 @@ func _on_fps_check_box_toggled(toggled_on: bool) -> void:
 func _on_left_button_pressed() -> void:
 	cur_page -= 1
 	cur_page = wrapi(cur_page, 0, PlayerData.found_notes.size())
-	journal_text.text = PlayerData.found_notes[cur_page]
-	journal_info_label.text = "%d/%d" % [cur_page + 1, PlayerData.found_notes.size()]
+	if PlayerData.found_notes.size() > 0:
+		update_journal_text() 
 
 
 func _on_right_button_pressed() -> void:
 	cur_page += 1
 	cur_page = wrapi(cur_page, 0, PlayerData.found_notes.size())
-	journal_text.text = PlayerData.found_notes[cur_page]
-	journal_info_label.text = "%d/%d" % [cur_page + 1, PlayerData.found_notes.size()]
+	if PlayerData.found_notes.size() > 0:
+		update_journal_text() 
 
 
 func _added_note() -> void:
