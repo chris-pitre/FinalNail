@@ -9,6 +9,9 @@ size = Vector3(1.75, 1.75, 1.75)
 
 [node name="ClayEnemy" type="Node3D" node_paths=PackedStringArray("anim")]
 script = ExtResource("1_7fouf")
+damage_anim_name = null
+is_lost_soul = null
+can_move = null
 anim = NodePath("clayfella/AnimationPlayer")
 enemy_name = "Effigy of Conviction"
 max_hp = 10
@@ -16,22 +19,6 @@ stats = Array[int]([2, 2, 30, 2, 2])
 resists = 14
 
 [node name="clayfella" parent="." instance=ExtResource("2_m50wc")]
-
-[node name="Skeleton3D" parent="clayfella/Armature" index="0"]
-bones/1/rotation = Quaternion(-0.237081, -2.31621e-07, 8.88178e-15, 0.97149)
-bones/2/rotation = Quaternion(0.142071, 3.54e-07, 1.69362e-08, 0.989856)
-bones/4/rotation = Quaternion(-0.0543176, 1.19034e-07, -6.47515e-09, 0.998524)
-bones/6/rotation = Quaternion(-0.311512, -0.497548, 0.710806, 0.387507)
-bones/13/rotation = Quaternion(0.0336302, 0.00160536, 0.0463268, 0.998359)
-bones/14/rotation = Quaternion(0.0174872, 0.0244711, 0.00112172, 0.999547)
-bones/16/rotation = Quaternion(0.0410719, 0.900065, -0.0685535, -0.428365)
-bones/18/rotation = Quaternion(0.0283222, -0.0221891, -0.051484, 0.998026)
-bones/20/rotation = Quaternion(0.125649, 0.909425, 0.110572, -0.3807)
-bones/21/rotation = Quaternion(-0.0225165, 0.0648239, 0.0494195, 0.996418)
-bones/22/rotation = Quaternion(0.0170494, -0.0208449, -0.102497, 0.994369)
-bones/25/rotation = Quaternion(-0.0264954, -0.00314211, 0.0527226, 0.998253)
-bones/26/rotation = Quaternion(-0.0195167, -0.00085379, -0.0528911, 0.998409)
-bones/29/rotation = Quaternion(0.0661424, 0.0196013, 0.028731, 0.997204)
 
 [node name="MoveRaycast" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

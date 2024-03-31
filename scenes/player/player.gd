@@ -12,7 +12,7 @@ enum DIRECTION {
 
 var frozen: bool = true
 var moving: bool = false
-var input_queue: Array = []
+static var input_queue: Array = []
 var last_input: Callable
 var footstep_sounds: Dictionary = {}
 

@@ -36,6 +36,8 @@ func kill_enemy():
 	current_enemy.position.y -= 10.0
 
 func start_battle(enemy: Enemy):
+	if current_enemy != null:
+		current_enemy.queue_free()
 	battle_active = true
 	current_enemy = enemy
 	SignalBus.message_show.emit("An intimidating figure blocks your path", 2)

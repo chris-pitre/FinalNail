@@ -13,6 +13,7 @@ enum STAT {
 @onready var move_raycast := $MoveRaycast
 @onready var movelist := $Movelist
 
+@export var damage_anim_name: String = "hit"
 @export var is_lost_soul: bool = false
 @export var can_move: bool = false
 @export var anim: AnimationPlayer = null
@@ -92,6 +93,7 @@ func _check_for_player(x, y):
 	last_player_pos = player_pos
 	if player_pos == global_position + Vector3(0, 0, -2) or player_pos == global_position + Vector3(2, 0, 0) or player_pos == global_position + Vector3(0, 0, 2) or player_pos == global_position + Vector3(-2, 0, 0):
 		player_found = true
+		Player.input_queue.clear()
 		var instant_move = Player.move_instant
 		Player.move_instant = false
 		BattleManager.start_battle(self)
@@ -113,7 +115,7 @@ func take_damage(damage: int, spirit: int, skill_damage: int):
 	var actual_dmg = floor(dmg_effectiveness * skill_damage * resist) + 1
 	hp -= actual_dmg
 	if anim != null:
-		play_animation("hit")
+		play_animation(damage_anim_name)
 	if resist == 0.5:
 		SignalBus.message_show.emit("%s resisted some of the attack" % [enemy_name], 1)
 	else: 
@@ -140,7 +142,7 @@ func die():
 	queue_free()
 
 func free_soul():
-	SignalBus.message_show.emit("%s has been freed" % [enemy_name], 2, true)
+	SignalBus.message_show.emit("%s has been captured" % [enemy_name], 2, true)
 	await get_tree().create_timer(2).timeout
 	BattleManager.end_battle(true)
 	PlayerData.add_soul()

@@ -11,7 +11,7 @@ func level_up(stat: PlayerData.STAT):
 		PlayerData.change_decrees(-1)
 		PlayerData.change_stat(stat, 2)
 		SignalBus.message_show.emit("You feel new power enter your body", 1, true)
-		Audio.play_sound("res://assets/sfx/ding.ogg", "SFX", 0.0, 2.0)
+		Audio.play_sound("res://assets/sfx/click2.ogg", "SFX", 0.0, 1.0)
 	else:
 		SignalBus.message_show.emit("You lack divine favor with your patron!", 1, true)
 		Audio.play_sound("res://assets/sfx/ding.ogg", "SFX", 0.0, 0.2)
