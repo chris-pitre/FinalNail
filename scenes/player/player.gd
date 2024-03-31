@@ -139,7 +139,7 @@ func play_footstep():
 		1:
 			sounds = footstep_sounds["grass"]
 	var rand_step = randi() % sounds.size()
-	Audio.play_sound(sounds[rand_step], "SFX")
+	Audio.play_sound(sounds[rand_step], "SFX", 0.1)
 
 func check_enemy():
 	if check_raycast.is_colliding():

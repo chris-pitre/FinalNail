@@ -9,6 +9,8 @@ func _ready() -> void:
 		var new_entry = ITEM_ENTRY.instantiate()
 		inventory_list.add_child(new_entry)
 		new_entry.item_id = item.id
-		new_entry.get_node("ItemEntryVBox/ItemInfo/ItemName").text = item.name
+		new_entry.name_label.text = "???"
 		new_entry.get_node("ItemEntryVBox/ItemInfo/ItemName/TooltipperComponent").tooltip = item.description
-		new_entry.get_node("ItemEntryVBox/ItemInfo/ItemNumber").text = str(0)
+		new_entry.number_label.text = str(0)
+		new_entry.use_button.disabled = true
+		new_entry.item_name = item.name

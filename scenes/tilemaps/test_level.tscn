@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://db0sndhg6hj30"]
+[gd_scene load_steps=6 format=3 uid="uid://db0sndhg6hj30"]
 
 [ext_resource type="TileSet" uid="uid://qd2lm2embmp1" path="res://src/tilesets/tileset.tres" id="1_ciyx5"]
 [ext_resource type="PackedScene" uid="uid://bc12s35ws2bah" path="res://scenes/map/note_object.tscn" id="4_der2d"]
 [ext_resource type="PackedScene" uid="uid://dyp1ksvfsp7a" path="res://scenes/map/door_object.tscn" id="4_fadgt"]
+[ext_resource type="PackedScene" uid="uid://dvotl1x03qltf" path="res://scenes/map/item_object.tscn" id="5_8gxif"]
 [ext_resource type="PackedScene" uid="uid://3f3x6nmgxlwg" path="res://scenes/map/lever_object.tscn" id="6_utnn8"]
 
 [node name="TestLevel" type="TileMap"]
@@ -41,3 +42,7 @@ emit_id = 1
 position = Vector2(152, 40)
 rotation = -1.57079
 emit_id = 2
+
+[node name="ItemObject" parent="." instance=ExtResource("5_8gxif")]
+position = Vector2(8, -56)
+rotation = 3.08577
