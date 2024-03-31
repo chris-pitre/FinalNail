@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://db0sndhg6hj30"]
+[gd_scene load_steps=13 format=3 uid="uid://db0sndhg6hj30"]
 
 [ext_resource type="TileSet" uid="uid://qd2lm2embmp1" path="res://src/tilesets/tileset.tres" id="1_ciyx5"]
 [ext_resource type="PackedScene" uid="uid://bc12s35ws2bah" path="res://scenes/map/note_object.tscn" id="4_der2d"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://k8qcjs7ru3nl" path="res://scenes/props/sconce.tscn" id="8_jxjqq"]
 [ext_resource type="PackedScene" uid="uid://t335ogqv6h5f" path="res://scenes/props/grave.tscn" id="9_73jld"]
 [ext_resource type="PackedScene" uid="uid://cwjcqvwce383c" path="res://scenes/props/altar.tscn" id="10_mr0bv"]
+[ext_resource type="PackedScene" uid="uid://cg3vxiykix48d" path="res://scenes/map/enemy_object.tscn" id="11_4fxc6"]
+[ext_resource type="PackedScene" uid="uid://dx4p42m6vo2vf" path="res://scenes/enemies/lost_soul_enemy.tscn" id="12_xtu4t"]
 
 [node name="TestLevel" type="TileMap"]
 tile_set = ExtResource("1_ciyx5")
@@ -194,3 +196,7 @@ scene = ExtResource("9_73jld")
 position = Vector2(40, 8)
 rotation = -4.71238
 scene = ExtResource("10_mr0bv")
+
+[node name="EnemyObject" parent="." instance=ExtResource("11_4fxc6")]
+position = Vector2(40, -24)
+scene = ExtResource("12_xtu4t")

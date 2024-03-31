@@ -11,6 +11,8 @@ signal enemy_turn_end()
 
 signal hide_scroll()
 
+signal hide_enemy()
+
 enum TURNS{
 	PLAYER,
 	ENEMY
@@ -26,6 +28,12 @@ enum DAMAGE{
 var battle_active: bool = false
 var current_turn: TURNS
 var current_enemy: Enemy = null
+
+func _ready():
+	hide_enemy.connect(kill_enemy)
+
+func kill_enemy():
+	current_enemy.position.y -= 10.0
 
 func start_battle(enemy: Enemy):
 	battle_active = true

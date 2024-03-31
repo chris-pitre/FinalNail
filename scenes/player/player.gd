@@ -19,6 +19,8 @@ var footstep_sounds: Dictionary = {}
 @onready var move_raycast: RayCast3D = $MoveRaycast
 @onready var check_raycast: RayCast3D = $Camera3D/CheckRaycast
 @onready var anim: AnimationPlayer = $Viewmodel/shove/AnimationPlayer
+@onready var coffin := $coff
+@onready var coffin_anim: AnimationPlayer = $coff/AnimationPlayer
 
 static var move_instant: bool = false
 static var input_queue_size: int = 2
@@ -26,6 +28,7 @@ static var input_queue_size: int = 2
 func _ready():
 	BattleManager.battle_start.connect(clear_queue)
 	PlayerData.animation_played.connect(play_animation)
+	PlayerData.coffin_attack.connect(coffin_kill)
 	SignalBus.rotate_player.connect(do_rotate)
 	SignalBus.player_check_enemy.connect(check_enemy)
 	SignalBus.main_menu_clicked_play.connect(_started_game)
@@ -155,6 +158,21 @@ func play_animation(anim_name: String) -> void:
 	anim.play(anim_name)
 	await anim.animation_finished
 	anim.play("idle")
+
+func coffin_kill() -> void:
+	coffin.position = Vector3(0.0, -10.25, -2.0)
+	coffin.visible = true
+	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	await tween.tween_property(coffin, "position:y", coffin.position.y + 10, 1).finished
+	coffin_anim.play("open")
+	await coffin_anim.animation_finished
+	var tween2 = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	await tween2.tween_property(coffin, "position:z", coffin.position.z + 1, 0.2).finished
+	coffin_anim.play("close")
+	BattleManager.hide_enemy.emit()
+	await coffin_anim.animation_finished
+	var tween3 = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	await tween3.tween_property(coffin, "position:y", coffin.position.y - 10, 1).finished
 
 func _started_game() -> void:
 	frozen = false

@@ -5,6 +5,7 @@ signal stat_changed(stat: String, amount: int)
 signal item_num_changed(item_id: String, amt_left: int)
 signal added_note()
 signal animation_played(anim_name: String)
+signal coffin_attack()
 signal player_died()
 signal decrees_changed(decrees: int)
 
@@ -37,7 +38,8 @@ var known_moves: Dictionary = {
 }
 
 var decree_moves : Dictionary = {
-	"Smite" : [Callable(_attack_smite), 10]
+	"Smite" : [Callable(_attack_smite), 10],
+	"Consecrate" : [Callable(_attack_coffin), 0]
 }
 
 func _set_health(amount: int) -> void:
@@ -128,6 +130,25 @@ func _attack_slash() -> void:
 	animation_played.emit("slash")
 	await get_tree().create_timer(0.5).timeout
 	BattleManager.current_enemy.take_damage(BattleManager.DAMAGE.SLASHING, stats[1], 10)
+
+func _attack_coffin(penalty: int = 0) -> void:
+	BattleManager.hide_scroll.emit()
+	if not BattleManager.current_enemy.can_free:
+		if BattleManager.current_enemy.is_lost_soul:
+			SignalBus.message_show.emit("The coffin is not ready yet...", 2, true)
+			await get_tree().create_timer(1.5).timeout
+			BattleManager.player_turn_end.emit()
+		else:
+			SignalBus.message_show.emit("The coffin has no effect on physical beings", 2, true)
+			await get_tree().create_timer(1.5).timeout
+			BattleManager.player_turn_end.emit()
+		return
+	SignalBus.message_show.emit("Rest in peace...", 3, true)
+	animation_played.emit("cast")
+	coffin_attack.emit()
+	await get_tree().create_timer(3).timeout
+	BattleManager.current_enemy.free_soul()
+		
 	
 func _attack_smite(penalty: int = 0) -> void:
 	BattleManager.hide_scroll.emit()

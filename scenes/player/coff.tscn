@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://2uvhyhdrrm60"]
+
+[ext_resource type="PackedScene" uid="uid://0p3c5yjmfi77" path="res://assets/models/coff.glb" id="1_4em22"]
+
+[node name="coff" instance=ExtResource("1_4em22")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/1/rotation = Quaternion(0.00246745, -0.0243385, 0.100833, 0.994603)
+bones/1/scale = Vector3(1, 1, 1)
+bones/2/rotation = Quaternion(-0.537045, -0.459941, 0.558508, -0.433711)
+bones/2/scale = Vector3(1, 1, 1)
+bones/3/rotation = Quaternion(0.705099, 0.587422, -0.321225, 0.233636)
+bones/3/scale = Vector3(1, 1, 1)
+bones/4/rotation = Quaternion(0.00246745, 0.0243385, -0.100833, 0.994603)
+bones/4/scale = Vector3(1, 1, 1)
+bones/5/rotation = Quaternion(0.253559, -0.23585, 0.732159, 0.586537)
+bones/5/scale = Vector3(1, 1, 1)
+bones/6/rotation = Quaternion(-0.707107, 0, 0, 0.707107)

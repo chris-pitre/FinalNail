@@ -13,6 +13,7 @@ enum STAT {
 @onready var move_raycast := $MoveRaycast
 @onready var movelist := $Movelist
 
+@export var is_lost_soul: bool = false
 @export var can_move: bool = false
 @export var anim: AnimationPlayer = null
 @export var enemy_name: String = "Dummy"
@@ -25,6 +26,7 @@ var hp: int
 var moving: bool = false
 var player_found: bool = false
 var last_player_pos: Vector3
+var can_free: bool = false
 
 func _ready():
 	SignalBus.player_pos_updated.connect(_check_for_player)
@@ -119,14 +121,29 @@ func take_damage(damage: int, spirit: int, skill_damage: int):
 	await get_tree().create_timer(1).timeout
 	SignalBus.message_show.emit("%s received %d damage" % [enemy_name, actual_dmg], 2, true)
 	await get_tree().create_timer(2).timeout
-	if hp <= 0:
-		SignalBus.message_show.emit("%s has been slain" % [enemy_name], 2, true)
+	if not is_lost_soul and hp <= 0:
+		die()
+	elif is_lost_soul and hp <= 0:
+		SignalBus.message_show.emit("The lost soul persists...", 2, true)
+		Audio.play_sound("res://assets/sfx/ding.ogg", "SFX", 0.0, 0.2)
 		await get_tree().create_timer(2).timeout
-		BattleManager.end_battle(true)
-		queue_free()
+		can_free = true
+		BattleManager.player_turn_end.emit()
 	else:
 		BattleManager.player_turn_end.emit()
 	
+
+func die():
+	SignalBus.message_show.emit("%s has been slain" % [enemy_name], 2, true)
+	await get_tree().create_timer(2).timeout
+	BattleManager.end_battle(true)
+	queue_free()
+
+func free_soul():
+	SignalBus.message_show.emit("%s has been freed" % [enemy_name], 2, true)
+	await get_tree().create_timer(2).timeout
+	BattleManager.end_battle(true)
+	queue_free()
 
 func do_turn():
 	var sum_of_weights = 0
