@@ -9,6 +9,8 @@ signal player_turn_end()
 signal enemy_turn_start()
 signal enemy_turn_end()
 
+signal hide_scroll()
+
 enum TURNS{
 	PLAYER,
 	ENEMY
@@ -28,9 +30,9 @@ var current_enemy: Enemy = null
 func start_battle(enemy: Enemy):
 	battle_active = true
 	current_enemy = enemy
-	battle_start.emit()
 	SignalBus.message_show.emit("An intimidating figure blocks your path", 2)
 	await get_tree().create_timer(2).timeout
+	battle_start.emit()
 	player_turn()
 	
 		

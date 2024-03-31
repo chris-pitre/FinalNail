@@ -65,5 +65,16 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 action_mode = 0
 text = "Decrees"
 
+[node name="DecreeChoices" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 40
+alignment = 1
+
 [connection signal="pressed" from="MainChoices/AttackButton" to="." method="_on_attack_button_pressed"]
 [connection signal="pressed" from="MainChoices/DecreesButton" to="." method="_on_decrees_button_pressed"]

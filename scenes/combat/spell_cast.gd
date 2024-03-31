@@ -8,6 +8,7 @@ var attack_id: int = 0
 
 func _ready():
 	SignalBus.toggle_spell_cast.connect(_toggle_visibility)
+	SignalBus.hide_spell_cast.connect(_hide_visibility)
 	for spell_node in $SpellNodes.get_children():
 		spell_node.node_spell_drawn.connect(_draw_spell)
 	$SpellNodes.visible = false
@@ -67,9 +68,12 @@ func _toggle_visibility():
 		$SpellNodes.visible = true
 		$SpellNodes.modulate.a = 0.0
 		var tween = get_tree().create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
-		await tween.tween_property($SpellNodes, "modulate:a", 0.4, randf_range(0.25, 0.75)).finished
+		await tween.tween_property($SpellNodes, "modulate:a", 0.4, randf_range(0.1, 0.2)).finished
 	else:
-		var tween = get_tree().create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
-		await tween.tween_property($SpellNodes, "modulate:a", 0.0, randf_range(0.25, 0.75)).finished
-		visible = false
-		$SpellNodes.visible = false
+		_hide_visibility()
+		
+func _hide_visibility():
+	var tween = get_tree().create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	await tween.tween_property($SpellNodes, "modulate:a", 0.0, randf_range(0.1, 0.2)).finished
+	visible = false
+	$SpellNodes.visible = false
