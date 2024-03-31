@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dm55nyi2o268d"]
+[gd_scene load_steps=8 format=3 uid="uid://dm55nyi2o268d"]
 
 [ext_resource type="PackedScene" uid="uid://b3t0o1y13dvch" path="res://assets/models/dropgate.glb" id="1_gs0g2"]
 [ext_resource type="Script" path="res://scenes/props/gate.gd" id="2_jlgcs"]
+[ext_resource type="AudioStream" uid="uid://cp22gr6qf7hna" path="res://assets/sfx/gateopen.ogg" id="3_g44ee"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4esml"]
 size = Vector3(2, 2, 2)
@@ -23,7 +24,7 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Cube_001")
 tracks/0/interp = 2
-tracks/0/loop_wrap = true
+tracks/0/loop_wrap = false
 tracks/0/keys = PackedFloat32Array(0, 1, 0, 1, 0, 0.6, 1, 0, 3, 0)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_eqew5"]
@@ -48,3 +49,9 @@ shape = SubResource("BoxShape3D_4esml")
 libraries = {
 "": SubResource("AnimationLibrary_eqew5")
 }
+speed_scale = 0.34
+
+[node name="GateSound" type="AudioStreamPlayer3D" parent="." index="3"]
+stream = ExtResource("3_g44ee")
+volume_db = -10.0
+max_polyphony = 2

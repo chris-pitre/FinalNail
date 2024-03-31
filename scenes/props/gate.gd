@@ -2,6 +2,7 @@ extends Node3D
 
 @onready var gate_anim := $AnimationPlayer
 @onready var collision := $Area3D/CollisionShape3D
+@onready var gate_sound := $GateSound
 
 var is_open: bool = false
 
@@ -11,12 +12,14 @@ func _ready():
 	SignalBus.switch_flipped.connect(_toggle)
 
 func _open():
+	gate_sound.play()
 	gate_anim.play("open")
 	collision.disabled = true
 	await gate_anim.animation_finished
 	is_open = true
 
 func _close():
+	gate_sound.play()
 	gate_anim.play("close")
 	collision.disabled = false
 	await gate_anim.animation_finished

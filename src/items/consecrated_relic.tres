@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://mqweafx3ekv8"]
+
+[ext_resource type="Script" path="res://src/items/item.gd" id="1_6ryun"]
+
+[resource]
+script = ExtResource("1_6ryun")
+name = "Consecrated Relic"
+id = "consecratedrelic"
+description = "The relic is engraved with familiar symbols. Gives 10 decrees."

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://o7gn20hcextm"]
+[gd_scene load_steps=4 format=3 uid="uid://cnhebje67y0cg"]
 
 [ext_resource type="Script" path="res://scenes/props/gate.gd" id="1_17j07"]
 [ext_resource type="PackedScene" uid="uid://5q10u4or3r3q" path="res://assets/models/gate.glb" id="1_ycdl1"]
