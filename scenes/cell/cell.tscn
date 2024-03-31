@@ -1,9 +1,9 @@
 [gd_scene load_steps=16 format=3 uid="uid://cjgwygl1psnne"]
 
 [ext_resource type="Script" path="res://scenes/cell/cell.gd" id="1_whknc"]
-[ext_resource type="Material" path="res://assets/materials/cobblestone.tres" id="2_yih3j"]
+[ext_resource type="Material" uid="uid://b6cxkxuuau7fp" path="res://assets/materials/cobblestone.tres" id="2_yih3j"]
 [ext_resource type="Material" uid="uid://cwmifmfw4402q" path="res://assets/materials/birck.tres" id="3_n0awh"]
-[ext_resource type="Texture2D" uid="uid://bsvuuwfpmpim1" path="res://assets/textures/smallbirckbothpillars.png" id="4_1ko2n"]
+[ext_resource type="Texture2D" uid="uid://b6exqwdrde6ge" path="res://assets/textures/smallbirckbothpillars.png" id="4_1ko2n"]
 [ext_resource type="Texture2D" uid="uid://di50ng7jmtboq" path="res://assets/textures/smallbircktrim.png" id="4_lppg5"]
 [ext_resource type="Material" uid="uid://df30sdy12o43m" path="res://assets/materials/smallbirck.tres" id="4_py8i7"]
 [ext_resource type="Texture2D" uid="uid://brmv2teuicjc4" path="res://assets/textures/smallbircktrim_n.png" id="5_it0q4"]
@@ -31,6 +31,7 @@ size = Vector3(2, 0.58, 0.2)
 size = Vector2(2.01, 2.01)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0xxdt"]
+size = Vector3(0.2, 0.2, 0.2)
 
 [sub_resource type="BoxMesh" id="BoxMesh_abicl"]
 size = Vector3(0.5, 2, 0.5)

@@ -95,8 +95,8 @@ func generate_level():
 
 func get_corners(tile_data: TileData) -> Dictionary:
 	var corners: Dictionary = {}
-	corners["SW"] = false if tile_data.get_terrain_peering_bit(TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_CORNER) == 1 else true
-	corners["SE"] = false if tile_data.get_terrain_peering_bit(TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER) == 1 else true
-	corners["NW"] = false if tile_data.get_terrain_peering_bit(TileSet.CELL_NEIGHBOR_TOP_LEFT_CORNER) == 1 else true
-	corners["NE"] = false if tile_data.get_terrain_peering_bit(TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER) == 1 else true
+	corners["SW"] = true if tile_data.get_terrain_peering_bit(TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_CORNER) == -1 else false
+	corners["SE"] = true if tile_data.get_terrain_peering_bit(TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER) == -1 else false
+	corners["NW"] = true if tile_data.get_terrain_peering_bit(TileSet.CELL_NEIGHBOR_TOP_LEFT_CORNER) == -1 else false
+	corners["NE"] = true if tile_data.get_terrain_peering_bit(TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER) == -1 else false
 	return corners

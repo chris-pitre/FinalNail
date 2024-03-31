@@ -528,7 +528,7 @@ stretch = true
 [node name="MinimapViewport" type="SubViewport" parent="UI/OuterMargin/ContentHBox/InfoVBox/MinimapAspect/BorderExpand/MinimapContainer"]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(120, 120)
 render_target_update_mode = 0
 
 [node name="Minimap" parent="UI/OuterMargin/ContentHBox/InfoVBox/MinimapAspect/BorderExpand/MinimapContainer/MinimapViewport" instance=ExtResource("4_0da32")]

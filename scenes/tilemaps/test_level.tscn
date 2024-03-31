@@ -107,7 +107,7 @@ position = Vector2(8, -56)
 rotation = 3.08577
 
 [node name="ItemObject3" parent="." instance=ExtResource("5_8gxif")]
-position = Vector2(271, -236)
+position = Vector2(282, -234)
 rotation = 3.08577
 
 [node name="ItemObject2" parent="." instance=ExtResource("5_8gxif")]

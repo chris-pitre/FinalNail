@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://t335ogqv6h5f"]
+[gd_scene load_steps=18 format=3 uid="uid://t335ogqv6h5f"]
 
 [ext_resource type="PackedScene" uid="uid://bm25b3lxwa0oe" path="res://assets/models/tombstone.glb" id="1_10u7w"]
 [ext_resource type="Texture2D" uid="uid://bsqtgc8330uu3" path="res://assets/models/tombstone_tombstone.png" id="2_voayd"]
+[ext_resource type="Script" path="res://src/components/tooltipper.gd" id="3_fjdlf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aoxbu"]
 resource_name = "Material.001"
@@ -134,6 +135,10 @@ surface_material_override/0 = SubResource("StandardMaterial3D_aoxbu")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 shape = SubResource("BoxShape3D_nynfq")
+
+[node name="TooltipperComponent" type="Node" parent="Area3D"]
+script = ExtResource("3_fjdlf")
+tooltip = "A grave."
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.733038, 0)
