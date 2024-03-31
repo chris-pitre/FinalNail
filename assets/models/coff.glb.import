@@ -3,20 +3,20 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b5ruxo6slid1f"
-path="res://.godot/imported/spikes.glb-98b350568b019e21d136fdb859b64a86.scn"
+uid="uid://0p3c5yjmfi77"
+path="res://.godot/imported/coff.glb-5c731ed20a497161a70b6e33ccbf8422.scn"
 
 [deps]
 
-source_file="res://assets/models/spikes.glb"
-dest_files=["res://.godot/imported/spikes.glb-98b350568b019e21d136fdb859b64a86.scn"]
+source_file="res://assets/models/coff.glb"
+dest_files=["res://.godot/imported/coff.glb-5c731ed20a497161a70b6e33ccbf8422.scn"]
 
 [params]
 
 nodes/root_type=""
 nodes/root_name=""
 nodes/apply_root_scale=true
-nodes/root_scale=0.1
+nodes/root_scale=1.0
 meshes/ensure_tangents=true
 meshes/generate_lods=true
 meshes/create_shadow_meshes=true

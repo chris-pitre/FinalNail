@@ -1,6 +1,6 @@
 [gd_scene load_steps=24 format=3 uid="uid://cswx3ev7rh7tw"]
 
-[ext_resource type="PackedScene" path="res://assets/models/hill.glb" id="1_eto8j"]
+[ext_resource type="PackedScene" uid="uid://do21tbq5xkkj6" path="res://assets/models/hill.glb" id="1_eto8j"]
 [ext_resource type="PackedScene" uid="uid://cvcvk40l5yxq4" path="res://assets/models/shove.glb" id="2_ha7xf"]
 [ext_resource type="PackedScene" uid="uid://ckhjgj1qa01fq" path="res://scenes/dressing/grass_patch.tscn" id="3_4f0vk"]
 [ext_resource type="Shader" path="res://src/shaders/sky.gdshader" id="4_6vxho"]

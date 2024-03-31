@@ -1,10 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dk0peaub608km"]
+[gd_scene load_steps=8 format=3 uid="uid://dk0peaub608km"]
 
 [ext_resource type="PackedScene" uid="uid://bi0du7rujukxq" path="res://scenes/combat/spell_node.tscn" id="1_0dimb"]
 [ext_resource type="Script" path="res://scenes/combat/spell_cast.gd" id="1_uw1tu"]
 [ext_resource type="Shader" path="res://src/shaders/spell_cast.gdshader" id="3_87ajx"]
-[ext_resource type="Texture2D" uid="uid://b4wvu2go0vkf" path="res://assets/icons/orbdark.png" id="3_merjo"]
-[ext_resource type="Texture2D" uid="uid://b42a8v2mdc42b" path="res://assets/icons/orbbright.png" id="4_tkc73"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_88atx"]
 noise_type = 0
@@ -41,56 +39,38 @@ columns = 3
 
 [node name="SpellNode1" parent="SpellNodes" instance=ExtResource("1_0dimb")]
 layout_mode = 2
-texture_normal = ExtResource("3_merjo")
-texture_hover = ExtResource("4_tkc73")
 id = 256
 
 [node name="SpellNode2" parent="SpellNodes" instance=ExtResource("1_0dimb")]
 layout_mode = 2
-texture_normal = ExtResource("3_merjo")
-texture_hover = ExtResource("4_tkc73")
 id = 128
 
 [node name="SpellNode3" parent="SpellNodes" instance=ExtResource("1_0dimb")]
 layout_mode = 2
-texture_normal = ExtResource("3_merjo")
-texture_hover = ExtResource("4_tkc73")
 id = 64
 
 [node name="SpellNode4" parent="SpellNodes" instance=ExtResource("1_0dimb")]
 layout_mode = 2
-texture_normal = ExtResource("3_merjo")
-texture_hover = ExtResource("4_tkc73")
 id = 32
 
 [node name="SpellNode5" parent="SpellNodes" instance=ExtResource("1_0dimb")]
 layout_mode = 2
-texture_normal = ExtResource("3_merjo")
-texture_hover = ExtResource("4_tkc73")
 id = 16
 
 [node name="SpellNode6" parent="SpellNodes" instance=ExtResource("1_0dimb")]
 layout_mode = 2
-texture_normal = ExtResource("3_merjo")
-texture_hover = ExtResource("4_tkc73")
 id = 8
 
 [node name="SpellNode7" parent="SpellNodes" instance=ExtResource("1_0dimb")]
 layout_mode = 2
-texture_normal = ExtResource("3_merjo")
-texture_hover = ExtResource("4_tkc73")
 id = 4
 
 [node name="SpellNode8" parent="SpellNodes" instance=ExtResource("1_0dimb")]
 layout_mode = 2
-texture_normal = ExtResource("3_merjo")
-texture_hover = ExtResource("4_tkc73")
 id = 2
 
 [node name="SpellNode9" parent="SpellNodes" instance=ExtResource("1_0dimb")]
 layout_mode = 2
-texture_normal = ExtResource("3_merjo")
-texture_hover = ExtResource("4_tkc73")
 id = 1
 
 [node name="SpellLine" type="Line2D" parent="."]

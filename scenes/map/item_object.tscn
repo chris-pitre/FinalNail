@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvotl1x03qltf"]
+
+[ext_resource type="Script" path="res://scenes/map/item_object.gd" id="1_wxk83"]
+[ext_resource type="PackedScene" uid="uid://ci1b07ymhqtk1" path="res://scenes/props/item.tscn" id="2_3ggru"]
+
+[sub_resource type="Gradient" id="Gradient_rmxod"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.524116)
+colors = PackedColorArray(0, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_s1civ"]
+gradient = SubResource("Gradient_rmxod")
+width = 8
+height = 8
+fill_to = Vector2(1, 1)
+
+[node name="ItemObject" type="Node2D"]
+script = ExtResource("1_wxk83")
+scene = ExtResource("2_3ggru")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 0.785398
+texture = SubResource("GradientTexture2D_s1civ")

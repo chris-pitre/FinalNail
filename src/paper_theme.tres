@@ -1,16 +1,80 @@
-[gd_resource type="Theme" load_steps=13 format=3 uid="uid://cf7epahqf8y5y"]
+[gd_resource type="Theme" load_steps=17 format=3 uid="uid://cf7epahqf8y5y"]
 
 [ext_resource type="Texture2D" uid="uid://4q0or4hi6d8u" path="res://assets/icons/checked.png" id="1_7x6u7"]
 [ext_resource type="Texture2D" uid="uid://baurxvvdekr7c" path="res://assets/icons/unchecked.png" id="2_guh8j"]
 [ext_resource type="Texture2D" uid="uid://5tp5wxc7e6cy" path="res://assets/icons/circle.png" id="3_gvh00"]
-[ext_resource type="Texture2D" path="res://assets/icons/updown.png" id="4_34ser"]
+[ext_resource type="Texture2D" uid="uid://cqgysl4r6spj" path="res://assets/icons/updown.png" id="4_34ser"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qx5tx"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tieub"]
+bg_color = Color(0.25098, 0.12549, 0.121569, 0.54902)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 4
+border_color = Color(0.341176, 0.180392, 0.180392, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7v0p7"]
 bg_color = Color(0.341176, 0.180392, 0.180392, 0)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
-border_width_bottom = 2
+border_width_bottom = 4
+border_color = Color(0.341176, 0.180392, 0.180392, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2shug"]
+bg_color = Color(0.341176, 0.180392, 0.180392, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 4
+border_color = Color(0.341176, 0.180392, 0.180392, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kljuf"]
+bg_color = Color(0.576471, 0.329412, 0.32549, 0.54902)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 4
+border_color = Color(0.341176, 0.180392, 0.180392, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q3pgi"]
+bg_color = Color(0.152941, 0.0666667, 0.0666667, 0.34902)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 4
 border_color = Color(0.341176, 0.180392, 0.180392, 1)
 corner_radius_top_left = 4
 corner_radius_top_right = 4
@@ -87,7 +151,16 @@ hinting = 2
 default_font = SubResource("SystemFont_phdlo")
 default_font_size = 28
 Button/colors/font_color = Color(0.341176, 0.180392, 0.180392, 1)
-Button/styles/normal = SubResource("StyleBoxFlat_qx5tx")
+Button/colors/font_disabled_color = Color(0.341176, 0.180392, 0.180392, 1)
+Button/colors/font_focus_color = Color(0.341176, 0.180392, 0.180392, 1)
+Button/colors/font_hover_color = Color(0.341176, 0.180392, 0.180392, 1)
+Button/colors/font_hover_pressed_color = Color(0.341176, 0.180392, 0.180392, 1)
+Button/colors/font_pressed_color = Color(0.341176, 0.180392, 0.180392, 1)
+Button/styles/disabled = SubResource("StyleBoxFlat_tieub")
+Button/styles/focus = SubResource("StyleBoxFlat_7v0p7")
+Button/styles/hover = SubResource("StyleBoxFlat_2shug")
+Button/styles/normal = SubResource("StyleBoxFlat_kljuf")
+Button/styles/pressed = SubResource("StyleBoxFlat_q3pgi")
 CheckBox/icons/checked = ExtResource("1_7x6u7")
 CheckBox/icons/unchecked = ExtResource("2_guh8j")
 CheckBox/styles/normal = SubResource("StyleBoxEmpty_7ug7n")

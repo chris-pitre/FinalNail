@@ -58,6 +58,8 @@ func _input(event):
 				input_queue.push_back([Callable(do_rotate), false, "rotate_left"]) 
 			if event.is_action("rotate_right"):
 				input_queue.push_back([Callable(do_rotate), true, "rotate_right"])
+			if event.is_action("wait"):
+				SignalBus.player_pos_updated.emit(global_position.x / 2, global_position.z / 2)
 
 func do_movement(dir: DIRECTION):
 	var vec_dir = -basis.z
@@ -139,7 +141,7 @@ func play_footstep():
 		1:
 			sounds = footstep_sounds["grass"]
 	var rand_step = randi() % sounds.size()
-	Audio.play_sound(sounds[rand_step], "SFX")
+	Audio.play_sound(sounds[rand_step], "SFX", 0.1)
 
 func check_enemy():
 	if check_raycast.is_colliding():
@@ -148,12 +150,11 @@ func check_enemy():
 			PlayerData.enemy_sighted = true
 		else:
 			PlayerData.enemy_sighted = false
-	
+
 func play_animation(anim_name: String) -> void:
 	anim.play(anim_name)
 	await anim.animation_finished
 	anim.play("idle")
-
 
 func _started_game() -> void:
 	frozen = false

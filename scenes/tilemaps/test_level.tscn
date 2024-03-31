@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://db0sndhg6hj30"]
+[gd_scene load_steps=9 format=3 uid="uid://db0sndhg6hj30"]
 
 [ext_resource type="TileSet" uid="uid://qd2lm2embmp1" path="res://src/tilesets/tileset.tres" id="1_ciyx5"]
 [ext_resource type="PackedScene" uid="uid://bc12s35ws2bah" path="res://scenes/map/note_object.tscn" id="4_der2d"]
 [ext_resource type="PackedScene" uid="uid://dyp1ksvfsp7a" path="res://scenes/map/door_object.tscn" id="4_fadgt"]
+[ext_resource type="PackedScene" uid="uid://dvotl1x03qltf" path="res://scenes/map/item_object.tscn" id="5_8gxif"]
+[ext_resource type="PackedScene" uid="uid://b3lw626j6w3ij" path="res://scenes/map/map_object.tscn" id="6_71rje"]
 [ext_resource type="PackedScene" uid="uid://3f3x6nmgxlwg" path="res://scenes/map/lever_object.tscn" id="6_utnn8"]
+[ext_resource type="PackedScene" uid="uid://defew7drhcfvy" path="res://scenes/props/spikes.tscn" id="7_80kwi"]
+[ext_resource type="PackedScene" uid="uid://cksvere82yb3x" path="res://scenes/props/ceilingaxe.tscn" id="8_ub36x"]
 
 [node name="TestLevel" type="TileMap"]
 tile_set = ExtResource("1_ciyx5")
@@ -41,3 +45,15 @@ emit_id = 1
 position = Vector2(152, 40)
 rotation = -1.57079
 emit_id = 2
+
+[node name="ItemObject" parent="." instance=ExtResource("5_8gxif")]
+position = Vector2(8, -56)
+rotation = 3.08577
+
+[node name="SpikeObject" parent="." instance=ExtResource("6_71rje")]
+position = Vector2(104, 8)
+scene = ExtResource("7_80kwi")
+
+[node name="AxeObject" parent="." instance=ExtResource("6_71rje")]
+position = Vector2(120, -24)
+scene = ExtResource("8_ub36x")

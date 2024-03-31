@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cf0ng65ho3ys0" path="res://scenes/map/map.tscn" id="1_hdrip"]
 [ext_resource type="PackedScene" uid="uid://db0sndhg6hj30" path="res://scenes/tilemaps/test_level.tscn" id="2_c2dl5"]
 [ext_resource type="Material" uid="uid://cwmifmfw4402q" path="res://assets/materials/birck.tres" id="3_7ewkn"]
-[ext_resource type="Material" uid="uid://b6cxkxuuau7fp" path="res://assets/materials/cobblestone.tres" id="4_2ua1v"]
+[ext_resource type="Material" path="res://assets/materials/cobblestone.tres" id="4_2ua1v"]
 [ext_resource type="Material" uid="uid://4exl02hr0bke" path="res://assets/materials/grass.tres" id="4_kbseo"]
 [ext_resource type="Script" path="res://src/cell_theme.gd" id="4_roce2"]
 [ext_resource type="Material" uid="uid://df30sdy12o43m" path="res://assets/materials/smallbirck.tres" id="5_wrpaq"]

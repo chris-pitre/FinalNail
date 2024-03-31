@@ -5,6 +5,7 @@ signal stat_changed(stat: String, amount: int)
 signal item_num_changed(item_id: String, amt_left: int)
 signal added_note()
 signal animation_played(anim_name: String)
+signal player_died()
 
 enum STAT {
 	COMPOSITION,
@@ -34,11 +35,14 @@ var known_moves: Dictionary = {
 func _set_health(amount: int) -> void:
 	health = amount
 	health_changed.emit(health, max_health)
+	if health <= 0:
+		player_died.emit()
 
 
 func _set_max_health(amount: int) -> void:
 	max_health = amount
 	health_changed.emit(health, max_health)
+
 
 func change_stat(stat: STAT, amount: int) -> void:
 	stats[stat] += amount

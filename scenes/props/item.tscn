@@ -1,0 +1,179 @@
+[gd_scene load_steps=26 format=3 uid="uid://ci1b07ymhqtk1"]
+
+[ext_resource type="Script" path="res://scenes/props/item3d.gd" id="1_ark6u"]
+[ext_resource type="Script" path="res://src/components/tooltipper.gd" id="2_fbe7r"]
+[ext_resource type="Texture2D" uid="uid://be034kuilrf4e" path="res://assets/icons/star.png" id="3_vr0sn"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tsltt"]
+radius = 0.2
+
+[sub_resource type="Curve" id="Curve_y4mep"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.266212, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_pavb6"]
+curve = SubResource("Curve_y4mep")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bkmxl"]
+particle_flag_rotate_y = true
+direction = Vector3(1, 1, 1)
+spread = 180.0
+initial_velocity_min = 0.5
+initial_velocity_max = 1.0
+angular_velocity_max = 126.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -1.0
+tangential_accel_min = 2.0
+tangential_accel_max = 2.0
+damping_min = 2.0
+damping_max = 2.0
+alpha_curve = SubResource("CurveTexture_pavb6")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_22qgl"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("3_vr0sn")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_ytndo"]
+material = SubResource("StandardMaterial3D_22qgl")
+size = Vector2(0.03, 0.03)
+
+[sub_resource type="Curve" id="Curve_xbyl8"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.266212, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_upbqj"]
+curve = SubResource("Curve_xbyl8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g6k8c"]
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+angle_max = 90.0
+direction = Vector3(1, 1, 1)
+spread = 180.0
+angular_velocity_min = -10.0
+angular_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_upbqj")
+
+[sub_resource type="Gradient" id="Gradient_4122w"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xqvjn"]
+gradient = SubResource("Gradient_4122w")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_va3we"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource("GradientTexture2D_xqvjn")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_ry5g8"]
+material = SubResource("StandardMaterial3D_va3we")
+size = Vector2(0.02, 0.4)
+
+[sub_resource type="Curve" id="Curve_8pu7h"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.266212, 0.363448), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_tiyqv"]
+curve = SubResource("Curve_8pu7h")
+
+[sub_resource type="Curve" id="Curve_m6cct"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.293515, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ql0c6"]
+curve = SubResource("Curve_m6cct")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_opgqr"]
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+angle_max = 90.0
+direction = Vector3(1, 1, 1)
+spread = 180.0
+angular_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_ql0c6")
+alpha_curve = SubResource("CurveTexture_tiyqv")
+
+[sub_resource type="Gradient" id="Gradient_lcxof"]
+offsets = PackedFloat32Array(0, 0.825279, 0.881041, 0.94052)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_adug0"]
+gradient = SubResource("Gradient_lcxof")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dho77"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource("GradientTexture2D_adug0")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_6a8x6"]
+material = SubResource("StandardMaterial3D_dho77")
+size = Vector2(0.3, 0.3)
+
+[node name="Item" type="Node3D"]
+script = ExtResource("1_ark6u")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_tsltt")
+
+[node name="TooltipperComponent" type="Node" parent="Area3D"]
+script = ExtResource("2_fbe7r")
+tooltip = "A glint of light catches your eye."
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+preprocess = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_bkmxl")
+draw_pass_1 = SubResource("QuadMesh_ytndo")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+amount = 4
+lifetime = 30.0
+preprocess = 30.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_g6k8c")
+draw_pass_1 = SubResource("QuadMesh_ry5g8")
+
+[node name="GPUParticles3D3" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+amount = 4
+lifetime = 30.0
+preprocess = 30.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_opgqr")
+draw_pass_1 = SubResource("QuadMesh_6a8x6")
+
+[connection signal="input_event" from="Area3D" to="." method="_on_area_3d_input_event"]
+[connection signal="mouse_entered" from="Area3D" to="." method="_on_area_3d_mouse_entered"]
+[connection signal="mouse_exited" from="Area3D" to="." method="_on_area_3d_mouse_exited"]
