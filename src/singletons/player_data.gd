@@ -26,6 +26,8 @@ var stats: Array[int] = [10, 10, 10, 10, 10]
 var decrees: int = 20
 var enemy_sighted: bool = false
 var facing: Vector3 = Vector3(0, 0, -2)
+var guys_killed: int = 0:
+	set = _set_guys_killed
 
 var known_moves: Dictionary = {
 	0b010010010: ["Stab", Callable(_attack_stab)],
@@ -136,3 +138,8 @@ func _attack_smite(penalty: int = 0) -> void:
 		animation_played.emit("cast")
 		await get_tree().create_timer(1.5).timeout
 		BattleManager.player_turn_end.emit()
+
+func _set_guys_killed(num: int) -> void:
+	guys_killed = num
+	if guys_killed >= 5:
+		SignalBus.won.emit()

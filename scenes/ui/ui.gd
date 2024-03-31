@@ -52,6 +52,7 @@ func _ready() -> void:
 	BattleManager.hide_scroll.connect(close_scroll)
 	SignalBus.player_stats_updated.connect(update_stats)
 	SignalBus.main_menu_clicked_play.connect(_started_game)
+	SignalBus.won.connect(_won_game)
 	update_stats()
 
 
@@ -246,3 +247,7 @@ func _added_note() -> void:
 
 func _show_battle_menu() -> void:
 	toggle_scroll(battle_choices_menu)
+
+
+func _won_game() -> void:
+	pass
