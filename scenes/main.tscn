@@ -422,7 +422,7 @@ use_taa = true
 use_debanding = true
 audio_listener_enable_3d = true
 physics_object_picking = true
-size = Vector2i(200, 150)
+size = Vector2i(1296, 920)
 render_target_update_mode = 0
 
 [node name="World" parent="UI/OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/WorldContainer/WorldViewport" instance=ExtResource("1_yich0")]
@@ -510,6 +510,13 @@ size_flags_horizontal = 3
 mouse_filter = 2
 alignment = 1
 
+[node name="TitleImage2" type="TextureRect" parent="UI/OuterMargin/ContentHBox/InfoVBox"]
+texture_filter = 4
+material = SubResource("ShaderMaterial_s51h8")
+layout_mode = 2
+texture = ExtResource("4_qmi60")
+expand_mode = 5
+
 [node name="MinimapAspect" type="AspectRatioContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -529,7 +536,7 @@ stretch = true
 [node name="MinimapViewport" type="SubViewport" parent="UI/OuterMargin/ContentHBox/InfoVBox/MinimapAspect/BorderExpand/MinimapContainer"]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(120, 120)
+size = Vector2i(292, 292)
 render_target_update_mode = 0
 
 [node name="Minimap" parent="UI/OuterMargin/ContentHBox/InfoVBox/MinimapAspect/BorderExpand/MinimapContainer/MinimapViewport" instance=ExtResource("4_0da32")]
@@ -785,6 +792,7 @@ text = "journal entry"
 autowrap_mode = 3
 
 [node name="PaperScrollMenu" type="Control" parent="UI"]
+visible = false
 clip_contents = true
 layout_mode = 1
 anchor_left = 0.8
