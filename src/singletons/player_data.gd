@@ -46,6 +46,7 @@ func _set_health(amount: int) -> void:
 	health_changed.emit(health, max_health)
 	if health <= 0:
 		player_died.emit()
+		Audio.play_sound("res://assets/sfx/ding.ogg", "SFX", 0.0, 0.2)
 
 
 func _set_max_health(amount: int) -> void:
@@ -109,10 +110,12 @@ func take_damage(damage: int, spirit: int, skill_damage: int):
 	var actual_dmg = floor(dmg_effectiveness * skill_damage * 0.75) + 1
 	health -= actual_dmg
 	SignalBus.message_show.emit("You received %d damage" % [actual_dmg], 2, true)
+	Audio.play_sound("res://assets/sfx/weirdhurt.ogg", "SFX")
 	await get_tree().create_timer(2).timeout
 
 func use_soul() -> void:
 	souls -= 1
+	decrees += 30
 	souls_changed.emit(souls)
 	num_graves -= 1
 	if num_graves <= 0:

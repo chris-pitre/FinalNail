@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://c62k2e27wds1u"]
+[gd_scene load_steps=67 format=3 uid="uid://c62k2e27wds1u"]
 
 [ext_resource type="Theme" uid="uid://blnesbnxoye5s" path="res://src/main_menu_theme.tres" id="1_gxy6w"]
 [ext_resource type="PackedScene" uid="uid://cswx3ev7rh7tw" path="res://scenes/ui/main_menu_background.tscn" id="1_llus8"]
@@ -34,6 +34,7 @@
 [ext_resource type="Texture2D" uid="uid://clcojjhs5sl5b" path="res://assets/textures/scrollend.png" id="18_wgwwn"]
 [ext_resource type="Texture2D" uid="uid://b5kfr1sty6nqm" path="res://assets/textures/death.png" id="24_u1io0"]
 [ext_resource type="PackedScene" uid="uid://xcwpufaesypj" path="res://scenes/ui/level_up.tscn" id="28_2s6un"]
+[ext_resource type="Texture2D" uid="uid://cl6oec8orks3y" path="res://assets/icons/death.png" id="34_tg63f"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s51h8"]
 shader = ExtResource("6_cthe7")
@@ -143,8 +144,63 @@ shader_parameter/amplitude = 0.2
 shader_parameter/aliasing = 0.01
 shader_parameter/noiseTexture = SubResource("NoiseTexture2D_h65fc")
 
-[sub_resource type="SystemFont" id="SystemFont_6r6vd"]
-font_names = PackedStringArray("Perpetua Titling MT")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x602j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sosdl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_41y50"]
+bg_color = Color(0.458824, 0, 0.458824, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 0, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vauoa"]
+bg_color = Color(0.14902, 0, 0.14902, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 0, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xnby4"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 0, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="Theme" id="Theme_csh50"]
+Button/styles/focus = SubResource("StyleBoxEmpty_sosdl")
+Button/styles/hover = SubResource("StyleBoxFlat_41y50")
+Button/styles/normal = SubResource("StyleBoxFlat_vauoa")
+Button/styles/pressed = SubResource("StyleBoxFlat_xnby4")
 
 [sub_resource type="GDScript" id="GDScript_5no0r"]
 script/source = "extends Label
@@ -154,7 +210,6 @@ script/source = "extends Label
 [node name="Main" type="Node"]
 
 [node name="MainMenu" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -176,7 +231,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="MainMenu/Background"]
 handle_input_locally = false
 size = Vector2i(1920, 1080)
-render_target_update_mode = 0
+render_target_update_mode = 4
 
 [node name="MainMenuBackground" parent="MainMenu/Background/SubViewport" instance=ExtResource("1_llus8")]
 
@@ -272,6 +327,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="UI" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -465,7 +521,7 @@ use_debanding = true
 audio_listener_enable_3d = true
 physics_object_picking = true
 size = Vector2i(1296, 920)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="World" parent="UI/OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/WorldContainer/WorldViewport" instance=ExtResource("1_yich0")]
 visible = false
@@ -579,7 +635,7 @@ stretch = true
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(292, 292)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Minimap" parent="UI/OuterMargin/ContentHBox/InfoVBox/MinimapAspect/BorderExpand/MinimapContainer/MinimapViewport" instance=ExtResource("4_0da32")]
 
@@ -666,6 +722,7 @@ text = "15"
 horizontal_alignment = 2
 
 [node name="StatContainer4" type="PanelContainer" parent="UI/OuterMargin/ContentHBox/InfoVBox/StatsVBox"]
+visible = false
 layout_mode = 2
 mouse_filter = 2
 
@@ -834,7 +891,6 @@ text = "journal entry"
 autowrap_mode = 3
 
 [node name="PaperScrollMenu" type="Control" parent="UI"]
-visible = false
 clip_contents = true
 layout_mode = 1
 anchor_left = 0.8
@@ -1042,32 +1098,51 @@ offset_bottom = 1168.0
 
 [node name="DeathScreen" type="Control" parent="UI"]
 visible = false
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Background" type="TextureRect" parent="UI/DeathScreen"]
-layout_mode = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
-texture = ExtResource("24_u1io0")
-
-[node name="Label" type="Label" parent="UI/DeathScreen/Background"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -440.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0.45098, 0, 0.631373, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 20
-theme_override_fonts/font = SubResource("SystemFont_6r6vd")
-theme_override_font_sizes/font_size = 200
-text = "DEATH"
-horizontal_alignment = 1
-vertical_alignment = 1
+
+[node name="Background" type="TextureRect" parent="UI/DeathScreen"]
+material = SubResource("ShaderMaterial_x602j")
+layout_mode = 2
+offset_left = 4.0
+offset_right = 1924.0
+offset_bottom = 1080.0
+texture = ExtResource("24_u1io0")
+
+[node name="Death" type="TextureRect" parent="UI/DeathScreen/Background"]
+layout_mode = 0
+offset_top = 104.0
+offset_right = 1920.0
+offset_bottom = 464.0
+texture = ExtResource("34_tg63f")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/DeathScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="DeathReturn" type="Button" parent="UI/DeathScreen/MarginContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme = SubResource("Theme_csh50")
+theme_override_colors/font_color = Color(1, 0, 1, 1)
+theme_override_font_sizes/font_size = 64
+text = "RETURN"
 
 [node name="FPSCounter" type="Label" parent="UI"]
 visible = false
@@ -1102,3 +1177,4 @@ script = SubResource("GDScript_5no0r")
 [connection signal="value_changed" from="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer/MasterVolOption/MasterSlider" to="UI" method="_on_master_slider_value_changed"]
 [connection signal="value_changed" from="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer/SFXVolOption/SFXSlider" to="UI" method="_on_sfx_slider_value_changed"]
 [connection signal="value_changed" from="UI/PaperScrollMenu/PaperBG/ScrollMenus/Options/VBoxContainer/AmbienceVolOption/AmbienceSlider" to="UI" method="_on_ambience_slider_value_changed"]
+[connection signal="pressed" from="UI/DeathScreen/MarginContainer/DeathReturn" to="UI" method="_on_death_return_pressed"]
