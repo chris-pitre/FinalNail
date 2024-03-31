@@ -235,6 +235,7 @@ func _on_right_button_pressed() -> void:
 
 
 func _added_note() -> void:
+	cur_page = PlayerData.found_notes.size() - 1
 	journal_info_label.text = "%d/%d" % [cur_page + 1, PlayerData.found_notes.size()]
 	
 

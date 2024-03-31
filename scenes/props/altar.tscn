@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwjcqvwce383c"]
+
+[ext_resource type="PackedScene" uid="uid://bxj0j5of480wx" path="res://assets/models/altar.glb" id="1_cf5gn"]
+
+[node name="Altar" type="Node3D"]
+
+[node name="altar" parent="." instance=ExtResource("1_cf5gn")]
