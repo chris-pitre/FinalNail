@@ -22,6 +22,7 @@ var max_health: int = 100
 var items: Dictionary = {}
 # Composition, Spirit, Corpus, Premonition, Piety
 var stats: Array[int] = [10, 10, 10, 10, 10]
+var decrees: int = 0
 var enemy_sighted: bool = false
 var facing: Vector3 = Vector3(0, 0, -2)
 
@@ -110,6 +111,14 @@ func _attack_slash() -> void:
 	BattleManager.current_enemy.take_damage(BattleManager.DAMAGE.SLASHING, stats[1], 10)
 	
 func _attack_smite() -> void:
-	animation_played.emit("cast")
-	await get_tree().create_timer(1.5).timeout
-	BattleManager.current_enemy.take_damage(BattleManager.DAMAGE.MAGIC, stats[1], 30)
+	if decrees > 0:
+		decrees -= 1
+		SignalBus.message_show.emit("You call forth the power of your patron", 2, true)
+		animation_played.emit("cast")
+		await get_tree().create_timer(1.5).timeout
+		BattleManager.current_enemy.take_damage(BattleManager.DAMAGE.MAGIC, stats[4], 30)
+	else:
+		SignalBus.message_show.emit("You call for help but nobody listens", 2, true)
+		animation_played.emit("cast")
+		await get_tree().create_timer(1.5).timeout
+		BattleManager.player_turn_end.emit()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://c62k2e27wds1u"]
+[gd_scene load_steps=57 format=3 uid="uid://c62k2e27wds1u"]
 
 [ext_resource type="Theme" uid="uid://blnesbnxoye5s" path="res://src/main_menu_theme.tres" id="1_gxy6w"]
 [ext_resource type="PackedScene" uid="uid://cswx3ev7rh7tw" path="res://scenes/ui/main_menu_background.tscn" id="1_llus8"]
@@ -23,6 +23,8 @@
 [ext_resource type="PackedScene" uid="uid://b3on85708w0wg" path="res://scenes/ui/compass.tscn" id="13_k46fj"]
 [ext_resource type="Shader" path="res://src/shaders/mosqit.gdshader" id="13_xlk0h"]
 [ext_resource type="Theme" uid="uid://cf7epahqf8y5y" path="res://src/paper_theme.tres" id="14_qrejk"]
+[ext_resource type="Shader" path="res://src/shaders/decrees.gdshader" id="14_s78jm"]
+[ext_resource type="Texture2D" uid="uid://cfextmtx3p3p8" path="res://assets/icons/decrees.png" id="15_b85w1"]
 [ext_resource type="Texture2D" uid="uid://evmmktqjkhvp" path="res://assets/icons/arrow_right.png" id="15_v3lnj"]
 [ext_resource type="PackedScene" uid="uid://bxrbu0ifssc7k" path="res://scenes/ui/battle_choices.tscn" id="15_xq3yf"]
 [ext_resource type="Texture2D" uid="uid://csedt8ci3ymsw" path="res://assets/icons/arrow_right_empty.png" id="16_7jo2t"]
@@ -56,6 +58,18 @@ width = 1280
 height = 720
 color_ramp = SubResource("Gradient_oqbe3")
 noise = SubResource("FastNoiseLite_2j2fu")
+
+[sub_resource type="Gradient" id="Gradient_07avl"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dtdye"]
+gradient = SubResource("Gradient_07avl")
+width = 128
+height = 128
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f6aj1"]
+shader = ExtResource("14_s78jm")
 
 [sub_resource type="Gradient" id="Gradient_5dhlo"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
@@ -130,6 +144,7 @@ script/source = "extends Label
 [node name="Main" type="Node"]
 
 [node name="MainMenu" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -151,7 +166,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="MainMenu/Background"]
 handle_input_locally = false
 size = Vector2i(1920, 1080)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="MainMenuBackground" parent="MainMenu/Background/SubViewport" instance=ExtResource("1_llus8")]
 
@@ -247,7 +262,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="UI" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -325,6 +339,15 @@ stretch_mode = 5
 script = ExtResource("12_cafuu")
 tooltip = "Journal"
 
+[node name="EmptySpace" type="TextureRect" parent="UI/OuterMargin/ContentHBox/ButtonsVBox"]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_dtdye")
+
+[node name="TextureRect" type="TextureRect" parent="UI/OuterMargin/ContentHBox/ButtonsVBox"]
+material = SubResource("ShaderMaterial_f6aj1")
+layout_mode = 2
+texture = ExtResource("15_b85w1")
+
 [node name="ViewVBox" type="VBoxContainer" parent="UI/OuterMargin/ContentHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -353,8 +376,8 @@ handle_input_locally = false
 use_taa = true
 use_debanding = true
 physics_object_picking = true
-size = Vector2i(200, 150)
-render_target_update_mode = 0
+size = Vector2i(1296, 920)
+render_target_update_mode = 4
 
 [node name="World" parent="UI/OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/WorldContainer/WorldViewport" instance=ExtResource("1_yich0")]
 visible = false
@@ -454,8 +477,8 @@ stretch = true
 [node name="MinimapViewport" type="SubViewport" parent="UI/OuterMargin/ContentHBox/InfoVBox/MinimapAspect/BorderExpand/MinimapContainer"]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(120, 120)
-render_target_update_mode = 0
+size = Vector2i(328, 328)
+render_target_update_mode = 4
 
 [node name="Minimap" parent="UI/OuterMargin/ContentHBox/InfoVBox/MinimapAspect/BorderExpand/MinimapContainer/MinimapViewport" instance=ExtResource("4_0da32")]
 
