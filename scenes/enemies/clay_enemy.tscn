@@ -1,0 +1,121 @@
+[gd_scene load_steps=5 format=3 uid="uid://cga60eworphxk"]
+
+[ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_7fouf"]
+[ext_resource type="PackedScene" uid="uid://cfmvayc2a5cku" path="res://scenes/enemies/clayfella.tscn" id="2_m50wc"]
+[ext_resource type="PackedScene" uid="uid://dq0y51jvs17qw" path="res://scenes/enemies/moves/enemy_move.tscn" id="3_fsofi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oyb2v"]
+size = Vector3(1.75, 1.75, 1.75)
+
+[node name="ClayEnemy" type="Node3D" node_paths=PackedStringArray("anim")]
+script = ExtResource("1_7fouf")
+anim = NodePath("clayfella/AnimationPlayer")
+enemy_name = "Effigy of Conviction"
+max_hp = 10
+stats = Array[int]([2, 2, 30, 2, 2])
+resists = 14
+
+[node name="clayfella" parent="." instance=ExtResource("2_m50wc")]
+
+[node name="Skeleton3D" parent="clayfella/Armature" index="0"]
+bones/1/rotation = Quaternion(-0.237081, -2.31621e-07, 8.88178e-15, 0.97149)
+bones/2/rotation = Quaternion(0.142071, 3.54e-07, 1.69362e-08, 0.989856)
+bones/3/rotation = Quaternion(-0.0028765, -2.38418e-07, -6.85818e-10, 0.999996)
+bones/4/rotation = Quaternion(-0.0543176, 1.19034e-07, -6.47515e-09, 0.998524)
+bones/5/rotation = Quaternion(-0.573701, 0.379019, 0.323001, 0.650294)
+bones/6/rotation = Quaternion(-0.311512, -0.497548, 0.710806, 0.387507)
+bones/8/rotation = Quaternion(-0.0102876, -0.0119569, 0.0269788, 0.999512)
+bones/9/rotation = Quaternion(0.0200224, 0.00524799, -0.013966, 0.999688)
+bones/12/rotation = Quaternion(-0.0618556, 0.891666, -0.210587, -0.395928)
+bones/13/rotation = Quaternion(0.0336302, 0.00160536, 0.0463268, 0.998359)
+bones/14/rotation = Quaternion(0.0174872, 0.0244711, 0.00112172, 0.999547)
+bones/16/rotation = Quaternion(0.0410719, 0.900065, -0.0685535, -0.428365)
+bones/17/rotation = Quaternion(0.014019, 0.0916191, 0.0523065, 0.994321)
+bones/18/rotation = Quaternion(0.0283222, -0.0221891, -0.051484, 0.998026)
+bones/20/rotation = Quaternion(0.125649, 0.909425, 0.110572, -0.3807)
+bones/21/rotation = Quaternion(-0.0225165, 0.0648239, 0.0494195, 0.996418)
+bones/22/rotation = Quaternion(0.0170494, -0.0208449, -0.102497, 0.994369)
+bones/24/rotation = Quaternion(0.14448, 0.933808, 0.269237, -0.186119)
+bones/25/rotation = Quaternion(-0.0264954, -0.00314211, 0.0527226, 0.998253)
+bones/26/rotation = Quaternion(-0.0195167, -0.00085379, -0.0528911, 0.998409)
+bones/27/rotation = Quaternion(0.395494, -0.160507, 0.220327, 0.877085)
+bones/28/rotation = Quaternion(-0.212494, 0.0533723, -0.0583834, 0.973955)
+bones/29/rotation = Quaternion(0.0661424, 0.0196013, 0.028731, 0.997204)
+
+[node name="MoveRaycast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+target_position = Vector3(0, 0, -2)
+collide_with_areas = true
+
+[node name="MoveRaycasts" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="RayCastNorth" type="RayCast3D" parent="MoveRaycasts"]
+target_position = Vector3(0, 0, -2)
+collide_with_areas = true
+
+[node name="RayCastEast" type="RayCast3D" parent="MoveRaycasts"]
+target_position = Vector3(2, 0, 0)
+collide_with_areas = true
+
+[node name="RayCastSouth" type="RayCast3D" parent="MoveRaycasts"]
+target_position = Vector3(0, 0, 2)
+collide_with_areas = true
+
+[node name="RayCastWest" type="RayCast3D" parent="MoveRaycasts"]
+target_position = Vector3(-2, 0, 0)
+collide_with_areas = true
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_oyb2v")
+
+[node name="Movelist" type="Node3D" parent="."]
+
+[node name="ChestPunch" parent="Movelist" instance=ExtResource("3_fsofi")]
+move_weight = 0.3
+move_describe = "The statue punches your solar plexus"
+
+[node name="AttackComponent" parent="Movelist/ChestPunch" index="0" node_paths=PackedStringArray("enemy")]
+enemy = NodePath("../../..")
+active = true
+
+[node name="BuffComponent" parent="Movelist/ChestPunch" index="1" node_paths=PackedStringArray("enemy")]
+enemy = NodePath("../../..")
+amount = 1
+stat = 2
+active = true
+
+[node name="TheThinker" parent="Movelist" instance=ExtResource("3_fsofi")]
+move_describe = "The statue thinks for a moment"
+
+[node name="AttackComponent" parent="Movelist/TheThinker" index="0" node_paths=PackedStringArray("enemy")]
+enemy = NodePath("../../..")
+damage_type = 8
+attack_damage = 5
+
+[node name="BuffComponent" parent="Movelist/TheThinker" index="1" node_paths=PackedStringArray("enemy")]
+enemy = NodePath("../../..")
+stat = 4
+
+[node name="Disarm" parent="Movelist" instance=ExtResource("3_fsofi")]
+move_weight = 0.2
+move_describe = "The statue attempts a disarming strike"
+
+[node name="AttackComponent" parent="Movelist/Disarm" index="0" node_paths=PackedStringArray("enemy")]
+enemy = NodePath("../../..")
+attack_damage = 5
+active = true
+
+[node name="BuffComponent" parent="Movelist/Disarm" index="1" node_paths=PackedStringArray("enemy")]
+enemy = NodePath("../../..")
+amount = 1
+stat = 1
+active = true
+
+[editable path="clayfella"]
+[editable path="Movelist/ChestPunch"]
+[editable path="Movelist/TheThinker"]
+[editable path="Movelist/Disarm"]

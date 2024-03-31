@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_5br6v"]
 [ext_resource type="PackedScene" uid="uid://dq0y51jvs17qw" path="res://scenes/enemies/moves/enemy_move.tscn" id="2_jifa4"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/creature.tscn" id="2_x65w7"]
+[ext_resource type="PackedScene" uid="uid://dsb01j8l7gfvv" path="res://scenes/enemies/creature.tscn" id="2_x65w7"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oyb2v"]
 size = Vector3(1.75, 1.75, 1.75)
@@ -69,6 +69,8 @@ active = true
 
 [node name="BuffComponent" parent="Movelist/Claws" index="1" node_paths=PackedStringArray("enemy")]
 enemy = NodePath("../../..")
+
+[node name="MoveRaycast" type="RayCast3D" parent="."]
 
 [editable path="creature"]
 [editable path="Movelist/Scare"]

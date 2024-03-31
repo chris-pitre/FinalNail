@@ -15,12 +15,18 @@ size = Vector3(1.75, 1.75, 1.75)
 
 [node name="TestEnemy" type="Node3D"]
 script = ExtResource("1_iy0js")
+can_move = true
 max_hp = 50
 resists = 1
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_7rihp")
+
+[node name="MoveRaycast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+target_position = Vector3(0, 0, -2)
+collide_with_areas = true
 
 [node name="MoveRaycasts" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

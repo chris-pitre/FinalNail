@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://brh3f0l0wuqi1"]
+
+[ext_resource type="PackedScene" uid="uid://bd62dw2wqwot0" path="res://assets/models/eye.glb" id="1_oli4f"]
+
+[node name="eye" instance=ExtResource("1_oli4f")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/rotation = Quaternion(-0.027937, 1.19163e-07, -3.33035e-09, 0.99961)
+bones/1/rotation = Quaternion(-0.164743, -1.17581e-07, -1.9639e-08, 0.986336)
+bones/2/rotation = Quaternion(-0.250561, 7.71867e-15, -1.73381e-15, 0.968101)

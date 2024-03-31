@@ -1,0 +1,101 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvvl4ty8gd68d"]
+
+[ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_i2p1h"]
+[ext_resource type="PackedScene" uid="uid://brh3f0l0wuqi1" path="res://scenes/enemies/eye.tscn" id="2_336er"]
+[ext_resource type="PackedScene" uid="uid://dq0y51jvs17qw" path="res://scenes/enemies/moves/enemy_move.tscn" id="2_axx3m"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oyb2v"]
+size = Vector3(1.75, 1.75, 1.75)
+
+[node name="EyeballEnemy" type="Node3D" node_paths=PackedStringArray("anim")]
+script = ExtResource("1_i2p1h")
+can_move = true
+anim = NodePath("eye/AnimationPlayer")
+enemy_name = "Eyeball"
+max_hp = 50
+stats = Array[int]([5, 5, 2, 5, 5])
+resists = 8
+
+[node name="eye" parent="." instance=ExtResource("2_336er")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="Skeleton3D" parent="eye/Armature" index="0"]
+bones/0/position = Vector3(0.347356, -0.0608867, 0.00131994)
+bones/0/rotation = Quaternion(-0.0278428, 0.000514136, -0.0820457, 0.996239)
+bones/1/rotation = Quaternion(-0.152776, 0.0676136, 0.404811, 0.899009)
+bones/2/rotation = Quaternion(-0.180948, 0.046446, 0.179455, 0.965866)
+
+[node name="MoveRaycast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+target_position = Vector3(0, 0, -2)
+collide_with_areas = true
+
+[node name="MoveRaycasts" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="RayCastNorth" type="RayCast3D" parent="MoveRaycasts"]
+target_position = Vector3(0, 0, -2)
+collide_with_areas = true
+
+[node name="RayCastEast" type="RayCast3D" parent="MoveRaycasts"]
+target_position = Vector3(2, 0, 0)
+collide_with_areas = true
+
+[node name="RayCastSouth" type="RayCast3D" parent="MoveRaycasts"]
+target_position = Vector3(0, 0, 2)
+collide_with_areas = true
+
+[node name="RayCastWest" type="RayCast3D" parent="MoveRaycasts"]
+target_position = Vector3(-2, 0, 0)
+collide_with_areas = true
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_oyb2v")
+
+[node name="Movelist" type="Node3D" parent="."]
+
+[node name="Stare" parent="Movelist" instance=ExtResource("2_axx3m")]
+move_weight = 0.2
+move_describe = "It stares you down"
+
+[node name="AttackComponent" parent="Movelist/Stare" index="0" node_paths=PackedStringArray("enemy")]
+enemy = NodePath("../../..")
+
+[node name="BuffComponent" parent="Movelist/Stare" index="1" node_paths=PackedStringArray("enemy")]
+enemy = NodePath("../../..")
+amount = 1
+stat = 1
+active = true
+
+[node name="Judge" parent="Movelist" instance=ExtResource("2_axx3m")]
+move_describe = "You feel it observe your past sins"
+
+[node name="AttackComponent" parent="Movelist/Judge" index="0" node_paths=PackedStringArray("enemy")]
+enemy = NodePath("../../..")
+damage_type = 8
+attack_damage = 5
+active = true
+
+[node name="BuffComponent" parent="Movelist/Judge" index="1" node_paths=PackedStringArray("enemy")]
+enemy = NodePath("../../..")
+stat = 4
+active = true
+
+[node name="Bash" parent="Movelist" instance=ExtResource("2_axx3m")]
+move_weight = 0.8
+move_describe = "It flings itself at you!"
+
+[node name="AttackComponent" parent="Movelist/Bash" index="0" node_paths=PackedStringArray("enemy")]
+enemy = NodePath("../../..")
+active = true
+
+[node name="BuffComponent" parent="Movelist/Bash" index="1" node_paths=PackedStringArray("enemy")]
+enemy = NodePath("../../..")
+
+[editable path="eye"]
+[editable path="Movelist/Stare"]
+[editable path="Movelist/Judge"]
+[editable path="Movelist/Bash"]
