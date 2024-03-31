@@ -11,6 +11,6 @@ func _ready() -> void:
 		new_entry.item_id = item.id
 		new_entry.name_label.text = "???"
 		new_entry.get_node("ItemEntryVBox/ItemInfo/ItemName/TooltipperComponent").tooltip = item.description
-		new_entry.number_label.text = str(0)
-		new_entry.use_button.disabled = true
+		new_entry.button.text = "0"
+		new_entry.button.disabled = true
 		new_entry.item_name = item.name

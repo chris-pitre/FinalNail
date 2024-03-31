@@ -1,33 +1,69 @@
-[gd_scene load_steps=5 format=3 uid="uid://dscpx6b0qlcml"]
+[gd_scene load_steps=8 format=3 uid="uid://dscpx6b0qlcml"]
 
 [ext_resource type="PackedScene" uid="uid://bxpb03weyaw8d" path="res://assets/models/levar.glb" id="1_q2pdt"]
 [ext_resource type="Script" path="res://scenes/props/lever.gd" id="2_tklbl"]
+[ext_resource type="Script" path="res://src/components/tooltipper.gd" id="3_ds2qb"]
 [ext_resource type="AudioStream" uid="uid://6na4jksl680v" path="res://assets/sfx/lever.ogg" id="3_tx16x"]
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_2jw10"]
+height = 0.733
+radius = 0.105
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_xguqs"]
+height = 0.2
+radius = 0.4
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_w0hsf"]
-size = Vector3(2, 2, 2)
+size = Vector3(0.3, 0.3, 0.3)
 
 [node name="Lever" instance=ExtResource("1_q2pdt")]
 script = ExtResource("2_tklbl")
 
 [node name="Skeleton3D" parent="Armature" index="0"]
 bones/0/scale = Vector3(1, 1, 1)
-bones/1/rotation = Quaternion(0.00182903, -8.63802e-08, 0.94264, 0.333807)
-bones/2/position = Vector3(-0.0173035, 0.387008, 3.35743e-05)
-bones/2/rotation = Quaternion(1.45519e-11, -2.91038e-11, 1.49012e-08, 1)
-bones/3/position = Vector3(-0.0104718, 0.0282549, 2.03307e-05)
-bones/3/rotation = Quaternion(1.45519e-11, -2.91038e-11, 1.49012e-08, 1)
+bones/1/rotation = Quaternion(0.00064778, 6.40284e-10, 0.333806, 0.942641)
+bones/2/position = Vector3(-0.034607, 0.774017, 6.71486e-05)
+bones/2/rotation = Quaternion(-1.45519e-11, 1.45519e-11, -2.23517e-08, 1)
+bones/3/position = Vector3(-0.0209435, 0.0565097, 4.06614e-05)
+bones/3/rotation = Quaternion(-1.45519e-11, 1.45519e-11, -2.23517e-08, 1)
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="1"]
+transform = Transform3D(0.629319, 0.777146, -0.00122104, -0.777144, 0.62932, 0.00150786, 0.00194025, -2.32831e-10, 0.999998, -5.63481e-15, 0, -2.68384e-08)
+bone_name = "Bone.002"
+bone_idx = 1
+
+[node name="Area3D2" type="Area3D" parent="Armature/Skeleton3D/BoneAttachment3D" index="0"]
+transform = Transform3D(0.0617831, 0.9831, 0.172335, -0.986039, 0.0333703, 0.163139, 0.15463, -0.180008, 0.971436, 0.033221, -0.0480847, -0.127546)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/BoneAttachment3D/Area3D2" index="0"]
+transform = Transform3D(0.0567318, -0.991025, 0.121033, 0.978748, 0.0312755, -0.202656, 0.197053, 0.129956, 0.971741, -0.645219, -0.0431139, 0.227636)
+shape = SubResource("CylinderShape3D_2jw10")
+
+[node name="TooltipperComponent" type="Node" parent="Armature/Skeleton3D/BoneAttachment3D/Area3D2" index="1"]
+script = ExtResource("3_ds2qb")
+tooltip = "A lever."
 
 [node name="Area3D" type="Area3D" parent="." index="2"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_xguqs")
+
+[node name="TooltipperComponent" type="Node" parent="Area3D" index="1"]
+script = ExtResource("3_ds2qb")
+tooltip = "A lever."
+
+[node name="Block" type="Area3D" parent="." index="3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Block" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_w0hsf")
 
-[node name="Sound" type="AudioStreamPlayer3D" parent="." index="3"]
+[node name="Sound" type="AudioStreamPlayer3D" parent="." index="4"]
 stream = ExtResource("3_tx16x")
 volume_db = -15.0
 max_polyphony = 2
 bus = &"SFX"
 
+[connection signal="input_event" from="Armature/Skeleton3D/BoneAttachment3D/Area3D2" to="." method="_on_area_3d_input_event"]
 [connection signal="input_event" from="Area3D" to="." method="_on_area_3d_input_event"]

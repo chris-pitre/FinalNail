@@ -4,8 +4,7 @@ var item_name: String = ""
 var item_id: String = ""
 
 @onready var name_label: Label = $ItemEntryVBox/ItemInfo/ItemName
-@onready var number_label: Label = $ItemEntryVBox/ItemInfo/ItemNumber
-@onready var use_button: Button = $ItemEntryVBox/Button
+@onready var button: Button = $ItemEntryVBox/ItemInfo/UseButton
 
 
 func _ready() -> void:
@@ -15,10 +14,10 @@ func _ready() -> void:
 func _player_item_num_changed(_item_id: String, amt_left: int) -> void:
 	if item_id == _item_id:
 		if amt_left == 0:
-			use_button.disabled = true
+			button.disabled = true
 		else:
-			use_button.disabled = false
-		number_label.text = str(amt_left)
+			button.disabled = false
+		button.text = str(amt_left)
 		name_label.text = item_name
 
 

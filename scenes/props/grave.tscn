@@ -1,0 +1,155 @@
+[gd_scene load_steps=18 format=3 uid="uid://t335ogqv6h5f"]
+
+[ext_resource type="PackedScene" uid="uid://bm25b3lxwa0oe" path="res://assets/models/tombstone.glb" id="1_10u7w"]
+[ext_resource type="Texture2D" uid="uid://bsqtgc8330uu3" path="res://assets/models/tombstone_tombstone.png" id="2_voayd"]
+[ext_resource type="Script" path="res://src/components/tooltipper.gd" id="3_fjdlf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aoxbu"]
+resource_name = "Material.001"
+transparency = 4
+cull_mode = 2
+albedo_texture = ExtResource("2_voayd")
+roughness = 0.5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nynfq"]
+size = Vector3(0.6, 1.6, 0.6)
+
+[sub_resource type="Curve" id="Curve_ign3a"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.249147, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_y3vxk"]
+curve = SubResource("Curve_ign3a")
+
+[sub_resource type="Curve" id="Curve_4ar37"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.471034), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_yexe8"]
+curve = SubResource("Curve_4ar37")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uhj0d"]
+emission_shape = 3
+emission_box_extents = Vector3(0.3, 0.8, 0.3)
+gravity = Vector3(0, 1, 0)
+tangential_accel_min = 1.0
+tangential_accel_max = 1.0
+scale_curve = SubResource("CurveTexture_yexe8")
+alpha_curve = SubResource("CurveTexture_y3vxk")
+
+[sub_resource type="Gradient" id="Gradient_ln3n0"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_60l0g"]
+gradient = SubResource("Gradient_ln3n0")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g83xa"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource("GradientTexture2D_60l0g")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_n424a"]
+material = SubResource("StandardMaterial3D_g83xa")
+size = Vector2(0.05, 0.05)
+
+[sub_resource type="Animation" id="Animation_0dpje"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("tombstone/Cube_001:transparency")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles3D:amount_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_scuua"]
+resource_name = "fade"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("tombstone/Cube_001:transparency")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles3D:amount_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.8, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bajqw"]
+_data = {
+"RESET": SubResource("Animation_0dpje"),
+"fade": SubResource("Animation_scuua")
+}
+
+[node name="Grave" type="Node3D"]
+
+[node name="tombstone" parent="." instance=ExtResource("1_10u7w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.16193, 0)
+
+[node name="Cube_001" parent="tombstone" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_aoxbu")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+shape = SubResource("BoxShape3D_nynfq")
+
+[node name="TooltipperComponent" type="Node" parent="Area3D"]
+script = ExtResource("3_fjdlf")
+tooltip = "A grave."
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.733038, 0)
+amount = 128
+amount_ratio = 0.0
+process_material = SubResource("ParticleProcessMaterial_uhj0d")
+draw_pass_1 = SubResource("QuadMesh_n424a")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bajqw")
+}
+
+[editable path="tombstone"]

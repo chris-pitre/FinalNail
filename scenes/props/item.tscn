@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://ci1b07ymhqtk1"]
+[gd_scene load_steps=35 format=3 uid="uid://ci1b07ymhqtk1"]
 
 [ext_resource type="Script" path="res://scenes/props/item3d.gd" id="1_ark6u"]
 [ext_resource type="Script" path="res://src/components/tooltipper.gd" id="2_fbe7r"]
@@ -136,6 +136,58 @@ particles_anim_loop = false
 material = SubResource("StandardMaterial3D_dho77")
 size = Vector2(0.3, 0.3)
 
+[sub_resource type="Curve" id="Curve_ppivn"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.225256, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_s37v6"]
+curve = SubResource("Curve_ppivn")
+
+[sub_resource type="Curve" id="Curve_1qfvb"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_1gbfq"]
+curve = SubResource("Curve_1qfvb")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ornfq"]
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+angle_max = 90.0
+direction = Vector3(1, 1, 1)
+spread = 180.0
+angular_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_1gbfq")
+alpha_curve = SubResource("CurveTexture_s37v6")
+
+[sub_resource type="Gradient" id="Gradient_8lrwg"]
+offsets = PackedFloat32Array(0, 0.405204, 0.72119, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0.321569, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lkfpv"]
+gradient = SubResource("Gradient_8lrwg")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vkc6v"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 0.298039)
+albedo_texture = SubResource("GradientTexture2D_lkfpv")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_dumvn"]
+material = SubResource("StandardMaterial3D_vkc6v")
+
 [node name="Item" type="Node3D"]
 script = ExtResource("1_ark6u")
 
@@ -173,6 +225,15 @@ preprocess = 30.0
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_opgqr")
 draw_pass_1 = SubResource("QuadMesh_6a8x6")
+
+[node name="GPUParticles3D4" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+amount = 4
+lifetime = 30.0
+preprocess = 30.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_ornfq")
+draw_pass_1 = SubResource("QuadMesh_dumvn")
 
 [connection signal="input_event" from="Area3D" to="." method="_on_area_3d_input_event"]
 [connection signal="mouse_entered" from="Area3D" to="." method="_on_area_3d_mouse_entered"]

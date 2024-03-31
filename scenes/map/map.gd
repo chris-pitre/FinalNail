@@ -81,7 +81,7 @@ func generate_level():
 		var object = map_object.scene.instantiate()
 		add_child(object)
 		object.global_position = Vector3(map_object.position.x / 16.0 - 0.5, 0.0, map_object.position.y / 16.0 - 0.5) * 2
-		object.rotate_y(map_object.rotation)
+		object.rotate_y(-map_object.rotation)
 		
 		if map_object is DoorObject:
 			object.listen_id = map_object.listen_id
@@ -95,8 +95,8 @@ func generate_level():
 
 func get_corners(tile_data: TileData) -> Dictionary:
 	var corners: Dictionary = {}
-	corners["SW"] = false if tile_data.get_terrain_peering_bit(TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_CORNER) == 1 else true
-	corners["SE"] = false if tile_data.get_terrain_peering_bit(TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER) == 1 else true
-	corners["NW"] = false if tile_data.get_terrain_peering_bit(TileSet.CELL_NEIGHBOR_TOP_LEFT_CORNER) == 1 else true
-	corners["NE"] = false if tile_data.get_terrain_peering_bit(TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER) == 1 else true
+	corners["SW"] = true if tile_data.get_terrain_peering_bit(TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_CORNER) == -1 else false
+	corners["SE"] = true if tile_data.get_terrain_peering_bit(TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER) == -1 else false
+	corners["NW"] = true if tile_data.get_terrain_peering_bit(TileSet.CELL_NEIGHBOR_TOP_LEFT_CORNER) == -1 else false
+	corners["NE"] = true if tile_data.get_terrain_peering_bit(TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER) == -1 else false
 	return corners
