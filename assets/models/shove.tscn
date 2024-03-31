@@ -5,6 +5,8 @@
 [node name="shove" instance=ExtResource("1_76jim")]
 
 [node name="Skeleton3D" parent="Armature" index="0"]
-bones/7/rotation = Quaternion(-3.94635e-06, 3.94635e-06, 0.707107, 0.707107)
-bones/9/rotation = Quaternion(-3.94635e-06, -3.94635e-06, -0.707107, 0.707107)
+bones/0/position = Vector3(6.79948, -2.20202, -0.000305905)
+bones/0/rotation = Quaternion(-0.0326732, -0.534143, -0.0515531, 0.843188)
+bones/11/position = Vector3(1.36181, -8.30533, -1.97413)
 bones/11/rotation = Quaternion(-6.71544e-07, 0, 1, 0)
+bones/11/scale = Vector3(0, 0, 0)

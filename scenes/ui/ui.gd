@@ -47,11 +47,20 @@ func _ready() -> void:
 	SignalBus.message_show.connect(display_message)
 	BattleManager.battle_start.connect(_show_battle_menu)
 	BattleManager.battle_end.connect(_show_battle_menu)
+	SignalBus.player_stats_updated.connect(update_stats)
+	update_stats()
 
 
 func _process(delta: float) -> void:
 	fps_counter.text = "FPS: %d" % Engine.get_frames_per_second()
 
+func update_stats() -> void:
+	var stats = PlayerData.stats
+	set_stat(PlayerData.STAT.COMPOSITION, stats[0])
+	set_stat(PlayerData.STAT.SPIRIT, stats[1])
+	set_stat(PlayerData.STAT.CORPUS, stats[2])
+	set_stat(PlayerData.STAT.PREMONITION, stats[3])
+	set_stat(PlayerData.STAT.PIETY, stats[4])
 
 func set_stat(stat: PlayerData.STAT, amount: int) -> void:
 	match stat:

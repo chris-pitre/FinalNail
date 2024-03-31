@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://bt3jnkycke53c"]
+
+[node name="BuffComponent" type="Node3D"]

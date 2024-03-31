@@ -10,6 +10,9 @@ enum STAT {
 }
 
 @onready var movecasts := $MoveRaycasts
+@onready var movelist := $Movelist
+
+@export var anim: AnimationPlayer = null
 @export var enemy_name: String = "Dummy"
 @export var max_hp: int = 20
 var hp: int
@@ -19,9 +22,23 @@ var hp: int
 
 func _ready():
 	SignalBus.player_pos_updated.connect(_check_for_player)
+	SignalBus.player_dir_updated.connect(face_player)
 	BattleManager.enemy_turn_start.connect(do_turn)
 	hp = max_hp
-	
+	if anim != null:
+		anim.play("idle")
+
+func change_stat(stat: PlayerData.STAT, amount: int) -> void:
+	stats[stat] += amount
+
+
+func set_stat(stat: PlayerData.STAT, amount: int) -> void:
+	stats[stat] = amount
+
+func face_player(is_right: bool):
+	var dir = 1 if is_right else -1
+	rotation -= Vector3(0, dir * (PI / 2), 0)
+
 func _check_for_player(x, y):
 	for raycast in movecasts.get_children():
 		if raycast.is_colliding():
@@ -45,6 +62,8 @@ func take_damage(damage: int, spirit: int, skill_damage: int):
 	var resist = 0.5 if (damage & resists) == 1 else 1.0
 	var actual_dmg = floor(dmg_effectiveness * skill_damage * resist) + 1
 	hp -= actual_dmg
+	if anim != null:
+		play_animation("hit")
 	if resist == 0.5:
 		SignalBus.message_show.emit("%s resisted some of the attack" % [enemy_name], 1)
 	else: 
@@ -61,4 +80,19 @@ func take_damage(damage: int, spirit: int, skill_damage: int):
 	
 
 func do_turn():
-	PlayerData.take_damage(BattleManager.DAMAGE.BLUNT, stats[1], 10)
+	var sum_of_weights = 0
+	for move in movelist.get_children():
+		sum_of_weights += move.move_weight
+	var roll = randf_range(0, sum_of_weights)
+	for move in movelist.get_children():
+		if roll < move.move_weight:
+			if anim != null:
+				play_animation("attack")
+			move.execute()
+			break
+		roll -= move.move_weight
+
+func play_animation(anim_name: String):
+	anim.play(anim_name)
+	await anim.animation_finished
+	anim.play("idle")

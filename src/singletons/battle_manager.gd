@@ -44,7 +44,6 @@ func player_turn():
 	
 func enemy_turn():
 	current_turn = TURNS.ENEMY
-	SignalBus.message_show.emit("The abomination readies its strike", 1)
 	enemy_turn_start.emit()
 	await enemy_turn_end
 	if battle_active:

@@ -1,0 +1,16 @@
+[gd_scene load_steps=6 format=3 uid="uid://dq0y51jvs17qw"]
+
+[ext_resource type="Script" path="res://scenes/enemies/moves/enemy_move.gd" id="1_jl0ee"]
+[ext_resource type="PackedScene" uid="uid://bmlab6780afh4" path="res://scenes/enemies/moves/attack_component.tscn" id="2_4dstp"]
+[ext_resource type="Script" path="res://scenes/enemies/moves/attack_component.gd" id="3_54ib5"]
+[ext_resource type="PackedScene" uid="uid://bt3jnkycke53c" path="res://scenes/enemies/moves/buff_component.tscn" id="4_4uqax"]
+[ext_resource type="Script" path="res://scenes/enemies/moves/buff_component.gd" id="5_c8j7r"]
+
+[node name="EnemyMove" type="Node3D"]
+script = ExtResource("1_jl0ee")
+
+[node name="AttackComponent" parent="." instance=ExtResource("2_4dstp")]
+script = ExtResource("3_54ib5")
+
+[node name="BuffComponent" parent="." instance=ExtResource("4_4uqax")]
+script = ExtResource("5_c8j7r")

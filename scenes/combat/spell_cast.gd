@@ -64,6 +64,7 @@ func _draw_spell(center_pos, id):
 func _toggle_visibility():
 	if not visible:
 		visible = true
+		$SpellNodes.visible = true
 		$SpellNodes.modulate.a = 0.0
 		var tween = get_tree().create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 		await tween.tween_property($SpellNodes, "modulate:a", 0.4, randf_range(0.25, 0.75)).finished
@@ -71,3 +72,4 @@ func _toggle_visibility():
 		var tween = get_tree().create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
 		await tween.tween_property($SpellNodes, "modulate:a", 0.0, randf_range(0.25, 0.75)).finished
 		visible = false
+		$SpellNodes.visible = false
