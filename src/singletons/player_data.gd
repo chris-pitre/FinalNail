@@ -65,6 +65,8 @@ func use_item(item_id: String) -> void:
 		match item_id:
 			"soulvial":
 				health = max_health
+			"consecratedrelic":
+				decrees += 10
 		items[item_id] -= 1
 		item_num_changed.emit(item_id, items[item_id])
 
