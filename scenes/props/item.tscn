@@ -56,6 +56,7 @@ particle_flag_disable_z = true
 angle_max = 90.0
 direction = Vector3(1, 1, 1)
 spread = 180.0
+angular_velocity_min = -10.0
 angular_velocity_max = 10.0
 gravity = Vector3(0, 0, 0)
 alpha_curve = SubResource("CurveTexture_upbqj")

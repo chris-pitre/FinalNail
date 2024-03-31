@@ -148,12 +148,11 @@ func check_enemy():
 			PlayerData.enemy_sighted = true
 		else:
 			PlayerData.enemy_sighted = false
-	
+
 func play_animation(anim_name: String) -> void:
 	anim.play(anim_name)
 	await anim.animation_finished
 	anim.play("idle")
-
 
 func _started_game() -> void:
 	frozen = false
