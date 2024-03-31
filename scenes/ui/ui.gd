@@ -110,8 +110,14 @@ func set_view_tooltip(tooltip: String) -> void:
 
 func toggle_scroll(menu: Control) -> void:
 	if scroll_open:
-		await close_scroll()
-		open_scroll(menu)
+		if menu.visible:
+			if BattleManager.battle_active:
+				open_scroll(battle_choices_menu)
+			else:
+				close_scroll()
+		else:
+			await close_scroll()
+			open_scroll(menu)
 	else:
 		open_scroll(menu)
 
