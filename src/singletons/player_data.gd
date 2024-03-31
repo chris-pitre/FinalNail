@@ -54,6 +54,10 @@ func _set_max_health(amount: int) -> void:
 func set_decrees(amount: int) -> void:
 	decrees = amount
 	decrees_changed.emit(amount)
+	
+func change_decrees(amount: int) -> void:
+	decrees += amount
+	decrees_changed.emit(decrees)
 
 func change_stat(stat: STAT, amount: int) -> void:
 	stats[stat] += amount

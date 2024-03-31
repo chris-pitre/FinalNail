@@ -16,4 +16,7 @@ signal switch_flipped(id: int)
 signal toggle_spell_cast()
 signal hide_spell_cast()
 
+signal toggle_level_up()
+signal hide_level_up()
+
 signal won()

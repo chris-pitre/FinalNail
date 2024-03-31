@@ -1,0 +1,76 @@
+[gd_scene load_steps=4 format=3 uid="uid://xcwpufaesypj"]
+
+[ext_resource type="Script" path="res://scenes/ui/level_up.gd" id="1_xc5ch"]
+[ext_resource type="Script" path="res://src/components/tooltipper.gd" id="2_m76y6"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_g0vhf"]
+thickness = 2
+
+[node name="LevelUp" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_xc5ch")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Strengthen Pact"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_g0vhf")
+
+[node name="CompositionButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Composition"
+
+[node name="TooltipperComponent" type="Node" parent="VBoxContainer/CompositionButton"]
+script = ExtResource("2_m76y6")
+tooltip = "Trade a decree for corporeal physicality"
+
+[node name="SpiritButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Spirit"
+
+[node name="TooltipperComponent" type="Node" parent="VBoxContainer/SpiritButton"]
+script = ExtResource("2_m76y6")
+tooltip = "Trade a decree for more martial prowess"
+
+[node name="CorpusButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Corpus"
+
+[node name="TooltipperComponent" type="Node" parent="VBoxContainer/CorpusButton"]
+script = ExtResource("2_m76y6")
+tooltip = "Trade a decree for greater resilience"
+
+[node name="PremonitionButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Premonition
+"
+
+[node name="TooltipperComponent" type="Node" parent="VBoxContainer/PremonitionButton"]
+script = ExtResource("2_m76y6")
+tooltip = "Trade a decree for higher chances of divine augury"
+
+[node name="ExitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+text = "Exit"
+
+[connection signal="pressed" from="VBoxContainer/CompositionButton" to="." method="_on_composition_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/SpiritButton" to="." method="_on_spirit_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/CorpusButton" to="." method="_on_corpus_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/PremonitionButton" to="." method="_on_premonition_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

@@ -1,7 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://cwjcqvwce383c"]
+[gd_scene load_steps=5 format=3 uid="uid://cwjcqvwce383c"]
 
 [ext_resource type="PackedScene" uid="uid://bxj0j5of480wx" path="res://assets/models/altar.glb" id="1_cf5gn"]
+[ext_resource type="Script" path="res://scenes/props/altar.gd" id="1_sdvl8"]
+[ext_resource type="Script" path="res://src/components/tooltipper.gd" id="2_cgcw3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1iug3"]
+size = Vector3(1, 1.25, 0.5)
 
 [node name="Altar" type="Node3D"]
+script = ExtResource("1_sdvl8")
 
 [node name="altar" parent="." instance=ExtResource("1_cf5gn")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, -1)
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, -0.75)
+shape = SubResource("BoxShape3D_1iug3")
+
+[node name="TooltipperComponent" type="Node" parent="Area3D"]
+script = ExtResource("2_cgcw3")
+tooltip = "An altar to your patron"
+
+[connection signal="input_event" from="Area3D" to="." method="_on_area_3d_input_event"]

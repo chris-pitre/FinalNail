@@ -36,6 +36,7 @@ var scroll_opening: bool = false
 @onready var journal_text = $OuterMargin/Journal/VBoxContainer/PaperTexture/PageMargin/JournalText
 @onready var world = $OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/WorldContainer/WorldViewport/World
 @onready var num_decrees = $OuterMargin/ContentHBox/ButtonsVBox/DecreeCross/DecreeNum
+@onready var level_up_menu = $PaperScrollMenu/PaperBG/ScrollMenus/LevelUp
 
 func _ready() -> void:
 	current = self
@@ -53,6 +54,8 @@ func _ready() -> void:
 	SignalBus.player_stats_updated.connect(update_stats)
 	SignalBus.main_menu_clicked_play.connect(_started_game)
 	SignalBus.won.connect(_won_game)
+	SignalBus.toggle_level_up.connect(_show_level_up_screen)
+	SignalBus.hide_level_up.connect(close_scroll)
 	update_stats()
 
 
@@ -247,6 +250,9 @@ func _added_note() -> void:
 
 func _show_battle_menu() -> void:
 	toggle_scroll(battle_choices_menu)
+	
+func _show_level_up_screen() -> void:
+	toggle_scroll(level_up_menu)
 
 
 func _won_game() -> void:

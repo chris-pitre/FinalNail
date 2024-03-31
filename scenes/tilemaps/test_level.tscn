@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://db0sndhg6hj30"]
+[gd_scene load_steps=11 format=3 uid="uid://db0sndhg6hj30"]
 
 [ext_resource type="TileSet" uid="uid://qd2lm2embmp1" path="res://src/tilesets/tileset.tres" id="1_ciyx5"]
 [ext_resource type="PackedScene" uid="uid://bc12s35ws2bah" path="res://scenes/map/note_object.tscn" id="4_der2d"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://defew7drhcfvy" path="res://scenes/props/spikes.tscn" id="7_xcpsf"]
 [ext_resource type="PackedScene" uid="uid://k8qcjs7ru3nl" path="res://scenes/props/sconce.tscn" id="8_jxjqq"]
 [ext_resource type="PackedScene" uid="uid://t335ogqv6h5f" path="res://scenes/props/grave.tscn" id="9_73jld"]
+[ext_resource type="PackedScene" uid="uid://cwjcqvwce383c" path="res://scenes/props/altar.tscn" id="10_mr0bv"]
 
 [node name="TestLevel" type="TileMap"]
 tile_set = ExtResource("1_ciyx5")
@@ -188,3 +189,8 @@ scene = ExtResource("8_jxjqq")
 [node name="Grave" parent="." instance=ExtResource("6_h30ms")]
 position = Vector2(248, 88)
 scene = ExtResource("9_73jld")
+
+[node name="Altar" parent="." instance=ExtResource("6_h30ms")]
+position = Vector2(40, 8)
+rotation = -4.71238
+scene = ExtResource("10_mr0bv")

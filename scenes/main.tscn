@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://c62k2e27wds1u"]
+[gd_scene load_steps=60 format=3 uid="uid://c62k2e27wds1u"]
 
 [ext_resource type="Theme" uid="uid://blnesbnxoye5s" path="res://src/main_menu_theme.tres" id="1_gxy6w"]
 [ext_resource type="PackedScene" uid="uid://cswx3ev7rh7tw" path="res://scenes/ui/main_menu_background.tscn" id="1_llus8"]
@@ -32,6 +32,7 @@
 [ext_resource type="Shader" path="res://src/shaders/wavy.gdshader" id="17_1rdv2"]
 [ext_resource type="Texture2D" uid="uid://clcojjhs5sl5b" path="res://assets/textures/scrollend.png" id="18_wgwwn"]
 [ext_resource type="Texture2D" uid="uid://b5kfr1sty6nqm" path="res://assets/textures/death.png" id="24_u1io0"]
+[ext_resource type="PackedScene" uid="uid://xcwpufaesypj" path="res://scenes/ui/level_up.tscn" id="28_2s6un"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s51h8"]
 shader = ExtResource("6_cthe7")
@@ -943,6 +944,7 @@ layout_mode = 2
 value = 100.0
 
 [node name="Inventory" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus" instance=ExtResource("16_8h35l")]
+visible = false
 layout_mode = 2
 mouse_filter = 2
 
@@ -950,6 +952,10 @@ mouse_filter = 2
 visible = false
 layout_mode = 2
 mouse_filter = 2
+
+[node name="LevelUp" parent="UI/PaperScrollMenu/PaperBG/ScrollMenus" instance=ExtResource("28_2s6un")]
+visible = false
+layout_mode = 2
 
 [node name="RollContainer" type="MarginContainer" parent="UI/PaperScrollMenu"]
 layout_mode = 1
