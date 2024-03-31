@@ -62,6 +62,7 @@ func _ready() -> void:
 	SignalBus.toggle_level_up.connect(_show_level_up_screen)
 	SignalBus.hide_level_up.connect(close_scroll)
 	update_stats()
+	set_health(PlayerData.health, PlayerData.max_health)
 
 
 func _process(delta: float) -> void:

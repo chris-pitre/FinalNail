@@ -36,6 +36,8 @@ func _ready():
 	SignalBus.player_returned.connect(return_player)
 	anim.play("idle")
 	get_footstep_sounds()
+	PlayerData._set_max_health(PlayerData.max_health + PlayerData.stats[0])
+	PlayerData._set_health(PlayerData.health + PlayerData.stats[0])
 
 func _process(_delta):
 	if not input_queue.is_empty() and not moving:

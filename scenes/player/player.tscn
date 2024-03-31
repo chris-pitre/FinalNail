@@ -39,11 +39,6 @@ transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 [node name="shove" parent="Viewmodel" instance=ExtResource("2_mxokm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.04, -0.405)
 
-[node name="Skeleton3D" parent="Viewmodel/shove/Armature" index="0"]
-bones/7/rotation = Quaternion(-3.94635e-06, 3.94635e-06, 0.707107, 0.707107)
-bones/9/rotation = Quaternion(-3.94635e-06, -3.94635e-06, -0.707107, 0.707107)
-bones/11/rotation = Quaternion(-6.71544e-07, 0, 1, 0)
-
 [node name="coff" parent="." instance=ExtResource("3_jl2vg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10.25, -2)
 visible = false
@@ -52,10 +47,8 @@ visible = false
 bones/1/rotation = Quaternion(0.00246746, -0.0243385, 0.100833, 0.994603)
 bones/2/position = Vector3(0.209797, 0.820639, 0.115451)
 bones/3/position = Vector3(0.161694, 0.58556, 0.117806)
-bones/3/rotation = Quaternion(0.705099, 0.587422, -0.321225, 0.233636)
 bones/4/rotation = Quaternion(0.00246747, 0.0243385, -0.100833, 0.994603)
 bones/5/position = Vector3(-0.185431, 0.708214, 0.116644)
-bones/5/rotation = Quaternion(0.253559, -0.23585, 0.732159, 0.586537)
 
 [editable path="Viewmodel/shove"]
 [editable path="coff"]

@@ -66,11 +66,17 @@ func change_decrees(amount: int) -> void:
 func change_stat(stat: STAT, amount: int) -> void:
 	stats[stat] += amount
 	SignalBus.player_stats_updated.emit()
+	if stat == STAT.COMPOSITION:
+		_set_max_health(max_health + amount)
+		_set_health(health + amount)
 
 
 func set_stat(stat: STAT, amount: int) -> void:
 	stats[stat] = amount
 	SignalBus.player_stats_updated.emit()
+	if stat == STAT.COMPOSITION:
+		_set_max_health(max_health + amount)
+		_set_health(health + amount)
 
 
 func add_item(item_id: String, amt: int) -> void:
