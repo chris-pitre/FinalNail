@@ -23,14 +23,16 @@ position = Vector2(-54, 6)
 rotation = 1.82463
 text = "Welcome back to your graveyard shift.
 
-Return the lost souls of long dead adventurers back to their graves.
+Pacify the souls of dead adventurers lost in the labyrinth.
+
+Bring them to graves scattered throughout the dark corridors.
+
+There are four to be found.
+Bury them.
 
 [WASDQE] or [Arrow Keys] to move.
 
-[SPACE] to wait one turn.
-
-There are four to be found.
-Bury them."
+[SPACE] to wait one turn."
 
 [node name="NoteLore" parent="." instance=ExtResource("4_der2d")]
 position = Vector2(179, 75)

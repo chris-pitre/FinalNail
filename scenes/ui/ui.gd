@@ -37,6 +37,7 @@ var scroll_opening: bool = false
 @onready var world = $OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/WorldContainer/WorldViewport/World
 @onready var num_decrees = $OuterMargin/ContentHBox/ButtonsVBox/DecreeCross/DecreeNum
 @onready var level_up_menu = $PaperScrollMenu/PaperBG/ScrollMenus/LevelUp
+@onready var num_souls = $OuterMargin/ContentHBox/ButtonsVBox/Souls/SoulNum
 
 func _ready() -> void:
 	current = self
@@ -46,6 +47,7 @@ func _ready() -> void:
 	PlayerData.stat_changed.connect(set_stat)
 	PlayerData.decrees_changed.connect(set_decrees)
 	PlayerData.added_note.connect(_added_note)
+	PlayerData.souls_changed.connect(set_souls)
 	SignalBus.tooltip_show.connect(_show_tooltip)
 	SignalBus.tooltip_hide.connect(_hide_tooltip)
 	SignalBus.message_show.connect(display_message)
@@ -64,6 +66,9 @@ func _process(delta: float) -> void:
 
 func set_decrees(amount: int) -> void:
 	num_decrees.text = str(amount)
+
+func set_souls(amount: int) -> void:
+	num_souls.text = str(amount)
 
 func update_stats() -> void:
 	var stats = PlayerData.stats

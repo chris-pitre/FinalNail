@@ -8,6 +8,7 @@ signal animation_played(anim_name: String)
 signal coffin_attack()
 signal player_died()
 signal decrees_changed(decrees: int)
+signal souls_changed(souls: int)
 
 enum STAT {
 	COMPOSITION,
@@ -27,8 +28,8 @@ var stats: Array[int] = [10, 10, 10, 10, 10]
 var decrees: int = 20
 var enemy_sighted: bool = false
 var facing: Vector3 = Vector3(0, 0, -2)
-var guys_killed: int = 0:
-	set = _set_guys_killed
+var souls: int = 0
+var num_graves: int = 0
 
 var known_moves: Dictionary = {
 	0b010010010: ["Stab", Callable(_attack_stab)],
@@ -112,6 +113,13 @@ func take_damage(damage: int, spirit: int, skill_damage: int):
 	SignalBus.message_show.emit("You received %d damage" % [actual_dmg], 2, true)
 	await get_tree().create_timer(2).timeout
 
+func use_soul() -> void:
+	souls -= 1
+	souls_changed.emit(souls)
+	num_graves -= 1
+	if num_graves <= 0:
+		SignalBus.won.emit()
+
 func _attack_bash() -> void:
 	BattleManager.hide_scroll.emit()
 	animation_played.emit("bash")
@@ -163,8 +171,3 @@ func _attack_smite(penalty: int = 0) -> void:
 		animation_played.emit("cast")
 		await get_tree().create_timer(1.5).timeout
 		BattleManager.player_turn_end.emit()
-
-func _set_guys_killed(num: int) -> void:
-	guys_killed = num
-	if guys_killed >= 5:
-		SignalBus.won.emit()
