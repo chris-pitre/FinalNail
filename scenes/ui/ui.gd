@@ -40,6 +40,7 @@ var scroll_opening: bool = false
 @onready var num_souls = $OuterMargin/ContentHBox/ButtonsVBox/Souls/SoulNum
 @onready var death_screen = $DeathScreen
 @onready var death_return = $DeathScreen/MarginContainer/DeathReturn
+@onready var num_freed = $OuterMargin/ContentHBox/ButtonsVBox/FreedSouls/FreeLabel
 
 func _ready() -> void:
 	current = self
@@ -51,6 +52,7 @@ func _ready() -> void:
 	PlayerData.player_died.connect(_player_died)
 	PlayerData.added_note.connect(_added_note)
 	PlayerData.souls_changed.connect(set_souls)
+	PlayerData.freed_changed.connect(set_freed)
 	SignalBus.tooltip_show.connect(_show_tooltip)
 	SignalBus.tooltip_hide.connect(_hide_tooltip)
 	SignalBus.message_show.connect(display_message)
@@ -73,6 +75,9 @@ func set_decrees(amount: int) -> void:
 
 func set_souls(amount: int) -> void:
 	num_souls.text = str(amount)
+
+func set_freed(amount: int):
+	num_freed.text = str(amount)
 
 func update_stats() -> void:
 	var stats = PlayerData.stats

@@ -143,6 +143,7 @@ func free_soul():
 	SignalBus.message_show.emit("%s has been freed" % [enemy_name], 2, true)
 	await get_tree().create_timer(2).timeout
 	BattleManager.end_battle(true)
+	PlayerData.add_soul()
 	queue_free()
 
 func do_turn():

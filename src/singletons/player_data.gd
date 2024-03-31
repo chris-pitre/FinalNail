@@ -9,6 +9,7 @@ signal coffin_attack()
 signal player_died()
 signal decrees_changed(decrees: int)
 signal souls_changed(souls: int)
+signal freed_changed(freed: int)
 
 enum STAT {
 	COMPOSITION,
@@ -30,6 +31,7 @@ var enemy_sighted: bool = false
 var facing: Vector3 = Vector3(0, 0, -2)
 var souls: int = 0
 var num_graves: int = 0
+var freed: int = 0
 
 var known_moves: Dictionary = {
 	0b010010010: ["Stab", Callable(_attack_stab)],
@@ -90,7 +92,7 @@ func use_item(item_id: String) -> void:
 			"soulvial":
 				health = max_health
 			"consecratedrelic":
-				decrees += 10
+				change_decrees(10)
 		items[item_id] -= 1
 		item_num_changed.emit(item_id, items[item_id])
 
@@ -121,11 +123,17 @@ func take_damage(damage: int, spirit: int, skill_damage: int):
 	Audio.play_sound("res://assets/sfx/weirdhurt.ogg", "SFX")
 	await get_tree().create_timer(2).timeout
 
+func add_soul() -> void:
+	souls += 1
+	souls_changed.emit(souls)
+
 func use_soul() -> void:
 	souls -= 1
-	decrees += 30
+	freed += 1
+	change_decrees(30)
 	souls_changed.emit(souls)
 	num_graves -= 1
+	freed_changed.emit(freed)
 	if num_graves <= 0:
 		SignalBus.won.emit()
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://c62k2e27wds1u"]
+[gd_scene load_steps=68 format=3 uid="uid://c62k2e27wds1u"]
 
 [ext_resource type="Theme" uid="uid://blnesbnxoye5s" path="res://src/main_menu_theme.tres" id="1_gxy6w"]
 [ext_resource type="PackedScene" uid="uid://cswx3ev7rh7tw" path="res://scenes/ui/main_menu_background.tscn" id="1_llus8"]
@@ -30,6 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://csedt8ci3ymsw" path="res://assets/icons/arrow_right_empty.png" id="16_7jo2t"]
 [ext_resource type="PackedScene" uid="uid://l036fxrvhnet" path="res://scenes/ui/inventory.tscn" id="16_8h35l"]
 [ext_resource type="Texture2D" uid="uid://162cuvetrclf" path="res://assets/icons/souls.png" id="16_gktj6"]
+[ext_resource type="Texture2D" uid="uid://cpvcki5bhvd4o" path="res://assets/icons/freed_souls.png" id="16_qq17x"]
 [ext_resource type="Shader" path="res://src/shaders/wavy.gdshader" id="17_1rdv2"]
 [ext_resource type="Texture2D" uid="uid://clcojjhs5sl5b" path="res://assets/textures/scrollend.png" id="18_wgwwn"]
 [ext_resource type="Texture2D" uid="uid://b5kfr1sty6nqm" path="res://assets/textures/death.png" id="24_u1io0"]
@@ -70,7 +71,6 @@ colors = PackedColorArray(0, 0, 0, 0)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_dtdye"]
 gradient = SubResource("Gradient_07avl")
 width = 128
-height = 128
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f6aj1"]
 shader = ExtResource("14_s78jm")
@@ -453,7 +453,7 @@ tooltip = "Favors from your patron."
 [node name="Souls" type="TextureRect" parent="UI/OuterMargin/ContentHBox/ButtonsVBox"]
 material = SubResource("ShaderMaterial_f6aj1")
 layout_mode = 2
-texture = ExtResource("16_gktj6")
+texture = ExtResource("16_qq17x")
 
 [node name="SoulNum" type="Label" parent="UI/OuterMargin/ContentHBox/ButtonsVBox/Souls"]
 layout_mode = 1
@@ -491,6 +491,47 @@ vertical_alignment = 1
 script = ExtResource("12_cafuu")
 tooltip = "Souls to bury."
 
+[node name="FreedSouls" type="TextureRect" parent="UI/OuterMargin/ContentHBox/ButtonsVBox"]
+material = SubResource("ShaderMaterial_f6aj1")
+layout_mode = 2
+texture = ExtResource("16_gktj6")
+
+[node name="FreedNum" type="Label" parent="UI/OuterMargin/ContentHBox/ButtonsVBox/FreedSouls"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.0
+offset_top = -21.5
+offset_right = 11.0
+offset_bottom = 21.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+
+[node name="FreeLabel" type="Label" parent="UI/OuterMargin/ContentHBox/ButtonsVBox/FreedSouls"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -92.0
+offset_top = -43.0
+offset_right = 92.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 26
+text = "FREED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TooltipperComponent" type="Node" parent="UI/OuterMargin/ContentHBox/ButtonsVBox/FreedSouls"]
+script = ExtResource("12_cafuu")
+tooltip = "Souls freed thus far."
+
 [node name="ViewVBox" type="VBoxContainer" parent="UI/OuterMargin/ContentHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -520,7 +561,7 @@ use_taa = true
 use_debanding = true
 audio_listener_enable_3d = true
 physics_object_picking = true
-size = Vector2i(200, 150)
+size = Vector2i(1296, 920)
 render_target_update_mode = 0
 
 [node name="World" parent="UI/OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/WorldContainer/WorldViewport" instance=ExtResource("1_yich0")]
@@ -634,7 +675,7 @@ stretch = true
 [node name="MinimapViewport" type="SubViewport" parent="UI/OuterMargin/ContentHBox/InfoVBox/MinimapAspect/BorderExpand/MinimapContainer"]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(120, 120)
+size = Vector2i(292, 292)
 render_target_update_mode = 0
 
 [node name="Minimap" parent="UI/OuterMargin/ContentHBox/InfoVBox/MinimapAspect/BorderExpand/MinimapContainer/MinimapViewport" instance=ExtResource("4_0da32")]
