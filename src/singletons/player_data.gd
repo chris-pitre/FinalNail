@@ -6,6 +6,7 @@ signal item_num_changed(item_id: String, amt_left: int)
 signal added_note()
 signal animation_played(anim_name: String)
 signal player_died()
+signal decrees_changed(decrees: int)
 
 enum STAT {
 	COMPOSITION,
@@ -22,7 +23,7 @@ var max_health: int = 100
 var items: Dictionary = {}
 # Composition, Spirit, Corpus, Premonition, Piety
 var stats: Array[int] = [10, 10, 10, 10, 10]
-var decrees: int = 0
+var decrees: int = 20
 var enemy_sighted: bool = false
 var facing: Vector3 = Vector3(0, 0, -2)
 
@@ -31,6 +32,10 @@ var known_moves: Dictionary = {
 	0b000111000: ["Slash", Callable(_attack_slash)],
 	0b111101101: ["Bash", Callable(_attack_bash)],
 	0b010111010: ["Smite", Callable(_attack_smite)]
+}
+
+var decree_moves : Dictionary = {
+	"Smite" : [Callable(_attack_smite), 10]
 }
 
 func _set_health(amount: int) -> void:
@@ -44,6 +49,9 @@ func _set_max_health(amount: int) -> void:
 	max_health = amount
 	health_changed.emit(health, max_health)
 
+func set_decrees(amount: int) -> void:
+	decrees = amount
+	decrees_changed.emit(amount)
 
 func change_stat(stat: STAT, amount: int) -> void:
 	stats[stat] += amount
@@ -95,28 +103,32 @@ func take_damage(damage: int, spirit: int, skill_damage: int):
 	await get_tree().create_timer(2).timeout
 
 func _attack_bash() -> void:
+	BattleManager.hide_scroll.emit()
 	animation_played.emit("bash")
 	await get_tree().create_timer(0.5).timeout
 	BattleManager.current_enemy.take_damage(BattleManager.DAMAGE.BLUNT, stats[1], 10)
 	
 	
 func _attack_stab() -> void:
+	BattleManager.hide_scroll.emit()
 	animation_played.emit("stab")
 	await get_tree().create_timer(0.8).timeout
 	BattleManager.current_enemy.take_damage(BattleManager.DAMAGE.PIERCING, stats[1], 10)
 
 func _attack_slash() -> void:
+	BattleManager.hide_scroll.emit()
 	animation_played.emit("slash")
 	await get_tree().create_timer(0.5).timeout
 	BattleManager.current_enemy.take_damage(BattleManager.DAMAGE.SLASHING, stats[1], 10)
 	
-func _attack_smite() -> void:
+func _attack_smite(penalty: int = 0) -> void:
+	BattleManager.hide_scroll.emit()
 	if decrees > 0:
-		decrees -= 1
+		set_decrees(decrees - 1)
 		SignalBus.message_show.emit("You call forth the power of your patron", 2, true)
 		animation_played.emit("cast")
 		await get_tree().create_timer(1.5).timeout
-		BattleManager.current_enemy.take_damage(BattleManager.DAMAGE.MAGIC, stats[4], 30)
+		BattleManager.current_enemy.take_damage(BattleManager.DAMAGE.MAGIC, stats[4], 30 - penalty)
 	else:
 		SignalBus.message_show.emit("You call for help but nobody listens", 2, true)
 		animation_played.emit("cast")

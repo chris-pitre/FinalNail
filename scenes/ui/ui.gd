@@ -35,6 +35,7 @@ var scroll_opening: bool = false
 @onready var journal_info_label = $OuterMargin/Journal/VBoxContainer/JournalControls/JournalInfoLabel
 @onready var journal_text = $OuterMargin/Journal/VBoxContainer/PaperTexture/PageMargin/JournalText
 @onready var world = $OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/WorldContainer/WorldViewport/World
+@onready var num_decrees = $OuterMargin/ContentHBox/ButtonsVBox/DecreeCross/DecreeNum
 
 func _ready() -> void:
 	current = self
@@ -42,12 +43,13 @@ func _ready() -> void:
 	paper_scroll_menu.size = Vector2(368, 0)
 	PlayerData.health_changed.connect(set_health)
 	PlayerData.stat_changed.connect(set_stat)
+	PlayerData.decrees_changed.connect(set_decrees)
 	PlayerData.added_note.connect(_added_note)
 	SignalBus.tooltip_show.connect(_show_tooltip)
 	SignalBus.tooltip_hide.connect(_hide_tooltip)
 	SignalBus.message_show.connect(display_message)
-	BattleManager.battle_start.connect(_show_battle_menu)
-	BattleManager.battle_end.connect(_show_battle_menu)
+	BattleManager.player_turn_start.connect(_show_battle_menu)
+	BattleManager.hide_scroll.connect(close_scroll)
 	SignalBus.player_stats_updated.connect(update_stats)
 	SignalBus.main_menu_clicked_play.connect(_started_game)
 	update_stats()
@@ -55,6 +57,9 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	fps_counter.text = "FPS: %d" % Engine.get_frames_per_second()
+
+func set_decrees(amount: int) -> void:
+	num_decrees.text = str(amount)
 
 func update_stats() -> void:
 	var stats = PlayerData.stats
@@ -105,14 +110,8 @@ func set_view_tooltip(tooltip: String) -> void:
 
 func toggle_scroll(menu: Control) -> void:
 	if scroll_open:
-		if menu.visible:
-			if BattleManager.battle_active:
-				open_scroll(battle_choices_menu)
-			else:
-				close_scroll()
-		else:
-			await close_scroll()
-			open_scroll(menu)
+		await close_scroll()
+		open_scroll(menu)
 	else:
 		open_scroll(menu)
 

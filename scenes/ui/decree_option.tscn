@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://df3es7s6a47eg"]
+
+[ext_resource type="Script" path="res://scenes/ui/decree_option.gd" id="1_n3xw7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_id551"]
+bg_color = Color(0.0705882, 0.0705882, 0.0705882, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_io1jw"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_13xv3"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_opvq4"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_41mtw"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="Theme" id="Theme_gyi5q"]
+Button/styles/disabled = SubResource("StyleBoxFlat_id551")
+Button/styles/focus = SubResource("StyleBoxFlat_io1jw")
+Button/styles/hover = SubResource("StyleBoxFlat_13xv3")
+Button/styles/normal = SubResource("StyleBoxFlat_opvq4")
+Button/styles/pressed = SubResource("StyleBoxFlat_41mtw")
+
+[node name="DecreeOption" type="Button"]
+theme = SubResource("Theme_gyi5q")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+action_mode = 0
+text = "Decrees"
+script = ExtResource("1_n3xw7")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

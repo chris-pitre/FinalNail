@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://c62k2e27wds1u"]
+[gd_scene load_steps=59 format=3 uid="uid://c62k2e27wds1u"]
 
 [ext_resource type="Theme" uid="uid://blnesbnxoye5s" path="res://src/main_menu_theme.tres" id="1_gxy6w"]
 [ext_resource type="PackedScene" uid="uid://cswx3ev7rh7tw" path="res://scenes/ui/main_menu_background.tscn" id="1_llus8"]
@@ -29,6 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://bxrbu0ifssc7k" path="res://scenes/ui/battle_choices.tscn" id="15_xq3yf"]
 [ext_resource type="Texture2D" uid="uid://csedt8ci3ymsw" path="res://assets/icons/arrow_right_empty.png" id="16_7jo2t"]
 [ext_resource type="PackedScene" uid="uid://l036fxrvhnet" path="res://scenes/ui/inventory.tscn" id="16_8h35l"]
+[ext_resource type="Shader" path="res://src/shaders/wavy.gdshader" id="17_1rdv2"]
 [ext_resource type="Texture2D" uid="uid://clcojjhs5sl5b" path="res://assets/textures/scrollend.png" id="18_wgwwn"]
 [ext_resource type="Texture2D" uid="uid://b5kfr1sty6nqm" path="res://assets/textures/death.png" id="24_u1io0"]
 
@@ -70,6 +71,7 @@ height = 128
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f6aj1"]
 shader = ExtResource("14_s78jm")
+shader_parameter/speed = 0.7
 
 [sub_resource type="Gradient" id="Gradient_5dhlo"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
@@ -83,6 +85,12 @@ colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_5j5sa"]
 gradient = SubResource("Gradient_uveib")
 fill_to = Vector2(0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_reyug"]
+shader = ExtResource("17_1rdv2")
+shader_parameter/height = 2.0
+shader_parameter/frequency = 1.0
+shader_parameter/speed = 1.0
 
 [sub_resource type="Gradient" id="Gradient_jxb52"]
 colors = PackedColorArray(0.352941, 0, 0, 1, 0.196078, 0.196078, 0.478431, 1)
@@ -144,7 +152,6 @@ script/source = "extends Label
 [node name="Main" type="Node"]
 
 [node name="MainMenu" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -166,7 +173,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="MainMenu/Background"]
 handle_input_locally = false
 size = Vector2i(1920, 1080)
-render_target_update_mode = 0
+render_target_update_mode = 4
 
 [node name="MainMenuBackground" parent="MainMenu/Background/SubViewport" instance=ExtResource("1_llus8")]
 
@@ -262,6 +269,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="UI" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -343,10 +351,46 @@ tooltip = "Journal"
 layout_mode = 2
 texture = SubResource("GradientTexture2D_dtdye")
 
-[node name="TextureRect" type="TextureRect" parent="UI/OuterMargin/ContentHBox/ButtonsVBox"]
+[node name="DecreeCross" type="TextureRect" parent="UI/OuterMargin/ContentHBox/ButtonsVBox"]
 material = SubResource("ShaderMaterial_f6aj1")
 layout_mode = 2
 texture = ExtResource("15_b85w1")
+
+[node name="DecreeNum" type="Label" parent="UI/OuterMargin/ContentHBox/ButtonsVBox/DecreeCross"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.0
+offset_top = -21.5
+offset_right = 11.0
+offset_bottom = 21.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "20"
+
+[node name="DecreeTitles" type="Label" parent="UI/OuterMargin/ContentHBox/ButtonsVBox/DecreeCross"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -92.0
+offset_top = -43.0
+offset_right = 92.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 26
+text = "DECREES"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TooltipperComponent" type="Node" parent="UI/OuterMargin/ContentHBox/ButtonsVBox/DecreeCross"]
+script = ExtResource("12_cafuu")
+tooltip = "Favors from your patron"
 
 [node name="ViewVBox" type="VBoxContainer" parent="UI/OuterMargin/ContentHBox"]
 layout_mode = 2
@@ -376,8 +420,8 @@ handle_input_locally = false
 use_taa = true
 use_debanding = true
 physics_object_picking = true
-size = Vector2i(1296, 920)
-render_target_update_mode = 4
+size = Vector2i(200, 150)
+render_target_update_mode = 0
 
 [node name="World" parent="UI/OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/WorldContainer/WorldViewport" instance=ExtResource("1_yich0")]
 visible = false
@@ -395,15 +439,20 @@ size_flags_vertical = 8
 texture = SubResource("GradientTexture2D_5j5sa")
 
 [node name="MessageLabel" type="RichTextLabel" parent="UI/OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/MessageGradient"]
+material = SubResource("ShaderMaterial_reyug")
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -400.0
-offset_right = 400.0
-offset_bottom = 40.0
+anchor_bottom = 0.5
+offset_left = -489.5
+offset_top = -30.0
+offset_right = 489.5
+offset_bottom = 30.0
 grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 8
 bbcode_enabled = true
 text = "[center]water ice salt ay water ice salt ay[/center]"
@@ -413,6 +462,7 @@ scroll_active = false
 one_shot = true
 
 [node name="SpellCast" parent="UI/OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand" instance=ExtResource("8_5h8df")]
+visible = false
 layout_mode = 2
 mouse_filter = 1
 
@@ -477,8 +527,8 @@ stretch = true
 [node name="MinimapViewport" type="SubViewport" parent="UI/OuterMargin/ContentHBox/InfoVBox/MinimapAspect/BorderExpand/MinimapContainer"]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(328, 328)
-render_target_update_mode = 4
+size = Vector2i(120, 120)
+render_target_update_mode = 0
 
 [node name="Minimap" parent="UI/OuterMargin/ContentHBox/InfoVBox/MinimapAspect/BorderExpand/MinimapContainer/MinimapViewport" instance=ExtResource("4_0da32")]
 
