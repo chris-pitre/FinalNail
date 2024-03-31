@@ -38,6 +38,8 @@ var scroll_opening: bool = false
 @onready var num_decrees = $OuterMargin/ContentHBox/ButtonsVBox/DecreeCross/DecreeNum
 @onready var level_up_menu = $PaperScrollMenu/PaperBG/ScrollMenus/LevelUp
 @onready var num_souls = $OuterMargin/ContentHBox/ButtonsVBox/Souls/SoulNum
+@onready var death_screen = $DeathScreen
+@onready var death_return = $DeathScreen/MarginContainer/DeathReturn
 
 func _ready() -> void:
 	current = self
@@ -46,6 +48,7 @@ func _ready() -> void:
 	PlayerData.health_changed.connect(set_health)
 	PlayerData.stat_changed.connect(set_stat)
 	PlayerData.decrees_changed.connect(set_decrees)
+	PlayerData.player_died.connect(_player_died)
 	PlayerData.added_note.connect(_added_note)
 	PlayerData.souls_changed.connect(set_souls)
 	SignalBus.tooltip_show.connect(_show_tooltip)
@@ -262,3 +265,17 @@ func _show_level_up_screen() -> void:
 
 func _won_game() -> void:
 	pass
+
+func _on_death_return_pressed() -> void:
+	death_return.hide()
+	SignalBus.player_returned.emit()
+	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	await tween.tween_property(death_screen, "modulate:a", 0.0, 0.5).finished
+	death_screen.hide()
+
+func _player_died() -> void:
+	death_screen.show()
+	death_screen.modulate.a = 0.0
+	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	await tween.tween_property(death_screen, "modulate:a", 1.0, 0.5).finished
+	death_return.show()

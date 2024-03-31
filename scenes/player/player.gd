@@ -29,9 +29,11 @@ func _ready():
 	BattleManager.battle_start.connect(clear_queue)
 	PlayerData.animation_played.connect(play_animation)
 	PlayerData.coffin_attack.connect(coffin_kill)
+	PlayerData.player_died.connect(die)
 	SignalBus.rotate_player.connect(do_rotate)
 	SignalBus.player_check_enemy.connect(check_enemy)
 	SignalBus.main_menu_clicked_play.connect(_started_game)
+	SignalBus.player_returned.connect(return_player)
 	anim.play("idle")
 	get_footstep_sounds()
 
@@ -63,6 +65,9 @@ func _input(event):
 				input_queue.push_back([Callable(do_rotate), true, "rotate_right"])
 			if event.is_action("wait"):
 				SignalBus.player_pos_updated.emit(global_position.x / 2, global_position.z / 2)
+
+func die() -> void:
+	frozen = true
 
 func do_movement(dir: DIRECTION):
 	var vec_dir = -basis.z
@@ -176,3 +181,8 @@ func coffin_kill() -> void:
 
 func _started_game() -> void:
 	frozen = false
+
+func return_player() -> void:
+	frozen = false
+	global_position = Vector3(0.0, 1.0, 0.0)
+	PlayerData.health = PlayerData.max_health
