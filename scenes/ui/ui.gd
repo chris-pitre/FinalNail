@@ -29,11 +29,12 @@ var scroll_opening: bool = false
 @onready var inventory_menu = $PaperScrollMenu/PaperBG/ScrollMenus/Inventory
 @onready var journal_menu = $OuterMargin/Journal
 @onready var battle_choices_menu = $PaperScrollMenu/PaperBG/ScrollMenus/BattleChoices
-@onready var cursor: Cursor = $Cursor
+@onready var cursor: Cursor = $"../Cursor"
 @onready var portrait_texture = $OuterMargin/ContentHBox/InfoVBox/PortraitAspect/BorderExpand/Portrait
 @onready var scroll_menus = $PaperScrollMenu/PaperBG/ScrollMenus
 @onready var journal_info_label = $OuterMargin/Journal/VBoxContainer/JournalControls/JournalInfoLabel
 @onready var journal_text = $OuterMargin/Journal/VBoxContainer/PaperTexture/PageMargin/JournalText
+@onready var world = $OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/WorldContainer/WorldViewport/World
 
 func _ready() -> void:
 	current = self
@@ -48,6 +49,7 @@ func _ready() -> void:
 	BattleManager.battle_start.connect(_show_battle_menu)
 	BattleManager.battle_end.connect(_show_battle_menu)
 	SignalBus.player_stats_updated.connect(update_stats)
+	SignalBus.main_menu_clicked_play.connect(_started_game)
 	update_stats()
 
 
@@ -143,6 +145,10 @@ func close_scroll() -> void:
 func update_journal_text() -> void:
 	journal_text.text = PlayerData.found_notes[cur_page]
 	journal_info_label.text = "%d/%d" % [cur_page + 1, PlayerData.found_notes.size()]
+
+
+func _started_game() -> void:
+	world.show()
 
 
 func _on_message_timer_timeout() -> void:

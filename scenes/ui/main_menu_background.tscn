@@ -1,0 +1,278 @@
+[gd_scene load_steps=24 format=3 uid="uid://cswx3ev7rh7tw"]
+
+[ext_resource type="PackedScene" path="res://assets/models/hill.glb" id="1_eto8j"]
+[ext_resource type="PackedScene" uid="uid://cvcvk40l5yxq4" path="res://assets/models/shove.glb" id="2_ha7xf"]
+[ext_resource type="PackedScene" uid="uid://ckhjgj1qa01fq" path="res://scenes/dressing/grass_patch.tscn" id="3_4f0vk"]
+[ext_resource type="Shader" path="res://src/shaders/sky.gdshader" id="4_6vxho"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kcxgm"]
+load_path = "res://.godot/imported/grass.png-44de1b601ed5e0482c9aa195977ab90c.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ioj0"]
+albedo_texture = SubResource("CompressedTexture2D_kcxgm")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_odmtu"]
+shader = ExtResource("4_6vxho")
+shader_parameter/day_top_color = Color(0.2, 0.172549, 0.164706, 1)
+shader_parameter/day_bottom_color = Color(0.129412, 0.109804, 0.203922, 1)
+shader_parameter/sunset_top_color = Color(0.701961, 0.74902, 1, 1)
+shader_parameter/sunset_bottom_color = Color(1, 0.5, 0.7, 1)
+shader_parameter/night_top_color = Color(0.02, 0, 0.04, 1)
+shader_parameter/night_bottom_color = Color(0.1, 0, 0.2, 1)
+shader_parameter/horizon_color = Color(0, 0, 0, 1)
+shader_parameter/horizon_blur = 0.05
+shader_parameter/sun_color = Color(0.3, 0.3, 0.3, 1)
+shader_parameter/sun_sunset_color = Color(10, 0, 0, 1)
+shader_parameter/sun_size = 0.01
+shader_parameter/sun_blur = 9.135
+shader_parameter/moon_color = Color(1, 0.95, 0.7, 1)
+shader_parameter/moon_size = 0.06
+shader_parameter/moon_blur = 0.1
+shader_parameter/clouds_edge_color = Color(0.529412, 0.462745, 0.435294, 1)
+shader_parameter/clouds_top_color = Color(0.901961, 0.784314, 0.737255, 1)
+shader_parameter/clouds_middle_color = Color(0.678431, 0.592157, 0.556863, 1)
+shader_parameter/clouds_bottom_color = Color(0.501961, 0.435294, 0.411765, 1)
+shader_parameter/clouds_speed = 2.0
+shader_parameter/clouds_direction = 0.05
+shader_parameter/clouds_scale = 1.5
+shader_parameter/clouds_cutoff = 0.0
+shader_parameter/clouds_fuzziness = 0.59
+shader_parameter/clouds_weight = 0.0
+shader_parameter/clouds_blur = 0.31
+shader_parameter/stars_speed = 1.0
+shader_parameter/overwritten_time = 0.0
+
+[sub_resource type="Sky" id="Sky_e0wwy"]
+sky_material = SubResource("ShaderMaterial_odmtu")
+
+[sub_resource type="Environment" id="Environment_14dtr"]
+background_mode = 2
+background_energy_multiplier = 0.3
+sky = SubResource("Sky_e0wwy")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.03
+reflected_light_source = 1
+ssao_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.105882, 0.0666667, 0.231373, 1)
+fog_sun_scatter = 0.5
+fog_density = 0.05
+fog_sky_affect = 0.0
+volumetric_fog_albedo = Color(0.262745, 0.0745098, 0.6, 1)
+volumetric_fog_sky_affect = 0.1
+
+[sub_resource type="Curve" id="Curve_rgoov"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.259386, 0.471034), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_w2sh8"]
+curve = SubResource("Curve_rgoov")
+
+[sub_resource type="Gradient" id="Gradient_uinjr"]
+colors = PackedColorArray(1, 0, 1, 1, 0.501961, 0.356863, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_e4l2g"]
+gradient = SubResource("Gradient_uinjr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rh13i"]
+emission_shape = 1
+emission_sphere_radius = 0.2
+gravity = Vector3(0, 2, 0)
+radial_accel_min = 0.2
+radial_accel_max = 0.3
+tangential_accel_min = 1.0
+tangential_accel_max = 1.0
+damping_min = 2.0
+damping_max = 2.0
+color_ramp = SubResource("GradientTexture1D_e4l2g")
+alpha_curve = SubResource("CurveTexture_w2sh8")
+turbulence_enabled = true
+turbulence_noise_scale = 1.711
+
+[sub_resource type="Gradient" id="Gradient_o0ta2"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_piau6"]
+gradient = SubResource("Gradient_o0ta2")
+width = 16
+height = 16
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8qv18"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource("GradientTexture2D_piau6")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_yc6l4"]
+material = SubResource("StandardMaterial3D_8qv18")
+size = Vector2(0.03, 0.03)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l7a03"]
+particle_flag_rotate_y = true
+angle_max = 20.0
+direction = Vector3(0, 0, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="Gradient" id="Gradient_jxpv8"]
+interpolation_mode = 2
+colors = PackedColorArray(1, 1, 1, 0.0235294, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0juag"]
+gradient = SubResource("Gradient_jxpv8")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xfp1k"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 0.196078)
+albedo_texture = SubResource("GradientTexture2D_0juag")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_ay05p"]
+material = SubResource("StandardMaterial3D_xfp1k")
+size = Vector2(2, 10)
+
+[node name="MainMenuBackground" type="Node3D"]
+
+[node name="hill" parent="." instance=ExtResource("1_eto8j")]
+
+[node name="Plane" parent="hill" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7ioj0")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.401948, 0.513356, 0.758224, 0, 0.82806, -0.560639, -0.915663, -0.225348, -0.332837, 1.985, 0.585, 0.49)
+
+[node name="shove" parent="." instance=ExtResource("2_ha7xf")]
+transform = Transform3D(-0.978509, 0.0453332, 0.201159, 0, -0.975534, 0.219846, 0.206204, 0.215122, 0.954569, 0.64, 3.235, -0.42)
+
+[node name="Skeleton3D" parent="shove/Armature" index="0"]
+bones/0/position = Vector3(6.79948, -2.22673, -9.73336e-08)
+bones/0/rotation = Quaternion(-0.0326656, -0.534144, -0.0515651, 0.843187)
+bones/2/rotation = Quaternion(2.87795e-09, 2.32831e-10, 8.61816e-10, 1)
+bones/3/rotation = Quaternion(2.87795e-09, 2.32831e-10, 8.61816e-10, 1)
+bones/4/position = Vector3(1.91025, 9.03639, 1.9079e-06)
+bones/5/position = Vector3(0.168469, -0.00424279, -8.04464e-07)
+bones/6/position = Vector3(0.24137, 0.00249078, -1.05871e-06)
+bones/11/position = Vector3(3.5854, -6.2142, -3.37116)
+bones/11/rotation = Quaternion(-6.71544e-07, 0, 1, 0)
+bones/11/scale = Vector3(0, 0, 0)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="shove"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -1.49012e-08, 1, 0.371223, 2.00585, 0.230662)
+light_color = Color(0.552941, 0, 0.552941, 1)
+light_energy = 0.124
+light_specular = 6.39
+
+[node name="Grass" type="Node3D" parent="."]
+
+[node name="GrassPatch" parent="Grass" instance=ExtResource("3_4f0vk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.907386, 0.788107)
+double_sided = false
+alpha_cut = 2
+
+[node name="GrassPatch2" parent="Grass" instance=ExtResource("3_4f0vk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.181737, 0.907386, -0.201489)
+double_sided = false
+alpha_cut = 2
+
+[node name="GrassPatch3" parent="Grass" instance=ExtResource("3_4f0vk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.443, 0.847, 0.487)
+double_sided = false
+alpha_cut = 2
+
+[node name="GrassPatch4" parent="Grass" instance=ExtResource("3_4f0vk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.106, 0.977, -0.188)
+double_sided = false
+alpha_cut = 2
+
+[node name="GrassPatch5" parent="Grass" instance=ExtResource("3_4f0vk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.448515, 0.907386, 0.38971)
+double_sided = false
+alpha_cut = 2
+
+[node name="GrassPatch6" parent="Grass" instance=ExtResource("3_4f0vk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.339, 0.645, 1.092)
+double_sided = false
+alpha_cut = 2
+
+[node name="GrassPatch7" parent="Grass" instance=ExtResource("3_4f0vk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.662922, 0.746114, 0.720071)
+double_sided = false
+alpha_cut = 2
+
+[node name="GrassPatch8" parent="Grass" instance=ExtResource("3_4f0vk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.578183, 0.839421, 0.103711)
+double_sided = false
+alpha_cut = 2
+
+[node name="GrassPatch9" parent="Grass" instance=ExtResource("3_4f0vk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.095928, 0.956362, 0.350918)
+double_sided = false
+alpha_cut = 2
+
+[node name="GrassPatch10" parent="Grass" instance=ExtResource("3_4f0vk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.130717, 0.862881, 0.757248)
+double_sided = false
+alpha_cut = 2
+
+[node name="GrassPatch11" parent="Grass" instance=ExtResource("3_4f0vk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.496896, 0.780863, -0.344732)
+double_sided = false
+alpha_cut = 2
+
+[node name="GrassPatch12" parent="Grass" instance=ExtResource("3_4f0vk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.252, 0.491, 0.36)
+double_sided = false
+alpha_cut = 2
+
+[node name="GrassPatch13" parent="Grass" instance=ExtResource("3_4f0vk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.132, 0.521, 0.665)
+double_sided = false
+alpha_cut = 2
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_14dtr")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.853551, -0.467078, 0.230844, 0, 0.443071, 0.896486, -0.52101, 0.765197, -0.378184, 0, 0, 0)
+light_energy = 0.273
+shadow_bias = 0.0
+directional_shadow_split_1 = 0.015
+directional_shadow_split_2 = 0.092
+directional_shadow_split_3 = 0.278
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03, 1.165, 0.144)
+amount = 64
+lifetime = 2.0
+trail_lifetime = 2.8
+process_material = SubResource("ParticleProcessMaterial_rh13i")
+draw_pass_1 = SubResource("QuadMesh_yc6l4")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.657, 1.843, -0.015)
+amount = 16
+lifetime = 40.0
+preprocess = 40.0
+process_material = SubResource("ParticleProcessMaterial_l7a03")
+draw_pass_1 = SubResource("QuadMesh_ay05p")
+
+[editable path="hill"]
+[editable path="shove"]

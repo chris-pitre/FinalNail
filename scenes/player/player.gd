@@ -10,6 +10,7 @@ enum DIRECTION {
 	LEFT,
 }
 
+var frozen: bool = true
 var moving: bool = false
 var input_queue: Array = []
 var last_input: Callable
@@ -27,6 +28,7 @@ func _ready():
 	PlayerData.animation_played.connect(play_animation)
 	SignalBus.rotate_player.connect(do_rotate)
 	SignalBus.player_check_enemy.connect(check_enemy)
+	SignalBus.main_menu_clicked_play.connect(_started_game)
 	anim.play("idle")
 	get_footstep_sounds()
 
@@ -40,21 +42,22 @@ func _process(_delta):
 			command[0].call(command[1])
 
 func _input(event):
-	if BattleManager.battle_active:
-		return
-	if event.is_pressed() and (move_instant or input_queue.size() <= input_queue_size):
-		if event.is_action("move_forward"):
-			input_queue.push_back([Callable(do_movement), DIRECTION.FORWARD, "move_forward"]) 
-		if event.is_action("move_backward"):
-			input_queue.push_back([Callable(do_movement), DIRECTION.BACKWARD, "move_backward"]) 
-		if event.is_action("move_left"):
-			input_queue.push_back([Callable(do_movement), DIRECTION.LEFT, "move_left"]) 
-		if event.is_action("move_right"):
-			input_queue.push_back([Callable(do_movement), DIRECTION.RIGHT, "move_right"]) 
-		if event.is_action("rotate_left"):
-			input_queue.push_back([Callable(do_rotate), false, "rotate_left"]) 
-		if event.is_action("rotate_right"):
-			input_queue.push_back([Callable(do_rotate), true, "rotate_right"])
+	if not frozen:
+		if BattleManager.battle_active:
+			return
+		if event.is_pressed() and (move_instant or input_queue.size() <= input_queue_size):
+			if event.is_action("move_forward"):
+				input_queue.push_back([Callable(do_movement), DIRECTION.FORWARD, "move_forward"]) 
+			if event.is_action("move_backward"):
+				input_queue.push_back([Callable(do_movement), DIRECTION.BACKWARD, "move_backward"]) 
+			if event.is_action("move_left"):
+				input_queue.push_back([Callable(do_movement), DIRECTION.LEFT, "move_left"]) 
+			if event.is_action("move_right"):
+				input_queue.push_back([Callable(do_movement), DIRECTION.RIGHT, "move_right"]) 
+			if event.is_action("rotate_left"):
+				input_queue.push_back([Callable(do_rotate), false, "rotate_left"]) 
+			if event.is_action("rotate_right"):
+				input_queue.push_back([Callable(do_rotate), true, "rotate_right"])
 
 func do_movement(dir: DIRECTION):
 	var vec_dir = -basis.z
@@ -123,8 +126,8 @@ func get_footstep_sounds() -> void:
 		var sounds = sound_folder.get_files()
 		for sound in sounds:
 			var clipped_path = sound.replace(".import", "")
-			if sound.ends_with(".wav"):
-				footstep_sounds[folder.get_basename()].append(STEPS_PATH + folder + "/" + sound)
+			if clipped_path.ends_with(".wav"):
+				footstep_sounds[folder.get_basename()].append(STEPS_PATH + folder + "/" + clipped_path)
 
 func play_footstep():
 	var cell_pos = (Vector2(global_position.x, global_position.z) / 2).floor()
@@ -150,3 +153,7 @@ func play_animation(anim_name: String) -> void:
 	anim.play(anim_name)
 	await anim.animation_finished
 	anim.play("idle")
+
+
+func _started_game() -> void:
+	frozen = false
