@@ -38,7 +38,7 @@ shape = SubResource("BoxShape3D_g8wfx")
 
 [node name="TooltipperComponent" type="Node" parent="Area3D"]
 script = ExtResource("1_6aoww")
-tooltip = "This is a note."
+tooltip = "A weathered note."
 
 [connection signal="input_event" from="Area3D" to="." method="_on_area_3d_input_event"]
 [connection signal="mouse_entered" from="Area3D" to="." method="_on_area_3d_mouse_entered"]

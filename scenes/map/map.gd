@@ -81,7 +81,7 @@ func generate_level():
 		var object = map_object.scene.instantiate()
 		add_child(object)
 		object.global_position = Vector3(map_object.position.x / 16.0 - 0.5, 0.0, map_object.position.y / 16.0 - 0.5) * 2
-		object.rotate_y(map_object.rotation)
+		object.rotate_y(-map_object.rotation)
 		
 		if map_object is DoorObject:
 			object.listen_id = map_object.listen_id

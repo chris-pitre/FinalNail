@@ -1,0 +1,100 @@
+[gd_scene load_steps=17 format=3 uid="uid://k8qcjs7ru3nl"]
+
+[ext_resource type="PackedScene" uid="uid://bq3lx84egxmn4" path="res://assets/models/scons.glb" id="1_7t2hv"]
+[ext_resource type="QuadMesh" uid="uid://v60hrypab77s" path="res://src/gradients/circlequadpart.tres" id="2_ulaov"]
+
+[sub_resource type="Curve" id="Curve_h6lni"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7o27q"]
+curve = SubResource("Curve_h6lni")
+
+[sub_resource type="Gradient" id="Gradient_twn12"]
+offsets = PackedFloat32Array(0, 0.271698, 1)
+colors = PackedColorArray(1, 0.454902, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_yrubi"]
+gradient = SubResource("Gradient_twn12")
+
+[sub_resource type="Curve" id="Curve_xvdqe"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vknki"]
+curve = SubResource("Curve_xvdqe")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4xl3q"]
+emission_shape = 1
+emission_sphere_radius = 0.05
+gravity = Vector3(0, 1, 0)
+scale_curve = SubResource("CurveTexture_vknki")
+color_ramp = SubResource("GradientTexture1D_yrubi")
+alpha_curve = SubResource("CurveTexture_7o27q")
+
+[sub_resource type="Curve" id="Curve_d6qr1"]
+_data = [Vector2(0, 1), 0.0, -2.14928, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_678pe"]
+curve = SubResource("Curve_d6qr1")
+
+[sub_resource type="Gradient" id="Gradient_l3qd3"]
+offsets = PackedFloat32Array(0, 0.298113, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0, 1, 0.701961, 1, 0, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_w128v"]
+gradient = SubResource("Gradient_l3qd3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ibhnd"]
+particle_flag_align_y = true
+emission_shape = 1
+emission_sphere_radius = 0.05
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+gravity = Vector3(0, 1, 0)
+damping_min = 1.0
+damping_max = 1.0
+color_ramp = SubResource("GradientTexture1D_w128v")
+alpha_curve = SubResource("CurveTexture_678pe")
+turbulence_enabled = true
+turbulence_noise_scale = 0.65
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y8ing"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_rc2fc"]
+material = SubResource("StandardMaterial3D_y8ing")
+radius = 0.005
+radial_steps = 3
+sections = 2
+section_length = 0.01
+
+[node name="Sconce" type="Node3D"]
+
+[node name="Center" type="Node3D" parent="."]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0, 0, 0)
+
+[node name="scons" parent="Center" instance=ExtResource("1_7t2hv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 1, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Center/scons"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000278652, 0.287485, 0)
+light_color = Color(0.721569, 0.223529, 1, 1)
+light_energy = 0.5
+distance_fade_enabled = true
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Center/scons"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00226809, 0.207601, 0)
+amount = 16
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_4xl3q")
+draw_pass_1 = ExtResource("2_ulaov")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="Center/scons"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00226809, 0.207601, 0)
+process_material = SubResource("ParticleProcessMaterial_ibhnd")
+draw_pass_1 = SubResource("TubeTrailMesh_rc2fc")

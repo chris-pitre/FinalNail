@@ -1,41 +1,113 @@
-[gd_scene load_steps=6 format=3 uid="uid://db0sndhg6hj30"]
+[gd_scene load_steps=10 format=3 uid="uid://db0sndhg6hj30"]
 
 [ext_resource type="TileSet" uid="uid://qd2lm2embmp1" path="res://src/tilesets/tileset.tres" id="1_ciyx5"]
 [ext_resource type="PackedScene" uid="uid://bc12s35ws2bah" path="res://scenes/map/note_object.tscn" id="4_der2d"]
 [ext_resource type="PackedScene" uid="uid://dyp1ksvfsp7a" path="res://scenes/map/door_object.tscn" id="4_fadgt"]
 [ext_resource type="PackedScene" uid="uid://dvotl1x03qltf" path="res://scenes/map/item_object.tscn" id="5_8gxif"]
+[ext_resource type="PackedScene" uid="uid://b3lw626j6w3ij" path="res://scenes/map/map_object.tscn" id="6_h30ms"]
 [ext_resource type="PackedScene" uid="uid://3f3x6nmgxlwg" path="res://scenes/map/lever_object.tscn" id="6_utnn8"]
+[ext_resource type="PackedScene" path="res://scenes/props/spikes.tscn" id="7_iqxke"]
+[ext_resource type="PackedScene" uid="uid://k8qcjs7ru3nl" path="res://scenes/props/sconce.tscn" id="8_jxjqq"]
+[ext_resource type="PackedScene" uid="uid://t335ogqv6h5f" path="res://scenes/props/grave.tscn" id="9_73jld"]
 
 [node name="TestLevel" type="TileMap"]
 tile_set = ExtResource("1_ciyx5")
 format = 2
-layer_0/tile_data = PackedInt32Array(0, 65537, 1, 1, 131073, 1, 2, 196608, 1, 5, 262144, 4, 6, 65536, 3, 7, 524288, 4, 65537, 131073, 2, 65536, 65537, 2, -65535, 131073, 0, -65536, 65537, 0, -1, 1, 0, 65535, 1, 1, 131071, 1, 2, -262139, 458752, 0, -262140, 65536, 3, -262141, 65536, 3, -262142, 65536, 3, -262143, 65536, 3, -196608, 196608, 1, -262144, 262144, 0, -131072, 524288, 3, 131072, 524288, 0, 196608, 196608, 1, 262144, 262144, 3, 262145, 65536, 3, 262146, 65536, 3, 262147, 65536, 3, 262148, 65536, 3, 262149, 524288, 3, 262150, 65536, 3, 262151, 458752, 3, 196615, 196608, 1, 131079, 262144, 2, 65543, 196608, 1, 8, 65536, 3, 9, 65536, 3, 10, 65536, 3, 11, 524288, 4, 12, 131072, 3, -131061, 196608, 1, -196597, 196608, 1, -262133, 196608, 0, 65547, 196608, 1, 131083, 196608, 1, 196619, 196608, 1, 262155, 196608, 2, -4, 131072, 0, 131068, 131072, 2, -131063, 196608, 2, 131080, 65536, 3, 131081, 131072, 3, -65525, 196608, 1, -2, 196608, 1, 65534, 458752, 4, 131070, 196608, 1, 196606, 262144, 3, 196607, 65536, 3, 131073, 65536, 3, 131074, 458752, 3, 65538, 196608, 1, -65534, 196608, 1, -131070, 458752, 0, -131071, 65536, 3, -65537, 65536, 3, -65538, 262144, 0, 65532, 327680, 4, -5, 65536, 0, -6, 0, 0, 65530, 0, 1, 131066, 0, 2, 131067, 65536, 2, 65533, 65536, 3, 65541, 196608, 1, 131077, 196608, 1, 196613, 196608, 1, -65531, 196608, 1, -131067, 196608, 1, -196603, 196608, 1, -131065, 196608, 1, -65529, 196608, 1, -196601, 196608, 1, -262137, 262144, 0, -262136, 65536, 3, -262135, 458752, 0, -196599, 196608, 1, 65531, 65536, 1)
+layer_0/tile_data = PackedInt32Array(0, 65537, 1, 1, 131073, 1, 2, 196608, 1, 5, 262144, 4, 6, 65536, 3, 7, 524288, 4, 65537, 131073, 2, 65536, 65537, 2, -65535, 131073, 0, -65536, 65537, 0, -1, 1, 0, 65535, 1, 1, 131071, 1, 2, -262139, 458752, 4, -262140, 65536, 3, -262141, 65536, 3, -262142, 65536, 3, -262143, 65536, 3, -196608, 196608, 1, -262144, 262144, 0, -131072, 524288, 3, 131072, 524288, 0, 196608, 196608, 1, 262144, 262144, 4, 262145, 65536, 3, 262146, 65536, 3, 262147, 65536, 3, 262148, 65536, 3, 262149, 524288, 3, 262150, 65536, 3, 262151, 458752, 3, 196615, 196608, 1, 131079, 262144, 2, 65543, 196608, 1, 8, 65536, 3, 9, 65536, 3, 10, 65536, 3, 11, 524288, 4, 12, 65536, 3, -131061, 196608, 1, -196597, 196608, 1, -262133, 196608, 0, 65547, 196608, 1, 131083, 196608, 1, 196619, 196608, 1, 262155, 196608, 2, -4, 131072, 0, 131068, 131072, 2, -131063, 196608, 2, 131080, 65536, 3, 131081, 131072, 3, -65525, 196608, 1, -2, 196608, 1, 65534, 458752, 4, 131070, 196608, 1, 196606, 262144, 3, 196607, 65536, 3, 131073, 65536, 3, 131074, 458752, 3, 65538, 196608, 1, -65534, 196608, 1, -131070, 458752, 0, -131071, 65536, 3, -65537, 65536, 3, -65538, 262144, 4, 65532, 327680, 4, -5, 0, 0, 131067, 262144, 1, 65533, 65536, 3, 65541, 196608, 1, 131077, 196608, 1, 196613, 196608, 1, -65531, 196608, 1, -131067, 196608, 1, -196603, 196608, 1, -131065, 196608, 1, -65529, 196608, 1, -196601, 196608, 1, -262137, 262144, 0, -262136, 65536, 3, -262135, 458752, 0, -196599, 196608, 1, 65531, 0, 1, -327675, 196608, 1, -393211, 524288, 1, -393212, 0, 2, -393210, 131072, 2, -524282, 131072, 1, -589818, 327680, 0, -589819, 65536, 0, -589820, 0, 0, -458746, 131072, 1, -524284, 0, 1, -458748, 0, 1, -458747, 65536, 1, -524283, 65536, 1, 13, 65536, 3, 14, 65536, 3, 15, 524288, 4, -65521, 196608, 1, -131057, 196608, 1, -196593, 262144, 4, -262129, 196608, 1, -327665, 196608, 1, -196592, 65536, 3, -196591, 131072, 3, -393201, 262144, 4, -393200, 65536, 3, -393199, 131072, 3, -458737, 196608, 1, -524273, 196608, 1, -589809, 524288, 4, -589808, 65536, 3, -589807, 131072, 3, -655345, 196608, 1, -720881, 196608, 1, -786417, 262144, 4, -786416, 65536, 3, -786415, 131072, 3, -851953, 196608, 1, -917489, 196608, 1, -983024, 65536, 3, -983023, 131072, 3, -983025, 262144, 0, 16, 65536, 3, 17, 65536, 3, 18, 65536, 3, 19, 65536, 3, 20, 65536, 3, 21, 65536, 3, 22, 131072, 3, 65551, 196608, 1, 131087, 196608, 1, 196623, 196608, 1, 262159, 196608, 1, 327695, 196608, 2, -589817, 131072, 3, -589816, 1, 1, -589815, 65537, 1, -589814, 65537, 1, -589813, 65537, 1, -589812, 65537, 1, -589811, 131073, 1, -589810, 0, 3, 327680, 196608, 1, 393216, 196608, 1, 458752, 196608, 1, 524288, 196608, 1, 589824, 196608, 1, 655360, 196608, 1, 720896, 196608, 1, 786432, 196608, 2, -131074, 196608, 1, -196610, 196608, 1, -262146, 196608, 1, -327682, 196608, 1, -393218, 196608, 1, -458754, 196608, 1, -524290, 196608, 1, -589826, 196608, 0, 196603, 196608, 2, 262139, 65537, 0, 262138, 1, 0, 393210, 1, 2, 393211, 65537, 2, 327675, 65537, 1, 327674, 1, 1, 262140, 131073, 0, 327676, 131073, 1, 393212, 131073, 2, -524280, 1, 2, -524279, 65537, 2, -655349, 65537, 0, -655348, 65537, 0, -655347, 131073, 0, -524275, 131073, 2, -524276, 65537, 2, -524277, 65537, 2, -524278, 65537, 2, -655350, 65537, 0, -655351, 65537, 0, -655352, 1, 0)
 
-[node name="NoteObject" parent="." instance=ExtResource("4_der2d")]
-position = Vector2(24, 13)
-rotation = -1.19825
-text = "Return the lost souls of long dead adventurers back to their graves.
+[node name="NoteTutorial" parent="." instance=ExtResource("4_der2d")]
+position = Vector2(-54, 6)
+rotation = 1.82463
+text = "Welcome back to your graveyard shift.
+
+Return the lost souls of long dead adventurers back to their graves.
 
 [WASDQE] or [Arrow Keys] to move.
 
-There are four to be found."
+[SPACE] to wait one turn.
 
-[node name="NoteObject2" parent="." instance=ExtResource("4_der2d")]
+There are four to be found.
+Bury them."
+
+[node name="NoteLore" parent="." instance=ExtResource("4_der2d")]
 position = Vector2(179, 75)
 rotation = 0.261799
+text = "If anyone from the party finds this, please come to the courtyard. Wherever the exit was, it's just covered by wall now.
 
-[node name="DoorObject" parent="." instance=ExtResource("4_fadgt")]
+- A"
+
+[node name="NoteSpike" parent="." instance=ExtResource("4_der2d")]
+position = Vector2(88, -96)
+rotation = 3.28214
+text = "step on the spikes"
+
+[node name="NoteCell" parent="." instance=ExtResource("4_der2d")]
+position = Vector2(281, -136)
+rotation = 3.92699
+
+[node name="DoorObjectListen1" parent="." instance=ExtResource("4_fadgt")]
 position = Vector2(136, 8)
 rotation = -1.57079
 listen_id = 1
 
-[node name="DoorObject2" parent="." instance=ExtResource("4_fadgt")]
+[node name="DoorObjectListen2" parent="." instance=ExtResource("4_fadgt")]
 position = Vector2(168, 8)
 rotation = -1.57079
 listen_id = 2
 
+[node name="DoorObjectListen3" parent="." instance=ExtResource("4_fadgt")]
+position = Vector2(8, -40)
+rotation = -3.14159
+listen_id = 3
+
+[node name="DoorObjectListen3-2" parent="." instance=ExtResource("4_fadgt")]
+position = Vector2(8, 56)
+rotation = -6.28319
+listen_id = 3
+
+[node name="DoorObjectListen4" parent="." instance=ExtResource("4_fadgt")]
+position = Vector2(264, -232)
+rotation = -1.57079
+listen_id = 4
+
+[node name="DoorObjectListen5" parent="." instance=ExtResource("4_fadgt")]
+position = Vector2(8, 88)
+rotation = -6.28319
+listen_id = 5
+
+[node name="DoorObjectListen6" parent="." instance=ExtResource("4_fadgt")]
+position = Vector2(-72, 40)
+rotation = -6.28319
+listen_id = 6
+
+[node name="DoorObjectListen7" parent="." instance=ExtResource("4_fadgt")]
+position = Vector2(-24, -40)
+rotation = -9.42478
+listen_id = 7
+
+[node name="DoorObjectListen8" parent="." instance=ExtResource("4_fadgt")]
+position = Vector2(120, -136)
+rotation = -7.85398
+listen_id = 8
+
+[node name="DoorObject5" parent="." instance=ExtResource("4_fadgt")]
+position = Vector2(264, -40)
+rotation = -1.57079
+
+[node name="DoorObject6" parent="." instance=ExtResource("4_fadgt")]
+position = Vector2(264, -88)
+rotation = -1.57079
+
+[node name="DoorObject8" parent="." instance=ExtResource("4_fadgt")]
+position = Vector2(264, -184)
+rotation = -1.57079
+
 [node name="ItemObject" parent="." instance=ExtResource("5_8gxif")]
 position = Vector2(8, -56)
+rotation = 3.08577
+
+[node name="ItemObject3" parent="." instance=ExtResource("5_8gxif")]
+position = Vector2(271, -236)
 rotation = 3.08577
 
 [node name="ItemObject2" parent="." instance=ExtResource("5_8gxif")]
@@ -43,11 +115,76 @@ position = Vector2(184, -60)
 rotation = 3.08577
 item_id = "consecratedrelic"
 
-[node name="LeverObject" parent="." instance=ExtResource("6_utnn8")]
+[node name="ItemObject4" parent="." instance=ExtResource("5_8gxif")]
+position = Vector2(-72, 56)
+rotation = 3.08577
+item_id = "consecratedrelic"
+
+[node name="LeverSend1" parent="." instance=ExtResource("6_utnn8")]
 position = Vector2(152, -24)
 emit_id = 1
 
-[node name="LeverObject2" parent="." instance=ExtResource("6_utnn8")]
+[node name="LeverSend2" parent="." instance=ExtResource("6_utnn8")]
 position = Vector2(152, 40)
 rotation = -1.5708
 emit_id = 2
+
+[node name="LeverSend3" parent="." instance=ExtResource("6_utnn8")]
+position = Vector2(-72, 8)
+rotation = -4.71239
+emit_id = 3
+
+[node name="Spikes" parent="." instance=ExtResource("6_h30ms")]
+position = Vector2(88, -104)
+scene = ExtResource("7_iqxke")
+
+[node name="Sconce" parent="." instance=ExtResource("6_h30ms")]
+position = Vector2(-80, 8)
+rotation = 1.5708
+scene = ExtResource("8_jxjqq")
+
+[node name="Sconce2" parent="." instance=ExtResource("6_h30ms")]
+position = Vector2(96, -56)
+rotation = -1.5708
+scene = ExtResource("8_jxjqq")
+
+[node name="Sconce8" parent="." instance=ExtResource("6_h30ms")]
+position = Vector2(240, -184)
+rotation = -4.71239
+scene = ExtResource("8_jxjqq")
+
+[node name="Sconce9" parent="." instance=ExtResource("6_h30ms")]
+position = Vector2(240, -232)
+rotation = -4.71239
+scene = ExtResource("8_jxjqq")
+
+[node name="Sconce10" parent="." instance=ExtResource("6_h30ms")]
+position = Vector2(240, -88)
+rotation = -4.71239
+scene = ExtResource("8_jxjqq")
+
+[node name="Sconce11" parent="." instance=ExtResource("6_h30ms")]
+position = Vector2(240, -40)
+rotation = -4.71239
+scene = ExtResource("8_jxjqq")
+
+[node name="Sconce3" parent="." instance=ExtResource("6_h30ms")]
+position = Vector2(88, 80)
+scene = ExtResource("8_jxjqq")
+
+[node name="Sconce4" parent="." instance=ExtResource("6_h30ms")]
+position = Vector2(152, -16)
+scene = ExtResource("8_jxjqq")
+
+[node name="Sconce5" parent="." instance=ExtResource("6_h30ms")]
+position = Vector2(160, 40)
+rotation = -1.5708
+scene = ExtResource("8_jxjqq")
+
+[node name="Sconce6" parent="." instance=ExtResource("6_h30ms")]
+position = Vector2(248, 96)
+scene = ExtResource("8_jxjqq")
+
+[node name="Grave" parent="." instance=ExtResource("6_h30ms")]
+position = Vector2(248, 88)
+scene = ExtResource("9_73jld")
