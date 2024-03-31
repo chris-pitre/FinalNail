@@ -7,10 +7,9 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_oyb2v"]
 size = Vector3(1.75, 1.75, 1.75)
 
-[node name="EyeballEnemy" type="Node3D" node_paths=PackedStringArray("anim")]
+[node name="EyeballEnemy" type="Node3D"]
 script = ExtResource("1_i2p1h")
 can_move = true
-anim = NodePath("eye/AnimationPlayer")
 enemy_name = "Eyeball"
 max_hp = 50
 stats = Array[int]([5, 5, 2, 5, 5])
@@ -18,12 +17,6 @@ resists = 8
 
 [node name="eye" parent="." instance=ExtResource("2_336er")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="Skeleton3D" parent="eye/Armature" index="0"]
-bones/0/position = Vector3(0.347356, -0.0608867, 0.00131994)
-bones/0/rotation = Quaternion(-0.0278428, 0.000514136, -0.0820457, 0.996239)
-bones/1/rotation = Quaternion(-0.152776, 0.0676136, 0.404811, 0.899009)
-bones/2/rotation = Quaternion(-0.180948, 0.046446, 0.179455, 0.965866)
 
 [node name="MoveRaycast" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

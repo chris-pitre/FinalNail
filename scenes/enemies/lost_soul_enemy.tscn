@@ -7,9 +7,8 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_oyb2v"]
 size = Vector3(1.75, 1.75, 1.75)
 
-[node name="LostSoul" type="Node3D" node_paths=PackedStringArray("anim")]
+[node name="LostSoul" type="Node3D"]
 script = ExtResource("1_5br6v")
-anim = NodePath("creature/AnimationPlayer")
 enemy_name = "Lost Soul"
 max_hp = 100
 resists = 4

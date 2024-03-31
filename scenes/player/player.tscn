@@ -38,14 +38,4 @@ transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 [node name="shove" parent="Viewmodel" instance=ExtResource("2_mxokm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.04, -0.405)
 
-[node name="Skeleton3D" parent="Viewmodel/shove/Armature" index="0"]
-bones/0/position = Vector3(6.79948, -2.22673, -9.73336e-08)
-bones/0/rotation = Quaternion(-0.0326656, -0.534144, -0.0515651, 0.843187)
-bones/2/rotation = Quaternion(2.87795e-09, 2.32831e-10, 8.61816e-10, 1)
-bones/3/rotation = Quaternion(2.87795e-09, 2.32831e-10, 8.61816e-10, 1)
-bones/4/position = Vector3(1.91025, 9.03639, 1.9079e-06)
-bones/5/position = Vector3(0.168469, -0.00424279, -8.04464e-07)
-bones/6/position = Vector3(0.24137, 0.00249078, -1.05871e-06)
-bones/11/position = Vector3(3.5854, -6.2142, -3.37116)
-
 [editable path="Viewmodel/shove"]
