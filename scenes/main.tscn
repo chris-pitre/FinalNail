@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://c62k2e27wds1u"]
+[gd_scene load_steps=61 format=3 uid="uid://c62k2e27wds1u"]
 
 [ext_resource type="Theme" uid="uid://blnesbnxoye5s" path="res://src/main_menu_theme.tres" id="1_gxy6w"]
 [ext_resource type="PackedScene" uid="uid://cswx3ev7rh7tw" path="res://scenes/ui/main_menu_background.tscn" id="1_llus8"]
@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bmt885g0bl15h" path="res://assets/icons/bagbutton.png" id="3_mde73"]
 [ext_resource type="PackedScene" uid="uid://dh1mo8mixskss" path="res://scenes/ui/minimap.tscn" id="4_0da32"]
 [ext_resource type="Texture2D" uid="uid://cq680le25i7k5" path="res://assets/icons/title.png" id="4_qmi60"]
-[ext_resource type="Texture2D" uid="uid://c4qojo5ch3eq3" path="res://assets/portraits/bellmet1.png" id="5_g3fs2"]
+[ext_resource type="Texture2D" uid="uid://bxdte7i1gco4v" path="res://assets/portraits/bellmet1.png" id="5_g3fs2"]
 [ext_resource type="Texture2D" uid="uid://duxtah1wxspxk" path="res://assets/icons/journalbutton.png" id="6_6ced4"]
 [ext_resource type="Texture2D" uid="uid://bhsueomjnheek" path="res://assets/textures/woodframesmall.png" id="6_8a06b"]
 [ext_resource type="Shader" path="res://src/shaders/spell_cast.gdshader" id="6_cthe7"]
@@ -20,7 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://djne241eqnkhg" path="res://scenes/ui/cursor.tscn" id="11_uqah4"]
 [ext_resource type="Texture2D" uid="uid://bxcw8ptise563" path="res://assets/textures/paper.png" id="12_18ds4"]
 [ext_resource type="Script" path="res://src/components/tooltipper.gd" id="12_cafuu"]
-[ext_resource type="PackedScene" uid="uid://b3on85708w0wg" path="res://scenes/ui/compass.tscn" id="13_k46fj"]
+[ext_resource type="PackedScene" path="res://scenes/ui/compass.tscn" id="13_k46fj"]
 [ext_resource type="Shader" path="res://src/shaders/mosqit.gdshader" id="13_xlk0h"]
 [ext_resource type="Theme" uid="uid://cf7epahqf8y5y" path="res://src/paper_theme.tres" id="14_qrejk"]
 [ext_resource type="Shader" path="res://src/shaders/decrees.gdshader" id="14_s78jm"]
@@ -29,6 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://bxrbu0ifssc7k" path="res://scenes/ui/battle_choices.tscn" id="15_xq3yf"]
 [ext_resource type="Texture2D" uid="uid://csedt8ci3ymsw" path="res://assets/icons/arrow_right_empty.png" id="16_7jo2t"]
 [ext_resource type="PackedScene" uid="uid://l036fxrvhnet" path="res://scenes/ui/inventory.tscn" id="16_8h35l"]
+[ext_resource type="Texture2D" uid="uid://162cuvetrclf" path="res://assets/icons/souls.png" id="16_gktj6"]
 [ext_resource type="Shader" path="res://src/shaders/wavy.gdshader" id="17_1rdv2"]
 [ext_resource type="Texture2D" uid="uid://clcojjhs5sl5b" path="res://assets/textures/scrollend.png" id="18_wgwwn"]
 [ext_resource type="Texture2D" uid="uid://b5kfr1sty6nqm" path="res://assets/textures/death.png" id="24_u1io0"]
@@ -153,6 +154,7 @@ script/source = "extends Label
 [node name="Main" type="Node"]
 
 [node name="MainMenu" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -174,7 +176,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="MainMenu/Background"]
 handle_input_locally = false
 size = Vector2i(1920, 1080)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="MainMenuBackground" parent="MainMenu/Background/SubViewport" instance=ExtResource("1_llus8")]
 
@@ -270,7 +272,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="UI" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -391,7 +392,48 @@ vertical_alignment = 1
 
 [node name="TooltipperComponent" type="Node" parent="UI/OuterMargin/ContentHBox/ButtonsVBox/DecreeCross"]
 script = ExtResource("12_cafuu")
-tooltip = "Favors from your patron"
+tooltip = "Favors from your patron."
+
+[node name="Souls" type="TextureRect" parent="UI/OuterMargin/ContentHBox/ButtonsVBox"]
+material = SubResource("ShaderMaterial_f6aj1")
+layout_mode = 2
+texture = ExtResource("16_gktj6")
+
+[node name="SoulNum" type="Label" parent="UI/OuterMargin/ContentHBox/ButtonsVBox/Souls"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.0
+offset_top = -21.5
+offset_right = 11.0
+offset_bottom = 21.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+
+[node name="SoulLabel" type="Label" parent="UI/OuterMargin/ContentHBox/ButtonsVBox/Souls"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -92.0
+offset_top = -43.0
+offset_right = 92.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 26
+text = "SOULS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TooltipperComponent" type="Node" parent="UI/OuterMargin/ContentHBox/ButtonsVBox/Souls"]
+script = ExtResource("12_cafuu")
+tooltip = "Souls to bury."
 
 [node name="ViewVBox" type="VBoxContainer" parent="UI/OuterMargin/ContentHBox"]
 layout_mode = 2
@@ -423,7 +465,7 @@ use_debanding = true
 audio_listener_enable_3d = true
 physics_object_picking = true
 size = Vector2i(1296, 920)
-render_target_update_mode = 0
+render_target_update_mode = 4
 
 [node name="World" parent="UI/OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/WorldContainer/WorldViewport" instance=ExtResource("1_yich0")]
 visible = false
@@ -537,7 +579,7 @@ stretch = true
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(292, 292)
-render_target_update_mode = 0
+render_target_update_mode = 4
 
 [node name="Minimap" parent="UI/OuterMargin/ContentHBox/InfoVBox/MinimapAspect/BorderExpand/MinimapContainer/MinimapViewport" instance=ExtResource("4_0da32")]
 

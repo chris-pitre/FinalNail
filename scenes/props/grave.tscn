@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://t335ogqv6h5f"]
+[gd_scene load_steps=19 format=3 uid="uid://t335ogqv6h5f"]
 
 [ext_resource type="PackedScene" uid="uid://bm25b3lxwa0oe" path="res://assets/models/tombstone.glb" id="1_10u7w"]
+[ext_resource type="Script" path="res://scenes/props/grave.gd" id="1_s60y5"]
 [ext_resource type="Texture2D" uid="uid://bsqtgc8330uu3" path="res://assets/models/tombstone_tombstone.png" id="2_voayd"]
 [ext_resource type="Script" path="res://src/components/tooltipper.gd" id="3_fjdlf"]
 
@@ -110,7 +111,7 @@ tracks/1/path = NodePath("GPUParticles3D:amount_ratio")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.8, 2),
+"times": PackedFloat32Array(0, 1, 2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.0, 1.0, 0.0]
@@ -123,6 +124,7 @@ _data = {
 }
 
 [node name="Grave" type="Node3D"]
+script = ExtResource("1_s60y5")
 
 [node name="tombstone" parent="." instance=ExtResource("1_10u7w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.16193, 0)
@@ -138,7 +140,7 @@ shape = SubResource("BoxShape3D_nynfq")
 
 [node name="TooltipperComponent" type="Node" parent="Area3D"]
 script = ExtResource("3_fjdlf")
-tooltip = "A grave."
+tooltip = "A grave meant for lost souls to return to."
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.733038, 0)
@@ -151,5 +153,7 @@ draw_pass_1 = SubResource("QuadMesh_n424a")
 libraries = {
 "": SubResource("AnimationLibrary_bajqw")
 }
+
+[connection signal="input_event" from="Area3D" to="." method="_on_area_3d_input_event"]
 
 [editable path="tombstone"]
