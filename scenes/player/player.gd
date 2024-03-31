@@ -58,6 +58,8 @@ func _input(event):
 				input_queue.push_back([Callable(do_rotate), false, "rotate_left"]) 
 			if event.is_action("rotate_right"):
 				input_queue.push_back([Callable(do_rotate), true, "rotate_right"])
+			if event.is_action("wait"):
+				SignalBus.player_pos_updated.emit(global_position.x / 2, global_position.z / 2)
 
 func do_movement(dir: DIRECTION):
 	var vec_dir = -basis.z

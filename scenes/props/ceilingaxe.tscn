@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://cksvere82yb3x"]
+
+[ext_resource type="PackedScene" uid="uid://crekf8it8ui65" path="res://assets/models/ceilingaxe.glb" id="1_3bgks"]
+[ext_resource type="Script" path="res://scenes/props/ceilingaxe.gd" id="2_aeqyn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7fq3n"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="ceilingaxe" instance=ExtResource("1_3bgks")]
+script = ExtResource("2_aeqyn")
+
+[node name="Armature" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/1/rotation = Quaternion(0.707107, 0, -0.707107, 0)
+
+[node name="Area3D" type="Area3D" parent="." index="2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_7fq3n")
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]

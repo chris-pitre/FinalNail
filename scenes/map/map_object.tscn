@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://b3lw626j6w3ij"]
 
 [ext_resource type="Script" path="res://scenes/map/map_object.gd" id="1_t7k6l"]
-[ext_resource type="Texture2D" uid="uid://cl10apbwajddh" path="res://src/gradients/red_triangle.tres" id="2_jdktk"]
+[ext_resource type="Texture2D" uid="uid://y0rh55iji8v" path="res://src/gradients/red_triangle_small.tres" id="2_6aums"]
 
 [node name="MapObject" type="Node2D"]
 script = ExtResource("1_t7k6l")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 0.785398
-texture = ExtResource("2_jdktk")
+texture = ExtResource("2_6aums")
