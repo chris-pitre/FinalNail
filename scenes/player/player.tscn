@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_dj456"]
 [ext_resource type="PackedScene" uid="uid://d7rcoukatcl8" path="res://assets/models/shove.tscn" id="2_mxokm"]
-[ext_resource type="PackedScene" uid="uid://2uvhyhdrrm60" path="res://scenes/player/coff.tscn" id="3_jl2vg"]
+[ext_resource type="PackedScene" path="res://scenes/player/coff.tscn" id="3_jl2vg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yjxp8"]
 size = Vector3(1.5, 1.5, 1.5)

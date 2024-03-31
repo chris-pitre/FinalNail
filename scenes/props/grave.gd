@@ -1,17 +1,18 @@
-extends Node3D
+extends Interactable
 
 @onready var anim := $AnimationPlayer
 
 func _ready() -> void:
+	SignalBus.player_pos_updated.connect(_player_pos_updated)
 	PlayerData.num_graves += 1
 
-func _on_area_3d_input_event(camera: Node, event: InputEvent, position: Vector3, normal: Vector3, shape_idx: int) -> void:
-	if event.is_action_pressed("lmb"):
-		if PlayerData.souls > 0:
-			PlayerData.use_soul()
-			fade()
+func interact() -> void:
+	if PlayerData.souls > 0:
+		PlayerData.use_soul()
+		fade()
 
 func fade() -> void:
 	anim.play("fade")
 	await anim.animation_finished
 	queue_free()
+

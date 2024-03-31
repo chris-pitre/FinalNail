@@ -22,6 +22,7 @@ layout_mode = 2
 [node name="ItemName" type="Label" parent="ItemEntryVBox/ItemInfo"]
 layout_mode = 2
 size_flags_horizontal = 0
+mouse_filter = 1
 text = "ItemName"
 
 [node name="TooltipperComponent" type="Node" parent="ItemEntryVBox/ItemInfo/ItemName"]
