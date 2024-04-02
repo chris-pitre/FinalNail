@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://dlp05rifdf40h"]
+
+[ext_resource type="Script" path="res://src/items/item.gd" id="1_gbkig"]
+
+[resource]
+script = ExtResource("1_gbkig")
+name = "Glowing Talisman"
+id = "talisman"
+description = "A piece of paper imbued with an archaic energy. Increases spirit by 8."

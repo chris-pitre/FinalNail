@@ -188,3 +188,4 @@ func return_player() -> void:
 	frozen = false
 	global_position = Vector3(0.0, 1.0, 0.0)
 	PlayerData.health = PlayerData.max_health
+	BattleManager.end_battle(false)

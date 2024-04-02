@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bud544xv1crtu"]
+[gd_scene load_steps=7 format=3 uid="uid://bud544xv1crtu"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_dj456"]
 [ext_resource type="PackedScene" uid="uid://d7rcoukatcl8" path="res://assets/models/shove.tscn" id="2_mxokm"]
@@ -6,6 +6,18 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yjxp8"]
 size = Vector3(1.5, 1.5, 1.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mf5w1"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_h3g53"]
+material = SubResource("StandardMaterial3D_mf5w1")
+flip_faces = true
+top_radius = 20.0
+bottom_radius = 20.0
+height = 4.0
+cap_top = false
+cap_bottom = false
 
 [node name="Player" type="Node3D" groups=["Player"]]
 script = ExtResource("1_dj456")
@@ -43,12 +55,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.04, -0.405)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10.25, -2)
 visible = false
 
-[node name="Skeleton3D" parent="coff/Armature" index="0"]
-bones/1/rotation = Quaternion(0.00246746, -0.0243385, 0.100833, 0.994603)
-bones/2/position = Vector3(0.209797, 0.820639, 0.115451)
-bones/3/position = Vector3(0.161694, 0.58556, 0.117806)
-bones/4/rotation = Quaternion(0.00246747, 0.0243385, -0.100833, 0.994603)
-bones/5/position = Vector3(-0.185431, 0.708214, 0.116644)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_h3g53")
 
 [editable path="Viewmodel/shove"]
 [editable path="coff"]

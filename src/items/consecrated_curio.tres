@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://btdg4huux0mj7"]
+
+[ext_resource type="Script" path="res://src/items/item.gd" id="1_bcug3"]
+
+[resource]
+script = ExtResource("1_bcug3")
+name = "Consecrated Curio"
+id = "concur"
+description = "The curio is engraved with undecipherable symbols and exudes an aura of purity. Gives 40 decrees."

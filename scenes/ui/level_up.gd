@@ -9,7 +9,7 @@ func _ready():
 func level_up(stat: PlayerData.STAT):
 	if PlayerData.decrees > 0:
 		PlayerData.change_decrees(-1)
-		PlayerData.change_stat(stat, 2)
+		PlayerData.change_stat(stat, 1)
 		SignalBus.message_show.emit("You feel new power enter your body", 1, true)
 		Audio.play_sound("res://assets/sfx/click2.ogg", "SFX", 0.0, 1.0)
 	else:

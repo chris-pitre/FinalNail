@@ -9,9 +9,6 @@ size = Vector3(1.75, 1.75, 1.75)
 
 [node name="ClayEnemy" type="Node3D" node_paths=PackedStringArray("anim")]
 script = ExtResource("1_7fouf")
-damage_anim_name = null
-is_lost_soul = null
-can_move = null
 anim = NodePath("clayfella/AnimationPlayer")
 enemy_name = "Effigy of Conviction"
 max_hp = 10

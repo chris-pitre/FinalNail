@@ -41,6 +41,7 @@ var scroll_opening: bool = false
 @onready var death_screen = $DeathScreen
 @onready var death_return = $DeathScreen/MarginContainer/DeathReturn
 @onready var num_freed = $OuterMargin/ContentHBox/ButtonsVBox/FreedSouls/FreeLabel
+@onready var hurt_rect := $OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand/HurtRect
 
 func _ready() -> void:
 	current = self
@@ -102,6 +103,8 @@ func set_stat(stat: PlayerData.STAT, amount: int) -> void:
 
 
 func set_health(amount: int, max_amount: int) -> void:
+	if amount < health_bar.value:
+		play_hurt_anim()
 	health_bar.max_value = max_amount
 	health_bar.value = amount
 	health_bar_label.text = "%d/%d" % [amount, max_amount]
@@ -168,6 +171,12 @@ func close_scroll() -> void:
 func update_journal_text() -> void:
 	journal_text.text = PlayerData.found_notes[cur_page]
 	journal_info_label.text = "%d/%d" % [cur_page + 1, PlayerData.found_notes.size()]
+
+
+func play_hurt_anim() -> void:
+	hurt_rect.material.set_shader_parameter("alpha", 1.0)
+	var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUAD)
+	await tween.tween_property(hurt_rect.material, "shader_parameter/alpha", 0.0, 0.3).finished
 
 
 func _started_game() -> void:
@@ -268,9 +277,10 @@ func _show_battle_menu() -> void:
 func _show_level_up_screen() -> void:
 	toggle_scroll(level_up_menu)
 
-
 func _won_game() -> void:
-	pass
+	await get_tree().create_timer(2).timeout
+	world.hide()
+	hide()
 
 func _on_death_return_pressed() -> void:
 	death_return.hide()

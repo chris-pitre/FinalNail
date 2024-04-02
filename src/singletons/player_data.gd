@@ -46,6 +46,8 @@ var decree_moves : Dictionary = {
 }
 
 func _set_health(amount: int) -> void:
+	if amount < health:
+		Audio.play_sound("res://assets/sfx/weirdhurt.ogg", "SFX", 0.2)
 	health = amount
 	health_changed.emit(health, max_health)
 	if health <= 0:
@@ -91,8 +93,20 @@ func use_item(item_id: String) -> void:
 		match item_id:
 			"soulvial":
 				health = max_health
-			"consecratedrelic":
+			"conrelic":
 				change_decrees(10)
+			"blackchains":
+				change_stat(STAT.CORPUS, 8)
+			"conart":
+				change_decrees(20)
+			"offering":
+				change_stat(STAT.PIETY, 5)
+			"soulbinder":
+				change_stat(STAT.COMPOSITION, 8)
+			"talisman":
+				change_stat(STAT.SPIRIT, 8)
+			"concur":
+				change_decrees(40)
 		items[item_id] -= 1
 		item_num_changed.emit(item_id, items[item_id])
 
@@ -120,7 +134,6 @@ func take_damage(damage: int, spirit: int, skill_damage: int):
 	var actual_dmg = floor(dmg_effectiveness * skill_damage * 0.75) + 1
 	health -= actual_dmg
 	SignalBus.message_show.emit("You received %d damage" % [actual_dmg], 2, true)
-	Audio.play_sound("res://assets/sfx/weirdhurt.ogg", "SFX")
 	await get_tree().create_timer(2).timeout
 
 func add_soul() -> void:

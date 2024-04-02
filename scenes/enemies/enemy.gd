@@ -139,6 +139,7 @@ func die():
 	SignalBus.message_show.emit("%s has been slain" % [enemy_name], 2, true)
 	await get_tree().create_timer(2).timeout
 	BattleManager.end_battle(true)
+	Audio.play_sound("res://assets/sfx/souldeath.ogg", "SFX")
 	queue_free()
 
 func free_soul():
@@ -149,17 +150,18 @@ func free_soul():
 	queue_free()
 
 func do_turn():
-	var sum_of_weights = 0
-	for move in movelist.get_children():
-		sum_of_weights += move.move_weight
-	var roll = randf_range(0, sum_of_weights)
-	for move in movelist.get_children():
-		if roll < move.move_weight:
-			if anim != null:
-				play_animation("attack")
-			move.execute()
-			break
-		roll -= move.move_weight
+	if self == BattleManager.current_enemy:
+		var sum_of_weights = 0
+		for move in movelist.get_children():
+			sum_of_weights += move.move_weight
+		var roll = randf_range(0, sum_of_weights)
+		for move in movelist.get_children():
+			if roll < move.move_weight:
+				if anim != null:
+					play_animation("attack")
+				move.execute()
+				break
+			roll -= move.move_weight
 
 func play_animation(anim_name: String):
 	anim.play(anim_name)

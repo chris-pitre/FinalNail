@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://37sxbqfksr8a"]
+
+[ext_resource type="Script" path="res://src/items/item.gd" id="1_rbypu"]
+
+[resource]
+script = ExtResource("1_rbypu")
+name = "Soul Binder"
+id = "soulbinder"
+description = "A device halfway between the spirit and physical realm that helps serves as a bridge between them. Raises composition by 8."

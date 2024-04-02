@@ -127,9 +127,12 @@ _data = {
 script = ExtResource("1_s60y5")
 
 [node name="tombstone" parent="." instance=ExtResource("1_10u7w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.16193, 0)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.195312, 1.19458, -0.037075)
 
 [node name="Cube_001" parent="tombstone" index="0"]
+visibility_range_end = 20.0
+visibility_range_end_margin = 1.0
+visibility_range_fade_mode = 1
 surface_material_override/0 = SubResource("StandardMaterial3D_aoxbu")
 
 [node name="Area3D" type="Area3D" parent="."]

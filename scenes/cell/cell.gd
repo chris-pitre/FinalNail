@@ -22,6 +22,9 @@ extends Node3D
 @onready var nw_pillar := $Pillars/NorthWestPillar
 @onready var ne_pillar := $Pillars/NorthEastPillar
 
+func _ready() -> void:
+	SignalBus.player_pos_updated.connect(_player_pos_updated)
+
 func set_faces(cell_list: Array[Vector2i], tile_open: bool, neighbors_open: Array, corners: Dictionary, cell_theme: CellTheme) -> void:
 	bottom.material_override = cell_theme.floor_out if tile_open else cell_theme.floor_tex
 	east.material_override = cell_theme.wall
@@ -68,3 +71,10 @@ func set_faces(cell_list: Array[Vector2i], tile_open: bool, neighbors_open: Arra
 			nw_pillar.visible = true
 		if corners["NE"]:
 			ne_pillar.visible = true
+
+func _player_pos_updated(x: int, y: int) -> void:
+	var player_global_pos = Vector3((x + 0.5) * 2, 1.0, (y + 0.5) * 2)
+	if (global_position - player_global_pos).length() > 20.0:
+		hide()
+	else:
+		show()

@@ -29,6 +29,9 @@ script = ExtResource("1_p6kv6")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.00766691, 0)
 material_override = SubResource("StandardMaterial3D_q8b0o")
+visibility_range_end = 20.0
+visibility_range_end_margin = 1.0
+visibility_range_fade_mode = 1
 mesh = SubResource("QuadMesh_mma87")
 
 [node name="Area3D" type="Area3D" parent="."]

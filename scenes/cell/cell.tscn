@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cjgwygl1psnne"]
+[gd_scene load_steps=19 format=3 uid="uid://cjgwygl1psnne"]
 
 [ext_resource type="Script" path="res://scenes/cell/cell.gd" id="1_whknc"]
 [ext_resource type="Material" uid="uid://b6cxkxuuau7fp" path="res://assets/materials/cobblestone.tres" id="2_yih3j"]
@@ -35,6 +35,20 @@ size = Vector3(0.2, 0.2, 0.2)
 
 [sub_resource type="BoxMesh" id="BoxMesh_abicl"]
 size = Vector3(0.5, 2, 0.5)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_oacqd"]
+load_path = "res://.godot/imported/smallbircktrim.png-527c35205b023486293c4ca320a1da66.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3d8vn"]
+load_path = "res://.godot/imported/smallbircktrim_n.png-169cbdb117fe5619a1c4f0b6c2674145.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0u654"]
+albedo_texture = SubResource("CompressedTexture2D_oacqd")
+normal_enabled = true
+normal_scale = 0.2
+normal_texture = SubResource("CompressedTexture2D_3d8vn")
+uv1_scale = Vector3(2.82, 1.025, 1)
+uv1_offset = Vector3(0, 0.72, 0)
 
 [node name="Cell" type="Node3D"]
 script = ExtResource("1_whknc")
@@ -142,29 +156,29 @@ skeleton = NodePath("../..")
 [node name="UpperTrim" type="Node3D" parent="."]
 
 [node name="NorthWall" type="MeshInstance3D" parent="UpperTrim"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.271, -1.05)
-material_override = SubResource("StandardMaterial3D_e1sem")
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 2.51392, -1.05)
+material_override = SubResource("StandardMaterial3D_0u654")
 cast_shadow = 2
 mesh = SubResource("BoxMesh_bmxim")
 skeleton = NodePath("../..")
 
 [node name="EastWall" type="MeshInstance3D" parent="UpperTrim"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.05, 2.271, 2.18557e-09)
-material_override = SubResource("StandardMaterial3D_e1sem")
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 2, 0, 1, 0, -4.37114e-08, 1.05, 2.51392, 2.18557e-09)
+material_override = SubResource("StandardMaterial3D_0u654")
 cast_shadow = 2
 mesh = SubResource("BoxMesh_bmxim")
 skeleton = NodePath("../..")
 
 [node name="WestWall" type="MeshInstance3D" parent="UpperTrim"]
-transform = Transform3D(1.31135e-07, 0, 1, 0, 1, 0, -1, 0, 1.31135e-07, -1.05, 2.271, 2.18557e-09)
-material_override = SubResource("StandardMaterial3D_e1sem")
+transform = Transform3D(1.31135e-07, 0, 1, 0, 2, 0, -1, 0, 1.31135e-07, -1.05, 2.51392, 2.18557e-09)
+material_override = SubResource("StandardMaterial3D_0u654")
 cast_shadow = 2
 mesh = SubResource("BoxMesh_bmxim")
 skeleton = NodePath("../..")
 
 [node name="SouthWall" type="MeshInstance3D" parent="UpperTrim"]
-transform = Transform3D(-1, 0, 8.74232e-08, 0, 1, 0, -8.74232e-08, 0, -1, 4.37114e-09, 2.271, 1.05)
-material_override = SubResource("StandardMaterial3D_e1sem")
+transform = Transform3D(-1, 0, 8.74232e-08, 0, 2, 0, -8.74232e-08, 0, -1, 4.37114e-09, 2.51392, 1.05)
+material_override = SubResource("StandardMaterial3D_0u654")
 cast_shadow = 2
 mesh = SubResource("BoxMesh_bmxim")
 skeleton = NodePath("../..")

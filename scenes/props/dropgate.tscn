@@ -38,6 +38,9 @@ script = ExtResource("2_jlgcs")
 
 [node name="Cube_001" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visibility_range_end = 20.0
+visibility_range_end_margin = 1.0
+visibility_range_fade_mode = 1
 
 [node name="Area3D" type="Area3D" parent="." index="1"]
 

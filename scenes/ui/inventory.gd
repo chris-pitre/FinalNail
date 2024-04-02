@@ -8,9 +8,7 @@ func _ready() -> void:
 	for item in ItemDatabase.items:
 		var new_entry = ITEM_ENTRY.instantiate()
 		inventory_list.add_child(new_entry)
-		new_entry.item_id = item.id
+		new_entry.item = item
 		new_entry.name_label.text = "???"
-		new_entry.get_node("ItemEntryVBox/ItemInfo/ItemName/TooltipperComponent").tooltip = item.description
 		new_entry.button.text = "0"
 		new_entry.button.disabled = true
-		new_entry.item_name = item.name

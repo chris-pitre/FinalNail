@@ -81,11 +81,17 @@ transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0, 0, 0)
 [node name="scons" parent="Center" instance=ExtResource("1_7t2hv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 1, 0)
 
+[node name="Cube" parent="Center/scons" index="0"]
+visibility_range_end = 20.0
+visibility_range_end_margin = 1.0
+visibility_range_fade_mode = 1
+
 [node name="OmniLight3D" type="OmniLight3D" parent="Center/scons"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000278652, 0.287485, 0)
 light_color = Color(0.721569, 0.223529, 1, 1)
 light_energy = 0.5
 distance_fade_enabled = true
+distance_fade_begin = 20.0
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Center/scons"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00226809, 0.207601, 0)
@@ -98,3 +104,5 @@ draw_pass_1 = ExtResource("2_ulaov")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00226809, 0.207601, 0)
 process_material = SubResource("ParticleProcessMaterial_ibhnd")
 draw_pass_1 = SubResource("TubeTrailMesh_rc2fc")
+
+[editable path="Center/scons"]

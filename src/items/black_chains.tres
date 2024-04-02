@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://i2j1wn3s1mn8"]
+
+[ext_resource type="Script" path="res://src/items/item.gd" id="1_t8usn"]
+
+[resource]
+script = ExtResource("1_t8usn")
+name = "Black Chains"
+id = "blackchains"
+description = "Chains blacker than night, meant to improve the strength of your physical manifestation. Increases corpus by 8."

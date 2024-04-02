@@ -203,6 +203,9 @@ tooltip = "A glint of light catches your eye."
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+visibility_range_end = 20.0
+visibility_range_end_margin = 1.0
+visibility_range_fade_mode = 1
 preprocess = 1.0
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_bkmxl")
@@ -210,6 +213,9 @@ draw_pass_1 = SubResource("QuadMesh_ytndo")
 
 [node name="GPUParticles3D2" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+visibility_range_end = 20.0
+visibility_range_end_margin = 1.0
+visibility_range_fade_mode = 1
 amount = 4
 lifetime = 30.0
 preprocess = 30.0
@@ -219,6 +225,9 @@ draw_pass_1 = SubResource("QuadMesh_ry5g8")
 
 [node name="GPUParticles3D3" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+visibility_range_end = 20.0
+visibility_range_end_margin = 1.0
+visibility_range_fade_mode = 1
 amount = 4
 lifetime = 30.0
 preprocess = 30.0
@@ -228,6 +237,9 @@ draw_pass_1 = SubResource("QuadMesh_6a8x6")
 
 [node name="GPUParticles3D4" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+visibility_range_end = 20.0
+visibility_range_end_margin = 1.0
+visibility_range_fade_mode = 1
 amount = 4
 lifetime = 30.0
 preprocess = 30.0

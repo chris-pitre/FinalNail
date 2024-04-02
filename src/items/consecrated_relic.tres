@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_6ryun")
 name = "Consecrated Relic"
-id = "consecratedrelic"
+id = "conrelic"
 description = "The relic is engraved with familiar symbols. Gives 10 decrees."

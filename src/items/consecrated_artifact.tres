@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://pyxe8b4escsc"]
+
+[ext_resource type="Script" path="res://src/items/item.gd" id="1_e8q0j"]
+
+[resource]
+script = ExtResource("1_e8q0j")
+name = "Consecrated Artifact"
+id = "conart"
+description = "The artifact is engraved with glowing symbols and shiny rings. Gives 20 decrees."

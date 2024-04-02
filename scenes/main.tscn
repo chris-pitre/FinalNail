@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://c62k2e27wds1u"]
+[gd_scene load_steps=70 format=3 uid="uid://c62k2e27wds1u"]
 
 [ext_resource type="Theme" uid="uid://blnesbnxoye5s" path="res://src/main_menu_theme.tres" id="1_gxy6w"]
 [ext_resource type="PackedScene" uid="uid://cswx3ev7rh7tw" path="res://scenes/ui/main_menu_background.tscn" id="1_llus8"]
@@ -36,6 +36,7 @@
 [ext_resource type="Texture2D" uid="uid://b5kfr1sty6nqm" path="res://assets/textures/death.png" id="24_u1io0"]
 [ext_resource type="PackedScene" uid="uid://xcwpufaesypj" path="res://scenes/ui/level_up.tscn" id="28_2s6un"]
 [ext_resource type="Texture2D" uid="uid://cl6oec8orks3y" path="res://assets/icons/death.png" id="34_tg63f"]
+[ext_resource type="Script" path="res://scenes/ui/end.gd" id="37_3nsew"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s51h8"]
 shader = ExtResource("6_cthe7")
@@ -94,6 +95,15 @@ shader = ExtResource("17_1rdv2")
 shader_parameter/height = 2.0
 shader_parameter/frequency = 1.0
 shader_parameter/speed = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wuofo"]
+shader = ExtResource("7_slnml")
+shader_parameter/intensity = 0.4
+shader_parameter/alpha = 0.0
+shader_parameter/vig_color = Color(1, 0, 0, 1)
+shader_parameter/speed = 0.02
+shader_parameter/amplitude = 0.2
+shader_parameter/aliasing = 0.01
 
 [sub_resource type="Gradient" id="Gradient_jxb52"]
 colors = PackedColorArray(0.352941, 0, 0, 1, 0.196078, 0.196078, 0.478431, 1)
@@ -607,6 +617,12 @@ visible = false
 layout_mode = 2
 mouse_filter = 1
 
+[node name="HurtRect" type="ColorRect" parent="UI/OuterMargin/ContentHBox/ViewVBox/Viewport/BorderExpand"]
+material = SubResource("ShaderMaterial_wuofo")
+layout_mode = 2
+mouse_filter = 2
+color = Color(1, 0, 0, 0.984314)
+
 [node name="WoodBorder" type="NinePatchRect" parent="UI/OuterMargin/ContentHBox/ViewVBox/Viewport"]
 layout_mode = 2
 texture = ExtResource("8_1pkee")
@@ -675,7 +691,7 @@ stretch = true
 [node name="MinimapViewport" type="SubViewport" parent="UI/OuterMargin/ContentHBox/InfoVBox/MinimapAspect/BorderExpand/MinimapContainer"]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(120, 120)
+size = Vector2i(2, 2)
 render_target_update_mode = 0
 
 [node name="Minimap" parent="UI/OuterMargin/ContentHBox/InfoVBox/MinimapAspect/BorderExpand/MinimapContainer/MinimapViewport" instance=ExtResource("4_0da32")]
@@ -1201,6 +1217,33 @@ horizontal_alignment = 2
 script = SubResource("GDScript_5no0r")
 
 [node name="Cursor" parent="." instance=ExtResource("11_uqah4")]
+
+[node name="End" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("2_m8jm6")
+color = Color(1, 1, 1, 0)
+script = ExtResource("37_3nsew")
+
+[node name="Label" type="Label" parent="End"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 0
 
 [connection signal="pressed" from="MainMenu/Credits/BackButton" to="MainMenu" method="_on_back_button_pressed"]
 [connection signal="pressed" from="MainMenu/MainMenuButtons/MarginContainer/VBoxContainer/Button" to="MainMenu" method="_on_button_pressed"]

@@ -65,6 +65,7 @@ func end_battle(is_win: bool):
 	battle_active = false
 	player_turn_end.emit()
 	battle_end.emit()
-	if randf() >= 0.2:
-		SignalBus.message_show.emit("You feel blessed by your patron...", 3)
-		PlayerData.change_stat(PlayerData.STAT.PIETY, randi_range(1, 5))
+	if is_win:
+		if randf() >= 0.2:
+			SignalBus.message_show.emit("You feel blessed by your patron...", 3)
+			PlayerData.change_stat(PlayerData.STAT.PIETY, randi_range(1, 5))
